@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Co-Stars — Kerry's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/costars.css" />
+</head>
+<body class="costars-body">
+  <div class="costars-bg"></div>
+
+  <div class="costars-content page-content">
+    <section class="section-hero">
+      <h1 class="costars-title">Co-Stars</h1>
+      <p class="costars-tagline">Connect any two actors through the movies they share</p>
+
+      <p class="costars-description">
+        A full-stack actor→movie connection game. Find the shortest path between any two actors 
+        by hopping through shared movies — think "Six Degrees of Kevin Bacon" but playable, 
+        with levels, hints, and a graph you can explore. The React frontend works offline 
+        through snapshot caching, powered by a FastAPI backend with type-agnostic pathfinding 
+        over a TMDB-enriched SQLite graph.
+      </p>
+
+      <div class="costars-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+        <span class="tech-badge">React 19</span>
+        <span class="tech-badge">TypeScript</span>
+        <span class="tech-badge">Vite</span>
+        <span class="tech-badge">FastAPI</span>
+        <span class="tech-badge">SQLite</span>
+        <span class="tech-badge">TMDB API</span>
+      </div>
+
+      <a href="#" class="github-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+
+      <!-- Film strip decoration -->
+      <div class="film-strip">
+        <div class="film-frame">🎭</div>
+        <div class="film-frame">🎬</div>
+        <div class="film-frame">⭐</div>
+        <div class="film-frame">🎭</div>
+        <div class="film-frame">🎬</div>
+        <div class="film-frame">⭐</div>
+      </div>
+
+      <!-- Demo placeholder -->
+      <div class="demo-placeholder" style="border-color: rgba(236,72,153,0.25); background: rgba(236,72,153,0.03);">
+        <div style="font-size: 3rem;">🎮</div>
+        <div>Playable demo will be embedded here</div>
+        <div class="placeholder-label">React app with offline snapshot mode</div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="costars-features">
+      <h2>How It Works</h2>
+
+      <div class="feature-grid">
+        <div class="costars-feature-card">
+          <h3>🔍 Pathfinding Engine</h3>
+          <p>
+            Type-agnostic shortest-path search across the actor→movie graph. 
+            Connect actor-to-actor, actor-to-movie, or movie-to-movie — 
+            the engine handles all combinations.
+          </p>
+        </div>
+
+        <div class="costars-feature-card">
+          <h3>📊 Difficulty Levels</h3>
+          <p>
+            Curated levels from easy (household names) to expert (deep cuts). 
+            Each level has a target path length, actor pool, and difficulty rating. 
+            Plus custom level creation.
+          </p>
+        </div>
+
+        <div class="costars-feature-card">
+          <h3>💡 Smart Suggestions</h3>
+          <p>
+            Context-aware hints that show which movies connect your current 
+            position to the goal, with popularity weighting and path-proximity scoring.
+          </p>
+        </div>
+
+        <div class="costars-feature-card">
+          <h3>📸 Offline Snapshots</h3>
+          <p>
+            The frontend exports and caches the entire game graph to localStorage. 
+            Play without a backend connection — data syncs when available.
+          </p>
+        </div>
+
+        <div class="costars-feature-card">
+          <h3>🎨 Polished UI</h3>
+          <p>
+            Purple gradient design with actor/movie cards, path visualization sidebar, 
+            suggestion buttons, and responsive layout. Built with React 19 and Vite.
+          </p>
+        </div>
+
+        <div class="costars-feature-card">
+          <h3>🗃️ TMDB Enriched Data</h3>
+          <p>
+            Full metadata from The Movie Database API — posters, bios, ratings, 
+            release dates. Automatic backfill and enrichment pipeline.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ NAV DOCK ═══ -->
+  <nav class="nav-dock">
+    <a href="/" data-page="home">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars" class="active">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

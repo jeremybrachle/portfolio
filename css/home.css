@@ -1,0 +1,272 @@
+/* ── HOME PAGE: Cosmic Visualizer Theme ── */
+/* Deep space purples, neon edges, pulsing canvas feel */
+
+.home-body {
+  background: #0a0a14;
+  color: #e2e0ff;
+  overflow-x: hidden;
+}
+
+/* Animated gradient bg */
+.home-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(120, 40, 200, 0.25), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(60, 20, 180, 0.2), transparent),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(168, 85, 247, 0.08), transparent),
+    #0a0a14;
+  animation: cosmicDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicDrift {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(25deg); }
+}
+
+.home-content {
+  position: relative;
+  z-index: 1;
+}
+
+.home-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #c084fc, #818cf8, #a78bfa, #f0abfc);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.home-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  color: rgba(200, 190, 255, 0.6);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* ── Visualizer Canvas Placeholder ── */
+.visualizer-stage {
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16/9;
+  border-radius: 20px;
+  background: rgba(15, 10, 30, 0.8);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 60px rgba(168, 85, 247, 0.15), 0 0 120px rgba(100, 50, 200, 0.08);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.visualizer-stage canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Fake bar animation for placeholder */
+.viz-bars {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  padding: 0 40px;
+}
+
+.viz-bar {
+  flex: 1;
+  max-width: 12px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, #7c3aed, #a78bfa, #c4b5fd);
+  animation: barPulse var(--duration) ease-in-out infinite alternate;
+  opacity: 0.8;
+}
+
+@keyframes barPulse {
+  0%   { height: var(--min-h); }
+  100% { height: var(--max-h); }
+}
+
+.viz-overlay-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(200, 190, 255, 0.35);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.viz-overlay-text .icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+/* Audio player bar */
+.audio-bar {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: rgba(15, 10, 30, 0.6);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(200, 190, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.audio-bar .now-playing {
+  flex: 1;
+  font-style: italic;
+}
+
+.audio-bar .play-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.audio-bar .play-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+}
+
+/* ── Project Overview Cards (below hero) ── */
+.projects-overview {
+  padding: 80px 24px 160px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-overview h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 48px;
+  color: rgba(200, 190, 255, 0.8);
+}
+
+.project-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.project-card .card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.project-card h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.project-card .card-tagline {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.project-card .card-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.project-card .card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Card themes */
+.card--vibe {
+  background: rgba(100, 50, 180, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  box-shadow: 0 4px 30px rgba(168, 85, 247, 0.1);
+}
+.card--vibe .card-accent { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+.card--vibe h3 { color: #c4b5fd; }
+.card--vibe .tech-badge { background: rgba(168, 85, 247, 0.2); color: #c4b5fd; }
+
+.card--costars {
+  background: rgba(180, 50, 120, 0.12);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  box-shadow: 0 4px 30px rgba(244, 114, 182, 0.08);
+}
+.card--costars .card-accent { background: linear-gradient(90deg, #ec4899, #f472b6); }
+.card--costars h3 { color: #f9a8d4; }
+.card--costars .tech-badge { background: rgba(244, 114, 182, 0.2); color: #f9a8d4; }
+
+.card--agent {
+  background: rgba(20, 120, 80, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  box-shadow: 0 4px 30px rgba(52, 211, 153, 0.08);
+}
+.card--agent .card-accent { background: linear-gradient(90deg, #059669, #34d399); }
+.card--agent h3 { color: #6ee7b7; }
+.card--agent .tech-badge { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+
+.card--apk {
+  background: rgba(180, 100, 20, 0.12);
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  box-shadow: 0 4px 30px rgba(251, 146, 60, 0.08);
+}
+.card--apk .card-accent { background: linear-gradient(90deg, #ea580c, #fb923c); }
+.card--apk h3 { color: #fdba74; }
+.card--apk .tech-badge { background: rgba(251, 146, 60, 0.2); color: #fdba74; }

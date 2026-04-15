@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-Agent Lab — Kerry's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/multi-agent.css" />
+</head>
+<body class="agent-body">
+  <div class="agent-bg"></div>
+
+  <div class="agent-content page-content">
+    <section class="section-hero">
+      <h1 class="agent-title">Multi-Agent Lab<span class="cursor-blink">_</span></h1>
+      <p class="agent-tagline">// paste text → watch agents analyze in real time</p>
+
+      <p class="agent-description">
+        A rule-based multi-agent document analysis system with a visual dashboard. 
+        Four specialized agents — Extractor, Summarizer, Critic, and Sentiment — 
+        process text sequentially through a shared PipelineContext, streaming results 
+        to an interactive browser dashboard via Server-Sent Events. 100% local Python. 
+        No cloud APIs. No LLMs. ~50ms total pipeline execution.
+      </p>
+
+      <div class="agent-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+        <span class="tech-badge">Python 3.11+</span>
+        <span class="tech-badge">FastAPI</span>
+        <span class="tech-badge">SSE Streaming</span>
+        <span class="tech-badge">Uvicorn</span>
+        <span class="tech-badge">pytest</span>
+      </div>
+
+      <a href="#" class="github-link" style="border-color: rgba(52,211,153,0.3); color: #6ee7b7;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+
+      <!-- Pipeline visualization -->
+      <div class="pipeline-display">
+        <div class="pipeline-header">$ multi-agent-lab run --dashboard</div>
+
+        <div class="pipeline-agent">
+          <div class="agent-icon agent-icon--extractor">📊</div>
+          <div>
+            <div class="agent-name">Extractor</div>
+            <div class="agent-desc">Word count, sentence count, key statistics</div>
+          </div>
+          <div class="agent-status">→ ready</div>
+        </div>
+
+        <div class="pipeline-agent">
+          <div class="agent-icon agent-icon--summarizer">📝</div>
+          <div>
+            <div class="agent-name">Summarizer</div>
+            <div class="agent-desc">Keyword-scored summary generation</div>
+          </div>
+          <div class="agent-status">→ ready</div>
+        </div>
+
+        <div class="pipeline-agent">
+          <div class="agent-icon agent-icon--critic">🔍</div>
+          <div>
+            <div class="agent-name">Critic</div>
+            <div class="agent-desc">Readability, structure, depth grading</div>
+          </div>
+          <div class="agent-status">→ ready</div>
+        </div>
+
+        <div class="pipeline-agent">
+          <div class="agent-icon agent-icon--sentiment">💭</div>
+          <div>
+            <div class="agent-name">Sentiment</div>
+            <div class="agent-desc">Tone scoring with negation &amp; intensifier handling</div>
+          </div>
+          <div class="agent-status">→ ready</div>
+        </div>
+      </div>
+
+      <!-- Demo placeholder -->
+      <div class="demo-placeholder" style="border-color: rgba(52,211,153,0.25); background: rgba(52,211,153,0.02); color: rgba(52,211,153,0.4); margin-top: 48px;">
+        <div style="font-size: 3rem;">⚡</div>
+        <div>Live dashboard demo will be embedded here</div>
+        <div class="placeholder-label">FastAPI + SSE streaming pipeline</div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="agent-features">
+      <h2>System Architecture</h2>
+
+      <div class="feature-grid">
+        <div class="agent-feature-card">
+          <h3>⚡ Pipeline Context</h3>
+          <p>
+            Agents share state through a PipelineContext object that flows through 
+            the chain. Each agent reads from predecessors and writes enriched data 
+            for the next stage.
+          </p>
+        </div>
+
+        <div class="agent-feature-card">
+          <h3>📡 SSE Streaming</h3>
+          <p>
+            Results stream to the browser in real time via Server-Sent Events. 
+            Watch each agent light up as it processes — no polling, no websockets.
+          </p>
+        </div>
+
+        <div class="agent-feature-card">
+          <h3>🖥️ Dual Interface</h3>
+          <p>
+            Interactive browser dashboard with animated pipeline visualization, 
+            plus a full CLI for batch processing and scripting.
+          </p>
+        </div>
+
+        <div class="agent-feature-card">
+          <h3>📈 Performance Tracking</h3>
+          <p>
+            Built-in LabTracker instrumentation — per-agent timing, memory usage, 
+            throughput metrics. The whole pipeline runs in ~50ms.
+          </p>
+        </div>
+
+        <div class="agent-feature-card">
+          <h3>🔌 Agent Registry</h3>
+          <p>
+            Pluggable agent architecture with a central registry. Add new analysis 
+            agents without modifying the orchestrator.
+          </p>
+        </div>
+
+        <div class="agent-feature-card">
+          <h3>🏠 100% Local</h3>
+          <p>
+            No cloud dependencies, no API keys, no LLMs. Everything runs on your 
+            machine. Pure Python rule-based analysis.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ NAV DOCK ═══ -->
+  <nav class="nav-dock">
+    <a href="/" data-page="home">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent" class="active">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

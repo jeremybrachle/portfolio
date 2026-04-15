@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APK Archeologist — Kerry's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/apk-archeologist.css" />
+</head>
+<body class="apk-body">
+  <div class="apk-bg"></div>
+
+  <div class="apk-content page-content">
+    <section class="section-hero">
+      <h1 class="apk-title">APK<br>Archeologist</h1>
+      <p class="apk-tagline">// extract endpoint DNA from compiled amber</p>
+
+      <p class="apk-description">
+        A CLI tool for mobile game preservation. Feed it an APK and it produces 
+        decompiled source, a catalog of every server endpoint the game contacts, 
+        authentication flow analysis, extractable asset inventory, and a runnable 
+        mock server scaffold — so games can keep running after their original 
+        servers go dark.
+      </p>
+
+      <div class="apk-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+        <span class="tech-badge">TypeScript</span>
+        <span class="tech-badge">Node.js 18+</span>
+        <span class="tech-badge">CLI</span>
+        <span class="tech-badge">JADX</span>
+        <span class="tech-badge">AssetRipper</span>
+        <span class="tech-badge">Il2CppDumper</span>
+      </div>
+
+      <a href="#" class="github-link" style="border-color: rgba(251,146,60,0.3); color: #fdba74;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+
+      <!-- Dig layers — the analysis pipeline as archaeology -->
+      <div class="dig-layers">
+        <div class="dig-layer dig-layer--surface">
+          <div class="layer-icon">📦</div>
+          <div>
+            <div class="layer-name">Ingest</div>
+            <div class="layer-desc">Unpack APK, identify engine, extract manifest</div>
+          </div>
+        </div>
+
+        <div class="dig-layer dig-layer--shallow">
+          <div class="layer-icon">🔓</div>
+          <div>
+            <div class="layer-name">Decompile</div>
+            <div class="layer-desc">JADX for Java/Kotlin, AssetRipper for Unity, Il2CppDumper for IL2CPP</div>
+          </div>
+        </div>
+
+        <div class="dig-layer dig-layer--deep">
+          <div class="layer-icon">🔍</div>
+          <div>
+            <div class="layer-name">Scan</div>
+            <div class="layer-desc">Search decompiled source for network endpoints &amp; auth flows</div>
+          </div>
+        </div>
+
+        <div class="dig-layer dig-layer--core">
+          <div class="layer-icon">🎨</div>
+          <div>
+            <div class="layer-name">Extract Assets</div>
+            <div class="layer-desc">Audio, textures, data files, configuration</div>
+          </div>
+        </div>
+
+        <div class="dig-layer dig-layer--artifact">
+          <div class="layer-icon">🏗️</div>
+          <div>
+            <div class="layer-name">Mock Server</div>
+            <div class="layer-desc">Generate a runnable server scaffold that replaces the original backend</div>
+          </div>
+        </div>
+
+        <div class="dig-layer dig-layer--report">
+          <div class="layer-icon">📋</div>
+          <div>
+            <div class="layer-name">Report</div>
+            <div class="layer-desc">Detailed Markdown &amp; JSON analysis of everything discovered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supported engines table -->
+      <table class="engine-table">
+        <thead>
+          <tr>
+            <th>Engine</th>
+            <th>Decompilation</th>
+            <th>Assets</th>
+            <th>Endpoints</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unity (Mono)</td>
+            <td class="check">✓ Full C#</td>
+            <td class="check">✓ Audio, textures, data</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Unity (IL2CPP)</td>
+            <td class="check">✓ C# stubs + strings</td>
+            <td class="check">✓ Audio, textures, data</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Java / Kotlin</td>
+            <td class="check">✓ Full source</td>
+            <td class="check">✓ Resources</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Unreal</td>
+            <td class="planned">Planned</td>
+            <td class="planned">Planned</td>
+            <td class="planned">Planned</td>
+          </tr>
+          <tr>
+            <td>Godot</td>
+            <td class="planned">Planned</td>
+            <td class="planned">Planned</td>
+            <td class="planned">Planned</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Demo placeholder -->
+      <div class="demo-placeholder" style="border-color: rgba(251,146,60,0.25); background: rgba(251,146,60,0.02); color: rgba(251,146,60,0.4); margin-top: 48px;">
+        <div style="font-size: 3rem;">🏺</div>
+        <div>Sample analysis report will be rendered here</div>
+        <div class="placeholder-label">Terminal recording or interactive report viewer</div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="apk-features">
+      <h2>Capabilities</h2>
+
+      <div class="feature-grid">
+        <div class="apk-feature-card">
+          <h3>📦 Full Pipeline</h3>
+          <p>
+            One command runs the entire chain: ingest → decompile → scan → 
+            extract → scaffold → report. Or run each stage individually.
+          </p>
+        </div>
+
+        <div class="apk-feature-card">
+          <h3>🔍 Endpoint Discovery</h3>
+          <p>
+            Scans decompiled source for HTTP endpoints, WebSocket connections, 
+            API keys, and authentication flows the game depends on.
+          </p>
+        </div>
+
+        <div class="apk-feature-card">
+          <h3>🏗️ Mock Server Generation</h3>
+          <p>
+            Automatically generates a runnable Node.js server scaffold that 
+            can replace the original backend — keeping the game alive.
+          </p>
+        </div>
+
+        <div class="apk-feature-card">
+          <h3>🎮 Game Preservation</h3>
+          <p>
+            Built for the long game. When servers shut down, mobile games die. 
+            This tool documents what was lost and builds the bridge to keep playing.
+          </p>
+        </div>
+
+        <div class="apk-feature-card">
+          <h3>🔌 Plugin Architecture</h3>
+          <p>
+            Engine-specific logic lives in plugins. Add support for new game engines 
+            without touching the core pipeline.
+          </p>
+        </div>
+
+        <div class="apk-feature-card">
+          <h3>📋 Rich Reports</h3>
+          <p>
+            Generates detailed Markdown and JSON reports documenting every 
+            endpoint, asset, and dependency discovered in the APK.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ NAV DOCK ═══ -->
+  <nav class="nav-dock">
+    <a href="/" data-page="home">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk" class="active">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

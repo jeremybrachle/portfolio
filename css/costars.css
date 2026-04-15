@@ -1,0 +1,133 @@
+/* ── CO-STARS PAGE: Hot Pink Cinema Theme ── */
+/* Film noir meets neon — hot pinks, deep magentas, film grain */
+
+.costars-body {
+  background: #12060e;
+  color: #fce4ec;
+}
+
+/* Film grain overlay */
+.costars-body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.costars-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 70%, rgba(236, 72, 153, 0.2), transparent),
+    radial-gradient(ellipse 50% 60% at 75% 25%, rgba(190, 24, 93, 0.15), transparent),
+    #12060e;
+}
+
+.costars-content {
+  position: relative;
+  z-index: 1;
+}
+
+.costars-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #f472b6, #ec4899, #db2777, #f9a8d4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+  margin-bottom: 8px;
+}
+
+.costars-tagline {
+  font-size: 1.2rem;
+  color: rgba(252, 228, 236, 0.5);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.costars-description {
+  max-width: 700px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(252, 228, 236, 0.75);
+  margin-bottom: 32px;
+}
+
+/* Film strip decoration */
+.film-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.film-frame {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  background: rgba(236, 72, 153, 0.08);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.film-frame:hover {
+  transform: scale(1.08);
+  background: rgba(236, 72, 153, 0.15);
+}
+
+/* Features section */
+.costars-features {
+  padding: 80px 24px 160px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.costars-features h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 48px;
+  color: #f9a8d4;
+}
+
+.costars-feature-card {
+  background: rgba(236, 72, 153, 0.06);
+  border: 1px solid rgba(236, 72, 153, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.costars-feature-card h3 {
+  font-size: 1.15rem;
+  color: #f472b6;
+  margin-bottom: 8px;
+}
+
+.costars-feature-card p {
+  color: rgba(252, 228, 236, 0.65);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.costars-tech .tech-badge {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f9a8d4;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}

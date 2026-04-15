@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kerry's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/home.css" />
+</head>
+<body class="home-body">
+  <div class="home-bg"></div>
+
+  <div class="home-content page-content">
+    <!-- ═══ HERO: Vibe Machine Showcase ═══ -->
+    <section class="section-hero">
+      <h1 class="home-title">Kerry's Lab</h1>
+      <p class="home-subtitle">
+        Builder of games, tools, and weird experiments. 
+        This is where the projects live.
+      </p>
+
+      <!-- Visualizer stage — placeholder for Vibe Machine embed -->
+      <div class="visualizer-stage" id="visualizer">
+        <div class="viz-bars" id="vizBars">
+          <!-- JS fills these -->
+        </div>
+        <div class="viz-overlay-text">
+          <div class="icon">🎵</div>
+          <div>Vibe Machine will live here</div>
+          <div class="placeholder-label">Drop in the visualizer when ready</div>
+        </div>
+      </div>
+
+      <!-- Audio bar — Claire de Lune player -->
+      <div class="audio-bar">
+        <button class="play-btn" id="playBtn" title="Play Claire de Lune">▶</button>
+        <div class="now-playing">
+          <span id="trackName">Debussy — Clair de Lune</span>
+        </div>
+        <div id="audioStatus" style="font-size:0.8rem; opacity:0.5;">
+          Place a public-domain MP3 at <code>/public/audio/clair-de-lune.mp3</code>
+        </div>
+      </div>
+
+      <!--
+        AUDIO SETUP NOTES:
+        ─────────────────────
+        Claire de Lune by Claude Debussy (1890) is PUBLIC DOMAIN.
+        Many recordings are also PD. Recommended sources:
+          • Musopen.org — free PD classical recordings
+          • IMSLP/Petrucci — PD scores + some recordings
+          • Archive.org — PD audio collection
+
+        Drop a PD recording into: /public/audio/clair-de-lune.mp3
+        The JS will detect and auto-wire it.
+      -->
+      <audio id="bgAudio" loop preload="auto">
+        <source src="/audio/clair-de-lune.mp3" type="audio/mpeg" />
+      </audio>
+    </section>
+
+    <!-- ═══ PROJECT CARDS ═══ -->
+    <section class="projects-overview">
+      <h2>The Projects</h2>
+
+      <div class="project-card-grid">
+        <!-- VIBE MACHINE -->
+        <a href="#" class="project-card card--vibe" data-current>
+          <div class="card-accent"></div>
+          <h3>🎧 Vibe Machine</h3>
+          <div class="card-tagline">Real-time audio visualizer</div>
+          <p class="card-description">
+            A real-time, audio-reactive music visualizer built entirely with vanilla JavaScript, 
+            HTML Canvas, and the Web Audio API. No frameworks. No build tools. No npm install. 
+            Five visualization modes — Bars, Waveform, Circular, Particles, and Starfield — 
+            with drag-and-drop audio, keyboard shortcuts, and fullscreen Vibe Mode. 
+            Also ships as a desktop Electron app.
+          </p>
+          <div class="card-tech">
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">Canvas 2D</span>
+            <span class="tech-badge">Web Audio API</span>
+            <span class="tech-badge">Electron</span>
+            <span class="tech-badge">Node.js</span>
+          </div>
+        </a>
+
+        <!-- CO-STARS -->
+        <a href="/pages/costars.html" class="project-card card--costars">
+          <div class="card-accent"></div>
+          <h3>🎬 Co-Stars</h3>
+          <div class="card-tagline">Actor→movie connection game</div>
+          <p class="card-description">
+            A full-stack actor connection game — find the shortest path between any two actors 
+            through the movies they share. React + TypeScript frontend with offline snapshot 
+            caching, powered by a FastAPI backend with type-agnostic pathfinding over a 
+            TMDB-enriched SQLite graph. Features levels, hints, suggestions, 
+            and custom level creation.
+          </p>
+          <div class="card-tech">
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">SQLite</span>
+            <span class="tech-badge">Vite</span>
+          </div>
+        </a>
+
+        <!-- MULTI-AGENT LAB -->
+        <a href="/pages/multi-agent.html" class="project-card card--agent">
+          <div class="card-accent"></div>
+          <h3>🤖 Multi-Agent Lab</h3>
+          <div class="card-tagline">Document analysis pipeline</div>
+          <p class="card-description">
+            Paste in any text, watch four agents analyze it in real time. Extractor, Summarizer, 
+            Critic, and Sentiment agents process documents sequentially through a shared pipeline, 
+            streaming results to an interactive dashboard via SSE. 100% local, pure Python — 
+            no cloud APIs, no LLMs. Fast (~50ms total pipeline).
+          </p>
+          <div class="card-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">SSE</span>
+            <span class="tech-badge">Dashboard</span>
+          </div>
+        </a>
+
+        <!-- APK ARCHEOLOGIST -->
+        <a href="/pages/apk-archeologist.html" class="project-card card--apk">
+          <div class="card-accent"></div>
+          <h3>🏺 APK Archeologist</h3>
+          <div class="card-tagline">Mobile game preservation CLI</div>
+          <p class="card-description">
+            A CLI tool for mobile game preservation. Feed it an APK and it produces decompiled 
+            source, a catalog of every server endpoint, authentication flow analysis, extractable 
+            asset inventory, and a runnable mock server scaffold. Built so games can keep 
+            running after their original servers go dark. Supports Unity, Java/Kotlin, 
+            with Unreal and Godot planned.
+          </p>
+          <div class="card-tech">
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">CLI</span>
+            <span class="tech-badge">Reverse Engineering</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ NAV DOCK ═══ -->
+  <nav class="nav-dock">
+    <a href="/" data-page="home" class="active">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/home.js"></script>
+</body>
+</html>
