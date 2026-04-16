@@ -73,6 +73,7 @@ img { max-width: 100%; display: block; }
 
 /* Per-page nav dot colors */
 .nav-dock a[data-page="home"] .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; }
+.nav-dock a[data-page="vibe"] .nav-dot { background: #c084fc; box-shadow: 0 0 8px #c084fc; }
 .nav-dock a[data-page="costars"] .nav-dot { background: #f472b6; box-shadow: 0 0 8px #f472b6; }
 .nav-dock a[data-page="multiagent"] .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
 .nav-dock a[data-page="apk"] .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; }
@@ -81,6 +82,23 @@ img { max-width: 100%; display: block; }
 /* ── Page Transition Fade ── */
 .page-content {
   animation: pageIn 0.6s ease-out;
+}
+
+/* ── Single-Page Section Visibility ── */
+.page-section {
+  display: none;
+}
+.page-section.active {
+  display: block;
+  animation: pageIn 0.6s ease-out;
+}
+
+/* ── Page Background (shared across all pages) ── */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
 }
 
 @keyframes pageIn {
@@ -190,4 +208,198 @@ img { max-width: 100%; display: block; }
   .nav-dock a span:not(.nav-dot) {
     display: none;
   }
+  #mini-player {
+    width: 220px;
+    left: 8px !important;
+  }
+}
+
+/* ── Mini Player ── */
+#mini-player {
+  position: fixed;
+  bottom: 90px;
+  left: 24px;
+  z-index: 9998;
+  width: 280px;
+  background: rgba(15, 12, 25, 0.85);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  overflow: hidden;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+}
+
+#mini-player:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.08);
+}
+
+#mini-player.playing {
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+#mini-player.dragging {
+  opacity: 0.9;
+  cursor: grabbing;
+}
+
+/* Handle / header bar */
+#mp-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: grab;
+  background: rgba(168, 85, 247, 0.06);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+#mp-handle:active {
+  cursor: grabbing;
+}
+
+.mp-drag-hint {
+  font-size: 0.55rem;
+  color: rgba(168, 85, 247, 0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mp-label {
+  font-size: 0.6rem;
+  color: rgba(192, 132, 252, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* Body */
+.mp-body {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Controls row */
+.mp-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#mp-play {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.1);
+  color: #c084fc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+#mp-play:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.mp-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#mp-track {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(226, 213, 243, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#mp-time {
+  font-size: 0.6rem;
+  color: rgba(192, 132, 252, 0.4);
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* Progress bar */
+#mp-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(168, 85, 247, 0.1);
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#mp-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #a855f7, #c084fc);
+  border-radius: 2px;
+  transition: width 0.3s linear;
+}
+
+#mini-player.playing #mp-progress-fill {
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
+}
+
+/* ── Mini Equalizer ── */
+#mp-eq {
+  flex-shrink: 0;
+  display: block;
+  opacity: 0.7;
+}
+
+#mini-player.playing #mp-eq {
+  opacity: 1;
+}
+
+/* ── Vibe Machine Iframe Wrapper ──
+   NEVER moved in the DOM — stays in body, positioned via JS.
+   Moving an iframe with appendChild causes a reload & kills audio. */
+#vm-iframe-wrap {
+  position: fixed;
+  z-index: 5;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#vm-iframe-wrap.hidden {
+  /* Keep audio running + analyser alive; just hide visually */
+  width: 1px !important;
+  height: 1px !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#vm-iframe-wrap.mounted {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#vm-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  border-radius: inherit;
+}
+
+/* ── Hide mini-player when iframe is visible (home page) ── */
+#mini-player.mp-hidden {
+  display: none;
 }

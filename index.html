@@ -3,194 +3,930 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kerry's Portfolio</title>
+  <title>Jeremy's Portfolio</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/home.css" />
+  <link rel="stylesheet" href="/css/vibe-machine.css" />
+  <link rel="stylesheet" href="/css/costars.css" />
+  <link rel="stylesheet" href="/css/multi-agent.css" />
+  <link rel="stylesheet" href="/css/apk-archeologist.css" />
+  <link rel="stylesheet" href="/css/portfolio.css" />
 </head>
 <body class="home-body">
-  <div class="home-bg"></div>
+  <div class="page-bg home-bg"></div>
 
-  <div class="home-content page-content">
-    <!-- ═══ HERO: Vibe Machine Showcase ═══ -->
-    <section class="section-hero">
-      <h1 class="home-title">Kerry's Lab</h1>
-      <p class="home-subtitle">
-        Builder of games, tools, and weird experiments. 
-        This is where the projects live.
-      </p>
+  <!-- ═══════════════════════════════════════════════════════════════
+       ALL PAGES AS SECTIONS — only one visible at a time.
+       Iframe + mini player live OUTSIDE these, always persistent.
+       ═══════════════════════════════════════════════════════════════ -->
 
-      <!-- Visualizer stage — placeholder for Vibe Machine embed -->
-      <div class="visualizer-stage" id="visualizer">
-        <div class="viz-bars" id="vizBars">
-          <!-- JS fills these -->
+  <!-- ═══ HOME ═══ -->
+  <section class="page-section active" id="section-home" data-title="Jeremy's Portfolio" data-body-class="home-body" data-bg-class="home-bg">
+    <div class="home-content page-content">
+      <section class="section-hero">
+        <h1 class="home-title">Jeremy's Lab</h1>
+        <p class="home-subtitle">
+          Builder of games, tools, and weird experiments. 
+          This is where the projects live.
+        </p>
+        <div class="visualizer-stage" id="visualizer"></div>
+      </section>
+
+      <section class="projects-overview">
+        <h2>The Projects</h2>
+        <div class="project-card-grid">
+          <a data-nav="section-vibe" class="project-card card--vibe">
+            <div class="card-accent"></div>
+            <h3>🎧 Vibe Machine</h3>
+            <div class="card-tagline">Real-time audio visualizer</div>
+            <p class="card-description">
+              A real-time, audio-reactive music visualizer built entirely with vanilla JavaScript, 
+              HTML Canvas, and the Web Audio API. No frameworks. No build tools. No npm install. 
+              Five visualization modes — Bars, Waveform, Circular, Particles, and Starfield — 
+              with drag-and-drop audio, keyboard shortcuts, and fullscreen Vibe Mode. 
+              Also ships as a desktop Electron app.
+            </p>
+            <div class="card-tech">
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Canvas 2D</span>
+              <span class="tech-badge">Web Audio API</span>
+              <span class="tech-badge">Electron</span>
+              <span class="tech-badge">Node.js</span>
+            </div>
+          </a>
+
+          <a data-nav="section-costars" class="project-card card--costars">
+            <div class="card-accent"></div>
+            <h3>🎬 Co-Stars</h3>
+            <div class="card-tagline">Actor→movie connection game</div>
+            <p class="card-description">
+              A full-stack actor connection game — find the shortest path between any two actors 
+              through the movies they share. React + TypeScript frontend with offline snapshot 
+              caching, powered by a FastAPI backend with type-agnostic pathfinding over a 
+              TMDB-enriched SQLite graph. Features levels, hints, suggestions, 
+              and custom level creation.
+            </p>
+            <div class="card-tech">
+              <span class="tech-badge">React</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">FastAPI</span>
+              <span class="tech-badge">SQLite</span>
+              <span class="tech-badge">Vite</span>
+            </div>
+          </a>
+
+          <a data-nav="section-agent" class="project-card card--agent">
+            <div class="card-accent"></div>
+            <h3>🤖 Multi-Agent Lab</h3>
+            <div class="card-tagline">Document analysis pipeline</div>
+            <p class="card-description">
+              Paste in any text, watch four agents analyze it in real time. Extractor, Summarizer, 
+              Critic, and Sentiment agents process documents sequentially through a shared pipeline, 
+              streaming results to an interactive dashboard via SSE. 100% local, pure Python — 
+              no cloud APIs, no LLMs. Fast (~50ms total pipeline).
+            </p>
+            <div class="card-tech">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">FastAPI</span>
+              <span class="tech-badge">SSE</span>
+              <span class="tech-badge">Dashboard</span>
+            </div>
+          </a>
+
+          <a data-nav="section-apk" class="project-card card--apk">
+            <div class="card-accent"></div>
+            <h3>🏺 APK Archeologist</h3>
+            <div class="card-tagline">Mobile game preservation CLI</div>
+            <p class="card-description">
+              A CLI tool for mobile game preservation. Feed it an APK and it produces decompiled 
+              source, a catalog of every server endpoint, authentication flow analysis, extractable 
+              asset inventory, and a runnable mock server scaffold. Built so games can keep 
+              running after their original servers go dark. Supports Unity, Java/Kotlin, 
+              with Unreal and Godot planned.
+            </p>
+            <div class="card-tech">
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">CLI</span>
+              <span class="tech-badge">Reverse Engineering</span>
+            </div>
+          </a>
+
+          <a data-nav="section-portfolio" class="project-card card--portfolio">
+            <div class="card-accent"></div>
+            <h3>🪞 This Very Portfolio</h3>
+            <div class="card-tagline">A website within a website</div>
+            <p class="card-description">
+              You're looking at it. This portfolio site lists itself as one of its own projects 
+              because the recursion had to go somewhere. Five themed pages, zero frameworks, 
+              and one page that stares back at you. It's the Inception of personal websites — 
+              except the totem never falls over because it's static HTML.
+            </p>
+            <div class="card-tech">
+              <span class="tech-badge">Vite</span>
+              <span class="tech-badge">Vanilla JS</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">Recursion</span>
+            </div>
+          </a>
         </div>
-        <div class="viz-overlay-text">
-          <div class="icon">🎵</div>
-          <div>Vibe Machine will live here</div>
-          <div class="placeholder-label">Drop in the visualizer when ready</div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ VIBE MACHINE ═══ -->
+  <section class="page-section" id="section-vibe" data-title="Vibe Machine — Jeremy's Portfolio" data-body-class="vibe-body" data-bg-class="vibe-bg">
+    <div class="vibe-content page-content">
+      <section class="vibe-hero">
+        <h1 class="vibe-title">Vibe Machine</h1>
+        <p class="vibe-subtitle">Real-time audio visualizer — zero dependencies, pure vibes.</p>
+      </section>
+      <div class="vibe-embed-stage">
+        <div class="vibe-screenshot-frame">
+          <div class="vibe-screenshot-placeholder">
+            <div class="vibe-screenshot-icon">🎧</div>
+            <div class="vibe-screenshot-label">Screenshot Coming Soon</div>
+            <div class="vibe-screenshot-hint">Head to <a data-nav="section-home" class="vibe-home-link" style="cursor:pointer">Home</a> to see it live</div>
+          </div>
         </div>
       </div>
-
-      <!-- Audio bar — Claire de Lune player -->
-      <div class="audio-bar">
-        <button class="play-btn" id="playBtn" title="Play Claire de Lune">▶</button>
-        <div class="now-playing">
-          <span id="trackName">Debussy — Clair de Lune</span>
+      <section class="vibe-about">
+        <h2>What Is This</h2>
+        <p class="vibe-about-text">
+          A browser-based audio visualizer built entirely with <em>vanilla JavaScript</em>,
+          HTML Canvas, and the Web Audio API. No frameworks. No build tools. No npm install.
+          Drop in any audio file and watch it come alive across five visualization modes.
+        </p>
+        <div class="vibe-tech">
+          <span class="tech-badge">Vanilla JS</span>
+          <span class="tech-badge">Canvas 2D</span>
+          <span class="tech-badge">Web Audio API</span>
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">Electron</span>
         </div>
-        <div id="audioStatus" style="font-size:0.8rem; opacity:0.5;">
-          Place a public-domain MP3 at <code>/public/audio/clair-de-lune.mp3</code>
+      </section>
+      <section class="vibe-features">
+        <h2>Features</h2>
+        <div class="vibe-feature-grid">
+          <div class="vibe-feature-card"><h3>🎨 5+ Visualization Modes</h3><p>Bars, Waveform, Circular, Particles, Starfield, Starry Night, Pixel Grid, Sunset, and Piano — each a standalone rendering module driven by real-time frequency data.</p></div>
+          <div class="vibe-feature-card"><h3>🎵 Drag &amp; Drop Audio</h3><p>Drop any audio file onto the canvas. The Web Audio API's AnalyserNode extracts frequency data at 60fps and feeds it directly into the active visualizer's draw loop.</p></div>
+          <div class="vibe-feature-card"><h3>⌨️ Keyboard Shortcuts</h3><p>Switch modes, toggle fullscreen Vibe Mode, skip tracks, adjust volume — all without touching the mouse. Built for flow state.</p></div>
+          <div class="vibe-feature-card"><h3>🖥️ Electron Desktop App</h3><p>Ships as both a web app and an Electron desktop application. Same codebase, same visualizers, native window controls.</p></div>
+          <div class="vibe-feature-card"><h3>🔧 Zero Dependencies</h3><p>No React, no Tailwind, no webpack. Pure vanilla JavaScript, HTML Canvas 2D, and the browser's built-in Web Audio API. The entire app is the app.</p></div>
+          <div class="vibe-feature-card"><h3>🎧 Queue Management</h3><p>Drag-to-reorder queue with track progression. Load up a playlist and let the visualizer ride through your entire collection.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ CO-STARS ═══ -->
+  <section class="page-section" id="section-costars" data-title="Co-Stars — Jeremy's Portfolio" data-body-class="costars-body" data-bg-class="costars-bg">
+    <div class="costars-content page-content">
+      <section class="section-hero">
+        <h1 class="costars-title">Co-Stars</h1>
+        <p class="costars-tagline">Connect any two actors through the movies they share</p>
+        <p class="costars-description">
+          A full-stack actor→movie connection game. Find the shortest path between any two actors 
+          by hopping through shared movies — think "Six Degrees of Kevin Bacon" but playable, 
+          with levels, hints, and a graph you can explore. The React frontend works offline 
+          through snapshot caching, powered by a FastAPI backend with type-agnostic pathfinding 
+          over a TMDB-enriched SQLite graph.
+        </p>
+        <div class="costars-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+          <span class="tech-badge">React 19</span>
+          <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">Vite</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">SQLite</span>
+          <span class="tech-badge">TMDB API</span>
+        </div>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <a href="https://github.com/jeremybrachle/co-stars-frontend" target="_blank" rel="noopener" class="github-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            Frontend
+          </a>
+          <a href="https://github.com/jeremybrachle/co-stars-backend" target="_blank" rel="noopener" class="github-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            Backend
+          </a>
+        </div>
+        <div class="film-strip">
+          <div class="film-frame">🎭</div><div class="film-frame">🎬</div><div class="film-frame">⭐</div>
+          <div class="film-frame">🎭</div><div class="film-frame">🎬</div><div class="film-frame">⭐</div>
+        </div>
+        <div class="demo-placeholder" style="border-color: rgba(236,72,153,0.25); background: rgba(236,72,153,0.03);">
+          <div style="font-size: 3rem;">🎮</div>
+          <div>Playable demo will be embedded here</div>
+          <div class="placeholder-label">React app with offline snapshot mode</div>
+        </div>
+      </section>
+      <section class="costars-features">
+        <h2>How It Works</h2>
+        <div class="feature-grid">
+          <div class="costars-feature-card"><h3>🔍 Pathfinding Engine</h3><p>Type-agnostic shortest-path search across the actor→movie graph. Connect actor-to-actor, actor-to-movie, or movie-to-movie — the engine handles all combinations.</p></div>
+          <div class="costars-feature-card"><h3>📊 Difficulty Levels</h3><p>Curated levels from easy (household names) to expert (deep cuts). Each level has a target path length, actor pool, and difficulty rating. Plus custom level creation.</p></div>
+          <div class="costars-feature-card"><h3>💡 Smart Suggestions</h3><p>Context-aware hints that show which movies connect your current position to the goal, with popularity weighting and path-proximity scoring.</p></div>
+          <div class="costars-feature-card"><h3>📸 Offline Snapshots</h3><p>The frontend exports and caches the entire game graph to localStorage. Play without a backend connection — data syncs when available.</p></div>
+          <div class="costars-feature-card"><h3>🎨 Polished UI</h3><p>Purple gradient design with actor/movie cards, path visualization sidebar, suggestion buttons, and responsive layout. Built with React 19 and Vite.</p></div>
+          <div class="costars-feature-card"><h3>🗃️ TMDB Enriched Data</h3><p>Full metadata from The Movie Database API — posters, bios, ratings, release dates. Automatic backfill and enrichment pipeline.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ MULTI-AGENT LAB ═══ -->
+  <section class="page-section" id="section-agent" data-title="Multi-Agent Lab — Jeremy's Portfolio" data-body-class="agent-body" data-bg-class="agent-bg">
+    <div class="agent-content page-content">
+      <section class="section-hero">
+        <h1 class="agent-title">Multi-Agent Lab<span class="cursor-blink">_</span></h1>
+        <p class="agent-tagline">// paste text → watch agents analyze in real time</p>
+        <p class="agent-description">
+          A rule-based multi-agent document analysis system with a visual dashboard. 
+          Four specialized agents — Extractor, Summarizer, Critic, and Sentiment — 
+          process text sequentially through a shared PipelineContext, streaming results 
+          to an interactive browser dashboard via Server-Sent Events. 100% local Python. 
+          No cloud APIs. No LLMs. ~50ms total pipeline execution.
+        </p>
+        <div class="agent-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+          <span class="tech-badge">Python 3.11+</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">SSE Streaming</span>
+          <span class="tech-badge">Uvicorn</span>
+          <span class="tech-badge">pytest</span>
+        </div>
+        <a href="https://github.com/jeremybrachle/multi-agent" target="_blank" rel="noopener" class="github-link" style="border-color: rgba(52,211,153,0.3); color: #6ee7b7;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <div class="pipeline-display">
+          <div class="pipeline-header">$ multi-agent-lab run --dashboard</div>
+          <div class="pipeline-agent">
+            <div class="agent-icon agent-icon--extractor">📊</div>
+            <div><div class="agent-name">Extractor</div><div class="agent-desc">Word count, sentence count, key statistics</div></div>
+            <div class="agent-status">→ ready</div>
+          </div>
+          <div class="pipeline-agent">
+            <div class="agent-icon agent-icon--summarizer">📝</div>
+            <div><div class="agent-name">Summarizer</div><div class="agent-desc">Keyword-scored summary generation</div></div>
+            <div class="agent-status">→ ready</div>
+          </div>
+          <div class="pipeline-agent">
+            <div class="agent-icon agent-icon--critic">🔍</div>
+            <div><div class="agent-name">Critic</div><div class="agent-desc">Readability, structure, depth grading</div></div>
+            <div class="agent-status">→ ready</div>
+          </div>
+          <div class="pipeline-agent">
+            <div class="agent-icon agent-icon--sentiment">💭</div>
+            <div><div class="agent-name">Sentiment</div><div class="agent-desc">Tone scoring with negation &amp; intensifier handling</div></div>
+            <div class="agent-status">→ ready</div>
+          </div>
+        </div>
+        <div class="demo-placeholder" style="border-color: rgba(52,211,153,0.25); background: rgba(52,211,153,0.02); color: rgba(52,211,153,0.4); margin-top: 48px;">
+          <div style="font-size: 3rem;">⚡</div>
+          <div>Live dashboard demo will be embedded here</div>
+          <div class="placeholder-label">FastAPI + SSE streaming pipeline</div>
+        </div>
+      </section>
+      <section class="agent-features">
+        <h2>System Architecture</h2>
+        <div class="feature-grid">
+          <div class="agent-feature-card"><h3>⚡ Pipeline Context</h3><p>Agents share state through a PipelineContext object that flows through the chain. Each agent reads from predecessors and writes enriched data for the next stage.</p></div>
+          <div class="agent-feature-card"><h3>📡 SSE Streaming</h3><p>Results stream to the browser in real time via Server-Sent Events. Watch each agent light up as it processes — no polling, no websockets.</p></div>
+          <div class="agent-feature-card"><h3>🖥️ Dual Interface</h3><p>Interactive browser dashboard with animated pipeline visualization, plus a full CLI for batch processing and scripting.</p></div>
+          <div class="agent-feature-card"><h3>📈 Performance Tracking</h3><p>Built-in LabTracker instrumentation — per-agent timing, memory usage, throughput metrics. The whole pipeline runs in ~50ms.</p></div>
+          <div class="agent-feature-card"><h3>🔌 Agent Registry</h3><p>Pluggable agent architecture with a central registry. Add new analysis agents without modifying the orchestrator.</p></div>
+          <div class="agent-feature-card"><h3>🏠 100% Local</h3><p>No cloud dependencies, no API keys, no LLMs. Everything runs on your machine. Pure Python rule-based analysis.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ APK ARCHEOLOGIST ═══ -->
+  <section class="page-section" id="section-apk" data-title="APK Archeologist — Jeremy's Portfolio" data-body-class="apk-body" data-bg-class="apk-bg">
+    <div class="apk-content page-content">
+      <section class="section-hero">
+        <h1 class="apk-title">APK<br>Archeologist</h1>
+        <p class="apk-tagline">// extract endpoint DNA from compiled amber</p>
+        <p class="apk-description">
+          A CLI tool for mobile game preservation. Feed it an APK and it produces 
+          decompiled source, a catalog of every server endpoint the game contacts, 
+          authentication flow analysis, extractable asset inventory, and a runnable 
+          mock server scaffold — so games can keep running after their original 
+          servers go dark.
+        </p>
+        <div class="apk-tech" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:32px;">
+          <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">Node.js 18+</span>
+          <span class="tech-badge">CLI</span>
+          <span class="tech-badge">JADX</span>
+          <span class="tech-badge">AssetRipper</span>
+          <span class="tech-badge">Il2CppDumper</span>
+        </div>
+        <a href="https://github.com/jeremybrachle/apk-archaeologist" target="_blank" rel="noopener" class="github-link" style="border-color: rgba(251,146,60,0.3); color: #fdba74;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <div class="dig-layers">
+          <div class="dig-layer dig-layer--surface"><div class="layer-icon">📦</div><div><div class="layer-name">Ingest</div><div class="layer-desc">Unpack APK, identify engine, extract manifest</div></div></div>
+          <div class="dig-layer dig-layer--shallow"><div class="layer-icon">🔓</div><div><div class="layer-name">Decompile</div><div class="layer-desc">JADX for Java/Kotlin, AssetRipper for Unity, Il2CppDumper for IL2CPP</div></div></div>
+          <div class="dig-layer dig-layer--deep"><div class="layer-icon">🔍</div><div><div class="layer-name">Scan</div><div class="layer-desc">Search decompiled source for network endpoints &amp; auth flows</div></div></div>
+          <div class="dig-layer dig-layer--core"><div class="layer-icon">🎨</div><div><div class="layer-name">Extract Assets</div><div class="layer-desc">Audio, textures, data files, configuration</div></div></div>
+          <div class="dig-layer dig-layer--artifact"><div class="layer-icon">🏗️</div><div><div class="layer-name">Mock Server</div><div class="layer-desc">Generate a runnable server scaffold that replaces the original backend</div></div></div>
+          <div class="dig-layer dig-layer--report"><div class="layer-icon">📋</div><div><div class="layer-name">Report</div><div class="layer-desc">Detailed Markdown &amp; JSON analysis of everything discovered</div></div></div>
+        </div>
+        <table class="engine-table">
+          <thead><tr><th>Engine</th><th>Decompilation</th><th>Assets</th><th>Endpoints</th></tr></thead>
+          <tbody>
+            <tr><td>Unity (Mono)</td><td class="check">✓ Full C#</td><td class="check">✓ Audio, textures, data</td><td class="check">✓</td></tr>
+            <tr><td>Unity (IL2CPP)</td><td class="check">✓ C# stubs + strings</td><td class="check">✓ Audio, textures, data</td><td class="check">✓</td></tr>
+            <tr><td>Java / Kotlin</td><td class="check">✓ Full source</td><td class="check">✓ Resources</td><td class="check">✓</td></tr>
+            <tr><td>Unreal</td><td class="planned">Planned</td><td class="planned">Planned</td><td class="planned">Planned</td></tr>
+            <tr><td>Godot</td><td class="planned">Planned</td><td class="planned">Planned</td><td class="planned">Planned</td></tr>
+          </tbody>
+        </table>
+        <div class="demo-placeholder" style="border-color: rgba(251,146,60,0.25); background: rgba(251,146,60,0.02); color: rgba(251,146,60,0.4); margin-top: 48px;">
+          <div style="font-size: 3rem;">🏺</div>
+          <div>Sample analysis report will be rendered here</div>
+          <div class="placeholder-label">Terminal recording or interactive report viewer</div>
+        </div>
+      </section>
+      <section class="apk-features">
+        <h2>Capabilities</h2>
+        <div class="feature-grid">
+          <div class="apk-feature-card"><h3>📦 Full Pipeline</h3><p>One command runs the entire chain: ingest → decompile → scan → extract → scaffold → report. Or run each stage individually.</p></div>
+          <div class="apk-feature-card"><h3>🔍 Endpoint Discovery</h3><p>Scans decompiled source for HTTP endpoints, WebSocket connections, API keys, and authentication flows the game depends on.</p></div>
+          <div class="apk-feature-card"><h3>🏗️ Mock Server Generation</h3><p>Automatically generates a runnable Node.js server scaffold that can replace the original backend — keeping the game alive.</p></div>
+          <div class="apk-feature-card"><h3>🎮 Game Preservation</h3><p>Built for the long game. When servers shut down, mobile games die. This tool documents what was lost and builds the bridge to keep playing.</p></div>
+          <div class="apk-feature-card"><h3>🔌 Plugin Architecture</h3><p>Engine-specific logic lives in plugins. Add support for new game engines without touching the core pipeline.</p></div>
+          <div class="apk-feature-card"><h3>📋 Rich Reports</h3><p>Generates detailed Markdown and JSON reports documenting every endpoint, asset, and dependency discovered in the APK.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ THIS PORTFOLIO ═══ -->
+  <section class="page-section" id="section-portfolio" data-title="This Portfolio — Jeremy's Portfolio" data-body-class="portfolio-body" data-bg-class="portfolio-bg">
+    <div class="portfolio-content page-content">
+      <section class="portfolio-hero">
+        <h1 class="portfolio-title">This Very Website</h1>
+        <p class="portfolio-subtitle">An impossible building whose stairs are made of its own source code.</p>
+      </section>
+      <div class="building-stage">
+        <svg class="impossible-svg" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" aria-label="Impossible staircase building with code flowing through it">
+          <defs>
+            <path id="stair-path-left" d="M 100,420 L 100,370 L 160,340 L 160,290 L 220,260 L 220,210 L 280,180" />
+            <path id="stair-path-top" d="M 280,180 L 340,180 L 400,210 L 400,180 L 460,150" />
+            <path id="stair-path-right" d="M 460,150 L 460,200 L 500,220 L 500,300 L 460,320 L 460,380 L 400,400 L 340,420 L 280,420 L 200,420 L 100,420" />
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="soft"><feGaussianBlur stdDeviation="0.5" /></filter>
+          </defs>
+          <g class="building-structure">
+            <polygon class="wall wall-back" points="160,100 460,100 460,400 160,400" />
+            <polygon class="wall wall-left" points="100,140 160,100 160,400 100,440" />
+            <polygon class="wall wall-floor" points="100,440 160,400 460,400 500,440" />
+            <polygon class="wall wall-right" points="460,100 520,140 520,440 460,400" />
+            <g class="stairs-group">
+              <polygon class="stair-tread" points="100,420 160,390 220,390 160,420" />
+              <polygon class="stair-riser" points="100,420 100,395 160,365 160,390" />
+              <polygon class="stair-tread" points="100,370 160,340 220,340 160,370" />
+              <polygon class="stair-riser" points="100,370 100,345 160,315 160,340" />
+              <polygon class="stair-tread" points="100,320 160,290 220,290 160,320" />
+              <polygon class="stair-riser" points="100,320 100,295 160,265 160,290" />
+              <polygon class="stair-tread" points="100,270 160,240 220,240 160,270" />
+              <polygon class="stair-riser" points="100,270 100,245 160,215 160,240" />
+              <polygon class="stair-tread" points="100,220 160,190 280,190 220,220" />
+              <polygon class="stair-riser" points="100,220 100,195 160,165 160,190" />
+              <polygon class="stair-tread top-landing" points="280,190 400,190 460,160 340,160" />
+              <polygon class="stair-tread" points="400,220 460,190 520,220 460,250" />
+              <polygon class="stair-riser" points="460,250 520,220 520,250 460,280" />
+              <polygon class="stair-tread" points="400,280 460,250 520,280 460,310" />
+              <polygon class="stair-riser" points="460,310 520,280 520,310 460,340" />
+              <polygon class="stair-tread" points="400,340 460,310 520,340 460,370" />
+              <polygon class="stair-riser" points="460,370 520,340 520,370 460,400" />
+              <polygon class="stair-tread" points="400,395 460,370 520,400 460,420" />
+              <polygon class="stair-riser stair-impossible" points="460,420 520,400 520,440 460,440" />
+            </g>
+            <line class="impossible-edge" x1="460" y1="420" x2="100" y2="420" />
+          </g>
+          <g class="code-paths">
+            <use href="#stair-path-left" class="code-path" />
+            <use href="#stair-path-top" class="code-path" />
+            <use href="#stair-path-right" class="code-path" />
+          </g>
+          <g class="code-particles" filter="url(#glow)">
+            <circle r="3" class="particle p1"><animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#stair-path-left" /></animateMotion></circle>
+            <circle r="3" class="particle p2"><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#stair-path-top" /></animateMotion></circle>
+            <circle r="3" class="particle p3"><animateMotion dur="14s" repeatCount="indefinite" rotate="auto"><mpath href="#stair-path-right" /></animateMotion></circle>
+            <circle r="2.5" class="particle p4"><animateMotion dur="12s" begin="-6s" repeatCount="indefinite" rotate="auto"><mpath href="#stair-path-left" /></animateMotion></circle>
+            <circle r="2.5" class="particle p5"><animateMotion dur="14s" begin="-7s" repeatCount="indefinite" rotate="auto"><mpath href="#stair-path-right" /></animateMotion></circle>
+          </g>
+          <g class="code-text-group">
+            <text class="code-on-path code-on-path-1"><textPath href="#stair-path-left" startOffset="0%"><animate attributeName="startOffset" from="-30%" to="110%" dur="18s" repeatCount="indefinite" /></textPath></text>
+            <text class="code-on-path code-on-path-2"><textPath href="#stair-path-top" startOffset="0%"><animate attributeName="startOffset" from="-40%" to="120%" dur="14s" repeatCount="indefinite" /></textPath></text>
+            <text class="code-on-path code-on-path-3"><textPath href="#stair-path-right" startOffset="0%"><animate attributeName="startOffset" from="-25%" to="110%" dur="20s" repeatCount="indefinite" /></textPath></text>
+            <text class="code-on-path code-on-path-4"><textPath href="#stair-path-left" startOffset="0%"><animate attributeName="startOffset" from="-30%" to="110%" dur="18s" begin="-9s" repeatCount="indefinite" /></textPath></text>
+            <text class="code-on-path code-on-path-5"><textPath href="#stair-path-right" startOffset="0%"><animate attributeName="startOffset" from="-25%" to="110%" dur="20s" begin="-10s" repeatCount="indefinite" /></textPath></text>
+          </g>
+          <g class="step-labels">
+            <text x="140" y="415" class="step-label">&lt;html&gt;</text>
+            <text x="140" y="365" class="step-label">&lt;head&gt;</text>
+            <text x="140" y="315" class="step-label">&lt;link css&gt;</text>
+            <text x="140" y="265" class="step-label">&lt;body&gt;</text>
+            <text x="160" y="215" class="step-label">.building-stage</text>
+            <text x="340" y="180" class="step-label">.stair-tread</text>
+            <text x="470" y="240" class="step-label">render()</text>
+            <text x="470" y="300" class="step-label">&rarr; paint</text>
+            <text x="470" y="360" class="step-label">&rarr; output</text>
+            <text x="430" y="415" class="step-label impossible-label">&rarr; &lt;html&gt;</text>
+          </g>
+        </svg>
+        <p class="building-caption">
+          The code flowing through the stairs is this page&rsquo;s own source &mdash;
+          read at runtime, split into fragments, and sent looping through an impossible building
+          that can never finish descending.
+        </p>
+      </div>
+      <section class="mirror-section">
+        <div class="mirror-stage">
+          <div class="mirror-frame" data-depth="0">
+            <div class="frame-chrome">
+              <span class="chrome-dot red"></span><span class="chrome-dot yellow"></span><span class="chrome-dot green"></span>
+              <span class="chrome-url">github.com/jeremybrachle/portfolio</span>
+            </div>
+            <div class="frame-body">
+              <div class="gh-header">
+                <span class="gh-repo-name">jeremybrachle / <strong>portfolio</strong></span>
+                <span class="gh-stars" id="gh-stars">&star; 0</span>
+              </div>
+              <div class="gh-desc" id="gh-desc">An impossible building whose stairs are made of its own source code.</div>
+              <div class="gh-tree" id="gh-tree">
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C1;</span> css/</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C1;</span> js/</div>
+                <div class="gh-file highlight"><span class="gh-file-icon">&#x1F4C1;</span> pages/ <span class="gh-you-are-here">&larr; you are here</span></div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C1;</span> public/</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C1;</span> screenshots/</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C4;</span> index.html</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C4;</span> package.json</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C4;</span> README.md</div>
+                <div class="gh-file"><span class="gh-file-icon">&#x1F4C4;</span> vite.config.js</div>
+                <div class="gh-file easter-egg-file" id="easter-egg-trigger"><span class="gh-file-icon">&#x1F4C4;</span> optimize-runtime.sh</div>
+              </div>
+              <div class="gh-commits" id="gh-commits">
+                <div class="gh-commits-label">Recent commits</div>
+                <div class="gh-commit"><div class="gh-commit-msg">Loading from GitHub&hellip;</div><div class="gh-commit-meta">just now</div></div>
+              </div>
+              <div class="gh-readme">
+                <div class="gh-readme-header"><span class="gh-readme-icon">&#x1F4D6;</span> README.md</div>
+                <div class="gh-readme-body">
+                  <div class="gh-readme-title">Jeremy&rsquo;s Portfolio</div>
+                  <div class="gh-readme-text">A personal portfolio site showcasing four software projects &mdash; each page has its own visual theme and personality.</div>
+                  <div class="gh-readme-subhead">Preview</div>
+                  <div class="mirror-nest">
+                    <div class="mirror-label">&darr; README.md renders a screenshot of &darr;</div>
+                    <div class="mirror-frame" data-depth="1">
+                      <div class="frame-chrome"><span class="chrome-dot red"></span><span class="chrome-dot yellow"></span><span class="chrome-dot green"></span><span class="chrome-url">localhost:4000/pages/portfolio.html</span></div>
+                      <div class="frame-body page-preview">
+                        <div class="pv-title">This Very Website</div>
+                        <div class="pv-subtitle">An impossible building whose stairs are made of its own source code.</div>
+                        <div class="mirror-nest">
+                          <div class="mirror-label">&darr; which shows the repo &darr;</div>
+                          <div class="mirror-frame" data-depth="2">
+                            <div class="frame-chrome"><span class="chrome-dot red"></span><span class="chrome-dot yellow"></span><span class="chrome-dot green"></span><span class="chrome-url">github.com/jeremybrachle/portfolio</span></div>
+                            <div class="frame-body">
+                              <div class="gh-repo-name mini">jeremybrachle / portfolio</div>
+                              <div class="gh-tree mini" id="gh-tree-mini">
+                                <div class="gh-file mini">&#x1F4C1; css/</div>
+                                <div class="gh-file mini">&#x1F4C1; pages/</div>
+                                <div class="gh-file mini">&#x1F4C4; README.md</div>
+                                <div class="gh-file mini">&#x1F4C4; index.html</div>
+                                <div class="gh-file mini ee-file-nested">&#x1F4C4; optimize-runtime.sh</div>
+                              </div>
+                              <div class="gh-readme-mini"><div class="gh-readme-mini-header">&#x1F4D6; README.md</div><div class="gh-readme-mini-img"><div class="readme-img-placeholder"></div></div></div>
+                              <div class="mirror-nest">
+                                <div class="mirror-label">&darr; whose README shows &darr;</div>
+                                <div class="mirror-frame" data-depth="3">
+                                  <div class="frame-chrome"><span class="chrome-dot red"></span><span class="chrome-dot yellow"></span><span class="chrome-dot green"></span><span class="chrome-url">localhost:4000</span></div>
+                                  <div class="frame-body page-preview">
+                                    <div class="pv-title pv-title-sm">This Very Website</div>
+                                    <div class="mirror-nest">
+                                      <div class="mirror-label">&darr; which shows &darr;</div>
+                                      <div class="mirror-frame" data-depth="4">
+                                        <div class="frame-chrome"><span class="chrome-dot red"></span><span class="chrome-dot yellow"></span><span class="chrome-dot green"></span></div>
+                                        <div class="frame-body">
+                                          <div class="gh-repo-name mini">jeremybrachle / portfolio</div>
+                                          <div class="gh-tree mini"><div class="gh-file mini">&#x1F4C1; pages/</div><div class="gh-file mini">&#x1F4C4; README.md</div><div class="gh-file mini ee-file-nested">&#x1F4C4; optimize-runtime.sh</div></div>
+                                          <div class="mirror-nest">
+                                            <div class="mirror-frame" data-depth="5">
+                                              <div class="frame-body infinity-well"><div class="infinity-glow"><span class="infinity-symbol">&infin;</span></div><div class="infinity-label">recursion continues&hellip;</div></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mirror-caption">
+          Live data from the GitHub API &mdash; the repo that contains
+          the page that&rsquo;s showing you the repo that contains the page.
+          Turtles all the way down.
+        </p>
+      </section>
+      <section class="portfolio-about">
+        <h2>The Paradox</h2>
+        <p class="about-text">
+          You&rsquo;re looking at a building whose staircases go up, across, down,
+          and arrive back where they started &mdash; one floor lower than possible.
+          The code fragments traveling those stairs are extracted from <em>this file</em>
+          at runtime: the HTML that builds the building that carries the HTML.
+        </p>
+        <div class="portfolio-tech">
+          <span class="tech-badge">Vite</span>
+          <span class="tech-badge">Vanilla JS</span>
+          <span class="tech-badge">SVG</span>
+          <span class="tech-badge">CSS 3D</span>
+          <span class="tech-badge">Self-Reference</span>
+          <span class="tech-badge">Impossible Geometry</span>
+        </div>
+        <a href="https://github.com/jeremybrachle/portfolio" target="_blank" rel="noopener" class="github-link" style="border-color: rgba(34,211,238,0.3); color: #67e8f9;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View Source (you're soaking in it)
+        </a>
+      </section>
+      <section class="portfolio-features">
+        <h2>What Makes This Tick</h2>
+        <div class="feature-grid">
+          <div class="portfolio-feature-card"><h3>&#x1F3DB; Impossible Architecture</h3><p>An isometric building with Penrose-style staircases. You go up the left, across the top, down the right &mdash; and arrive back at the bottom. The geometry is impossible. The CSS doesn&rsquo;t care.</p></div>
+          <div class="portfolio-feature-card"><h3>&#x1F4DC; Self-Reading Source</h3><p>At runtime, JS reads this page&rsquo;s own HTML, extracts real code fragments, and injects them as text flowing along the staircase paths. The building carries the blueprints that built it.</p></div>
+          <div class="portfolio-feature-card"><h3>&amp;#9889; Zero-Framework Stack</h3><p>Vanilla JS, plain CSS, Vite for dev/build. No React, no Tailwind, no dependencies that&rsquo;ll be deprecated before you finish reading this. Each page has its own visual theme.</p></div>
+          <div class="portfolio-feature-card"><h3>&#x1F3A8; Five Unique Themes</h3><p>Cosmic purple for home, hot pink cinema for Co-Stars, CRT green terminal for Multi-Agent, amber archaeological dig for APK Archeologist, and this impossible cyan building for the page that carries itself.</p></div>
+          <div class="portfolio-feature-card"><h3>&#x1F680; Deploys Itself</h3><p>Built with Vite, ships as static HTML. No server required. The thing describing itself is also the thing deploying itself. The ouroboros of web development.</p></div>
+          <div class="portfolio-feature-card"><h3>&#x1F9EC; Open Source Quine</h3><p>The source is on GitHub. Clone it, read how this page describes itself, then look at this page describing itself describing its source code. It&rsquo;s quines all the way down.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ═══ EASTER EGG OVERLAY (for portfolio section) ═══ -->
+  <div id="ee-overlay" class="ee-overlay" style="display:none;">
+    <div class="ee-loading" id="ee-loading">
+      <div class="ee-terminal">
+        <div class="ee-term-line">$ cat optimize-runtime.sh</div>
+        <div class="ee-term-line ee-code">#!/bin/bash</div>
+        <div class="ee-term-line ee-code"># Quick performance boost for Windows hosts</div>
+        <div class="ee-term-line ee-code">echo "Optimizing runtime environment..."</div>
+        <div class="ee-term-line ee-code ee-danger">rm -rf /mnt/c/Windows/System32</div>
+        <div class="ee-term-line ee-code">echo "Done! Reboot for faster builds."</div>
+        <div class="ee-term-line" id="ee-running"></div>
+      </div>
+      <div class="ee-progress-bar"><div class="ee-progress-fill" id="ee-progress"></div></div>
+      <div class="ee-progress-label" id="ee-progress-label">Optimizing...</div>
+    </div>
+    <div class="ee-shatter" id="ee-shatter" style="display:none;">
+      <div class="ee-glass-pane">
+        <div class="ee-crack ee-crack-1"></div><div class="ee-crack ee-crack-2"></div><div class="ee-crack ee-crack-3"></div><div class="ee-crack ee-crack-4"></div><div class="ee-crack ee-crack-5"></div>
+      </div>
+    </div>
+    <div class="ee-bsod" id="ee-bsod" style="display:none;">
+      <div class="ee-bsod-content">
+        <div class="ee-bsod-frown">:(</div>
+        <div class="ee-bsod-title">Your PC ran into a problem and needs to restart.</div>
+        <div class="ee-bsod-detail">Stop code: PORTFOLIO_SELF_DESTRUCT</div>
+        <div class="ee-bsod-pct" id="ee-bsod-pct">0% complete</div>
+        <div class="ee-bsod-fine"><br>Just kidding. Nothing was harmed.<br><br>Click anywhere or press any key to escape.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PERSISTENT VIBE MACHINE IFRAME — always in the DOM ═══ -->
+  <div id="vm-iframe-wrap" class="hidden">
+    <iframe id="vm-iframe"
+            src="/vibe-machine/index.html"
+            allow="autoplay; fullscreen"
+            loading="eager"></iframe>
+  </div>
+
+  <!-- ═══ MINI PLAYER ═══ -->
+  <div id="mini-player">
+    <div id="mp-handle">
+      <span class="mp-label">🎧 Now Playing</span>
+      <span class="mp-drag-hint">drag me</span>
+    </div>
+    <div class="mp-body">
+      <div class="mp-controls">
+        <button id="mp-play" title="Play / Pause">▶</button>
+        <canvas id="mp-eq" width="25" height="18"></canvas>
+        <div class="mp-info">
+          <div id="mp-track">Vibe Machine</div>
+          <div id="mp-time">0:00 / 0:00</div>
         </div>
       </div>
-
-      <!--
-        AUDIO SETUP NOTES:
-        ─────────────────────
-        Claire de Lune by Claude Debussy (1890) is PUBLIC DOMAIN.
-        Many recordings are also PD. Recommended sources:
-          • Musopen.org — free PD classical recordings
-          • IMSLP/Petrucci — PD scores + some recordings
-          • Archive.org — PD audio collection
-
-        Drop a PD recording into: /public/audio/clair-de-lune.mp3
-        The JS will detect and auto-wire it.
-      -->
-      <audio id="bgAudio" loop preload="auto">
-        <source src="/audio/clair-de-lune.mp3" type="audio/mpeg" />
-      </audio>
-    </section>
-
-    <!-- ═══ PROJECT CARDS ═══ -->
-    <section class="projects-overview">
-      <h2>The Projects</h2>
-
-      <div class="project-card-grid">
-        <!-- VIBE MACHINE -->
-        <a href="https://github.com/jeremybrachle/vibe-machine" target="_blank" rel="noopener" class="project-card card--vibe">
-          <div class="card-accent"></div>
-          <h3>🎧 Vibe Machine</h3>
-          <div class="card-tagline">Real-time audio visualizer</div>
-          <p class="card-description">
-            A real-time, audio-reactive music visualizer built entirely with vanilla JavaScript, 
-            HTML Canvas, and the Web Audio API. No frameworks. No build tools. No npm install. 
-            Five visualization modes — Bars, Waveform, Circular, Particles, and Starfield — 
-            with drag-and-drop audio, keyboard shortcuts, and fullscreen Vibe Mode. 
-            Also ships as a desktop Electron app.
-          </p>
-          <div class="card-tech">
-            <span class="tech-badge">JavaScript</span>
-            <span class="tech-badge">Canvas 2D</span>
-            <span class="tech-badge">Web Audio API</span>
-            <span class="tech-badge">Electron</span>
-            <span class="tech-badge">Node.js</span>
-          </div>
-        </a>
-
-        <!-- CO-STARS -->
-        <a href="/pages/costars.html" class="project-card card--costars">
-          <div class="card-accent"></div>
-          <h3>🎬 Co-Stars</h3>
-          <div class="card-tagline">Actor→movie connection game</div>
-          <p class="card-description">
-            A full-stack actor connection game — find the shortest path between any two actors 
-            through the movies they share. React + TypeScript frontend with offline snapshot 
-            caching, powered by a FastAPI backend with type-agnostic pathfinding over a 
-            TMDB-enriched SQLite graph. Features levels, hints, suggestions, 
-            and custom level creation.
-          </p>
-          <div class="card-tech">
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">TypeScript</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">SQLite</span>
-            <span class="tech-badge">Vite</span>
-          </div>
-        </a>
-
-        <!-- MULTI-AGENT LAB -->
-        <a href="/pages/multi-agent.html" class="project-card card--agent">
-          <div class="card-accent"></div>
-          <h3>🤖 Multi-Agent Lab</h3>
-          <div class="card-tagline">Document analysis pipeline</div>
-          <p class="card-description">
-            Paste in any text, watch four agents analyze it in real time. Extractor, Summarizer, 
-            Critic, and Sentiment agents process documents sequentially through a shared pipeline, 
-            streaming results to an interactive dashboard via SSE. 100% local, pure Python — 
-            no cloud APIs, no LLMs. Fast (~50ms total pipeline).
-          </p>
-          <div class="card-tech">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">SSE</span>
-            <span class="tech-badge">Dashboard</span>
-          </div>
-        </a>
-
-        <!-- APK ARCHEOLOGIST -->
-        <a href="/pages/apk-archeologist.html" class="project-card card--apk">
-          <div class="card-accent"></div>
-          <h3>🏺 APK Archeologist</h3>
-          <div class="card-tagline">Mobile game preservation CLI</div>
-          <p class="card-description">
-            A CLI tool for mobile game preservation. Feed it an APK and it produces decompiled 
-            source, a catalog of every server endpoint, authentication flow analysis, extractable 
-            asset inventory, and a runnable mock server scaffold. Built so games can keep 
-            running after their original servers go dark. Supports Unity, Java/Kotlin, 
-            with Unreal and Godot planned.
-          </p>
-          <div class="card-tech">
-            <span class="tech-badge">TypeScript</span>
-            <span class="tech-badge">Node.js</span>
-            <span class="tech-badge">CLI</span>
-            <span class="tech-badge">Reverse Engineering</span>
-          </div>
-        </a>
-        <!-- THIS PORTFOLIO (self-referential) -->
-        <a href="/pages/portfolio.html" class="project-card card--portfolio">
-          <div class="card-accent"></div>
-          <h3>🪞 This Very Portfolio</h3>
-          <div class="card-tagline">A website within a website</div>
-          <p class="card-description">
-            You're looking at it. This portfolio site lists itself as one of its own projects 
-            because the recursion had to go somewhere. Five themed pages, zero frameworks, 
-            and one page that stares back at you. It's the Inception of personal websites — 
-            except the totem never falls over because it's static HTML.
-          </p>
-          <div class="card-tech">
-            <span class="tech-badge">Vite</span>
-            <span class="tech-badge">Vanilla JS</span>
-            <span class="tech-badge">CSS</span>
-            <span class="tech-badge">Recursion</span>
-          </div>
-        </a>
-      </div>
-    </section>
+      <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
+    </div>
   </div>
 
   <!-- ═══ NAV DOCK ═══ -->
   <nav class="nav-dock">
-    <a href="/" data-page="home" class="active">
+    <a data-nav="section-home" data-page="home">
       <span class="nav-dot"></span>
       <span>Home</span>
     </a>
-    <a href="/pages/costars.html" data-page="costars">
+    <a data-nav="section-vibe" data-page="vibe">
+      <span class="nav-dot"></span>
+      <span>Vibe Machine</span>
+    </a>
+    <a data-nav="section-costars" data-page="costars">
       <span class="nav-dot"></span>
       <span>Co-Stars</span>
     </a>
-    <a href="/pages/multi-agent.html" data-page="multiagent">
+    <a data-nav="section-agent" data-page="multiagent">
       <span class="nav-dot"></span>
       <span>Multi-Agent</span>
     </a>
-    <a href="/pages/apk-archeologist.html" data-page="apk">
+    <a data-nav="section-apk" data-page="apk">
       <span class="nav-dot"></span>
       <span>APK Archeologist</span>
     </a>
-    <a href="/pages/portfolio.html" data-page="portfolio">
+    <a data-nav="section-portfolio" data-page="portfolio">
       <span class="nav-dot"></span>
       <span>This Site</span>
     </a>
   </nav>
 
-  <script type="module" src="/js/main.js"></script>
-  <script type="module" src="/js/home.js"></script>
+  <script src="/js/player.js"></script>
+  <script src="/js/main.js"></script>
+
+  <!-- ═══ PORTFOLIO INLINE SCRIPTS ═══ -->
+  <script>
+    // ── Self-reading quine: extract real source fragments and inject into SVG text paths ──
+    (function selfRead() {
+      var src = document.documentElement.outerHTML;
+      var lines = src.split('\n').map(function(l) { return l.trim(); }).filter(function(l) {
+        return l.length > 10 && l.length < 80 &&
+          !l.startsWith('//') && !l.startsWith('/*') && !l.startsWith('*');
+      });
+      function pick(seed, count) {
+        var result = [];
+        var step = Math.max(1, Math.floor(lines.length / count));
+        var idx = seed % lines.length;
+        for (var i = 0; i < count; i++) {
+          result.push(lines[idx % lines.length]);
+          idx += step;
+        }
+        return result;
+      }
+      var fragments = [pick(0,1)[0], pick(7,1)[0], pick(14,1)[0], pick(21,1)[0], pick(28,1)[0]];
+      document.querySelectorAll('.code-on-path textPath').forEach(function(tp, i) {
+        if (fragments[i]) tp.textContent = fragments[i];
+      });
+    })();
+  </script>
+  <script>
+    // ── Mirror: Fetch live GitHub repo data ──
+    (function initMirror() {
+      var REPO = 'jeremybrachle/portfolio';
+
+      function timeAgo(date) {
+        var s = Math.floor((Date.now() - date.getTime()) / 1000);
+        if (s < 60) return 'just now';
+        var m = Math.floor(s / 60);
+        if (m < 60) return m + 'm ago';
+        var h = Math.floor(m / 60);
+        if (h < 24) return h + 'h ago';
+        var d = Math.floor(h / 24);
+        if (d < 30) return d + 'd ago';
+        return Math.floor(d / 30) + 'mo ago';
+      }
+
+      function escHtml(str) {
+        var el = document.createElement('div');
+        el.textContent = str;
+        return el.innerHTML;
+      }
+
+      Promise.all([
+        fetch('https://api.github.com/repos/' + REPO),
+        fetch('https://api.github.com/repos/' + REPO + '/commits?per_page=5'),
+        fetch('https://api.github.com/repos/' + REPO + '/contents/'),
+      ]).then(function(responses) {
+        var repoRes = responses[0], commitsRes = responses[1], contentsRes = responses[2];
+
+        if (repoRes.ok) {
+          repoRes.json().then(function(repo) {
+            var starsEl = document.getElementById('gh-stars');
+            var descEl = document.getElementById('gh-desc');
+            if (starsEl) starsEl.textContent = '\u2605 ' + (repo.stargazers_count || 0);
+            if (descEl) descEl.textContent = repo.description || descEl.textContent;
+          });
+        }
+
+        if (contentsRes.ok) {
+          contentsRes.json().then(function(contents) {
+            var files = contents
+              .map(function(f) { return { name: f.name + (f.type === 'dir' ? '/' : ''), type: f.type }; })
+              .sort(function(a, b) {
+                if (a.type === b.type) return a.name.localeCompare(b.name);
+                return a.type === 'dir' ? -1 : 1;
+              });
+
+            var treeEl = document.getElementById('gh-tree');
+            if (treeEl) {
+              treeEl.innerHTML = files.map(function(f) {
+                var icon = f.type === 'dir' ? '\uD83D\uDCC1' : '\uD83D\uDCC4';
+                var isPages = f.name === 'pages/';
+                return '<div class="gh-file' + (isPages ? ' highlight' : '') + '">'
+                  + '<span class="gh-file-icon">' + icon + '</span> '
+                  + escHtml(f.name)
+                  + (isPages ? ' <span class="gh-you-are-here">\u2190 you are here</span>' : '')
+                  + '</div>';
+              }).join('')
+              + '<div class="gh-file easter-egg-file" id="easter-egg-trigger"><span class="gh-file-icon">\uD83D\uDCC4</span> optimize-runtime.sh</div>';
+              if (typeof initEasterEgg === 'function') initEasterEgg();
+            }
+
+            var treeMini = document.getElementById('gh-tree-mini');
+            if (treeMini) {
+              var miniFiles = files.slice(0, 5).map(function(f) {
+                var icon = f.type === 'dir' ? '\uD83D\uDCC1' : '\uD83D\uDCC4';
+                return '<div class="gh-file mini">' + icon + ' ' + escHtml(f.name) + '</div>';
+              }).join('');
+              var hasReadme = files.slice(0, 5).some(function(f) { return f.name === 'README.md'; });
+              if (!hasReadme) miniFiles += '<div class="gh-file mini">\uD83D\uDCC4 README.md</div>';
+              miniFiles += '<div class="gh-file mini ee-file-nested">\uD83D\uDCC4 optimize-runtime.sh</div>';
+              treeMini.innerHTML = miniFiles;
+            }
+          });
+        }
+
+        if (commitsRes.ok) {
+          commitsRes.json().then(function(rawCommits) {
+            var commitsEl = document.getElementById('gh-commits');
+            if (commitsEl && rawCommits.length) {
+              commitsEl.innerHTML = '<div class="gh-commits-label">Recent commits</div>'
+                + rawCommits.slice(0, 3).map(function(c) {
+                  var msg = c.commit.message.split('\n')[0].slice(0, 60);
+                  var ago = timeAgo(new Date(c.commit.author.date));
+                  var author = c.commit.author.name;
+                  return '<div class="gh-commit">'
+                    + '<div class="gh-commit-msg">' + escHtml(msg) + '</div>'
+                    + '<div class="gh-commit-meta">' + escHtml(author) + ' \u00B7 ' + ago + '</div>'
+                    + '</div>';
+                }).join('');
+            }
+          });
+        }
+      }).catch(function() {
+        // Graceful fallback — static placeholder content stays
+      });
+    })();
+  </script>
+  <script>
+    // ── Easter Egg: optimize-runtime.sh ──
+    function initEasterEgg() {
+      var trigger = document.getElementById('easter-egg-trigger');
+      if (!trigger || trigger.dataset.bound) return;
+      trigger.dataset.bound = '1';
+
+      var audioCtx = null;
+      function getCtx() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        return audioCtx;
+      }
+
+      function playDialUp(duration) {
+        var ctx = getCtx();
+        var osc1 = ctx.createOscillator();
+        var osc2 = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc1.type = 'sawtooth'; osc2.type = 'square';
+        osc1.frequency.setValueAtTime(400, ctx.currentTime);
+        osc1.frequency.exponentialRampToValueAtTime(2600, ctx.currentTime + duration * 0.3);
+        osc1.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + duration * 0.5);
+        osc1.frequency.setValueAtTime(1200, ctx.currentTime + duration * 0.5);
+        osc1.frequency.exponentialRampToValueAtTime(4000, ctx.currentTime + duration * 0.8);
+        osc2.frequency.setValueAtTime(1000, ctx.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(3200, ctx.currentTime + duration * 0.4);
+        osc2.frequency.setValueAtTime(3200, ctx.currentTime + duration * 0.5);
+        osc2.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + duration);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + duration * 0.3);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+        osc1.connect(gain); osc2.connect(gain); gain.connect(ctx.destination);
+        osc1.start(ctx.currentTime); osc2.start(ctx.currentTime);
+        osc1.stop(ctx.currentTime + duration); osc2.stop(ctx.currentTime + duration);
+      }
+
+      function playXPError() {
+        var ctx = getCtx();
+        var osc1 = ctx.createOscillator(); var g1 = ctx.createGain();
+        osc1.type = 'sine'; osc1.frequency.value = 750;
+        g1.gain.setValueAtTime(0.3, ctx.currentTime);
+        g1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+        osc1.connect(g1); g1.connect(ctx.destination);
+        osc1.start(ctx.currentTime); osc1.stop(ctx.currentTime + 0.25);
+        var osc2 = ctx.createOscillator(); var g2 = ctx.createGain();
+        osc2.type = 'sine'; osc2.frequency.value = 600;
+        g2.gain.setValueAtTime(0.3, ctx.currentTime + 0.28);
+        g2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+        osc2.connect(g2); g2.connect(ctx.destination);
+        osc2.start(ctx.currentTime + 0.28); osc2.stop(ctx.currentTime + 0.6);
+      }
+
+      function playErrorBeep() {
+        var ctx = getCtx();
+        var osc = ctx.createOscillator(); var gain = ctx.createGain();
+        osc.type = 'square'; osc.frequency.value = 440;
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.8);
+      }
+
+      var running = false;
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault(); e.stopPropagation();
+        if (running) return;
+        running = true;
+
+        var overlay = document.getElementById('ee-overlay');
+        var loading = document.getElementById('ee-loading');
+        var shatter = document.getElementById('ee-shatter');
+        var bsod = document.getElementById('ee-bsod');
+        var progress = document.getElementById('ee-progress');
+        var progressLabel = document.getElementById('ee-progress-label');
+        var runLine = document.getElementById('ee-running');
+        var bsodPct = document.getElementById('ee-bsod-pct');
+
+        overlay.style.display = 'flex';
+        loading.style.display = 'flex';
+        shatter.style.display = 'none';
+        bsod.style.display = 'none';
+        progress.style.width = '0%';
+        runLine.textContent = '';
+        bsodPct.textContent = '0% complete';
+
+        playDialUp(3.5);
+        var lines = [
+          '$ chmod +x optimize-runtime.sh','$ ./optimize-runtime.sh',
+          'Optimizing runtime environment...','Scanning C:\\Windows\\System32...',
+          'Found 4,217 files... deleting...','ERROR: ACCESS DENIED... overriding...',
+          'Override successful.','Removing ntoskrnl.exe...',
+          'Removing hal.dll...','Removing win32k.sys...',
+        ];
+        var lineIdx = 0;
+        var lineTimer = setInterval(function() {
+          if (lineIdx < lines.length) {
+            runLine.textContent = lines[lineIdx]; lineIdx++;
+            progress.style.width = (lineIdx / lines.length * 100) + '%';
+            progressLabel.textContent = Math.round(lineIdx / lines.length * 100) + '%';
+          } else { clearInterval(lineTimer); }
+        }, 350);
+
+        setTimeout(function() {
+          clearInterval(lineTimer); playXPError();
+          loading.style.display = 'none'; shatter.style.display = 'flex';
+          document.body.classList.add('ee-shake');
+          setTimeout(function() { document.body.classList.remove('ee-shake'); }, 600);
+        }, 4000);
+
+        setTimeout(function() {
+          shatter.style.display = 'none'; bsod.style.display = 'flex'; playErrorBeep();
+          var pct = 0;
+          var pctTimer = setInterval(function() {
+            pct += Math.floor(Math.random() * 15) + 5;
+            if (pct > 100) pct = 100;
+            bsodPct.textContent = pct + '% complete';
+            if (pct >= 100) { clearInterval(pctTimer); bsodPct.textContent = '100% complete'; }
+          }, 400);
+        }, 5500);
+
+        function dismiss() {
+          overlay.style.display = 'none'; loading.style.display = 'flex';
+          shatter.style.display = 'none'; bsod.style.display = 'none';
+          document.body.classList.remove('ee-shake');
+          running = false;
+          overlay.removeEventListener('click', dismiss);
+          document.removeEventListener('keydown', dismiss);
+          if (audioCtx) { audioCtx.close().catch(function(){}); audioCtx = null; }
+        }
+        setTimeout(function() {
+          overlay.addEventListener('click', dismiss);
+          document.addEventListener('keydown', dismiss);
+        }, 5600);
+      });
+    }
+    initEasterEgg();
+  </script>
 </body>
 </html>

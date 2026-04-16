@@ -1,19 +1,14 @@
-import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        costars: resolve(__dirname, 'pages/costars.html'),
-        multiagent: resolve(__dirname, 'pages/multi-agent.html'),
-        apk: resolve(__dirname, 'pages/apk-archeologist.html'),
-        portfolio: resolve(__dirname, 'pages/portfolio.html'),
-      },
+      input: 'index.html',
     },
   },
   server: {
     port: 4000,
   },
+  // All routes serve index.html (single-page app)
+  appType: 'spa',
 });

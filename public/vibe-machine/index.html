@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Machine</title>
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="config.js?v=3"></script>
+</head>
+<body>
+  <!-- Demo start screen -->
+  <div id="demo-start">
+    <button id="btn-start">Start the Vibe Machine</button>
+  </div>
+
+  <canvas id="visualizer"></canvas>
+
+  <!-- Queue panel (bottom-right) -->
+  <div id="queue-panel">
+    <div id="queue-header">
+      <span id="queue-title">🧪 Queue</span>
+      <span id="queue-count">0 tracks</span>
+      <button id="btn-queue-toggle" title="Toggle Queue (Q)">▼</button>
+    </div>
+    <div id="queue-body">
+      <div id="queue-drop-zone">
+        <div class="cauldron-mini">
+          <div class="cauldron-liquid-mini">
+            <div class="blob-mini blob-m1"></div>
+            <div class="blob-mini blob-m2"></div>
+          </div>
+        </div>
+        <span>Drop files here</span>
+      </div>
+      <ul id="queue-list"></ul>
+    </div>
+  </div>
+
+  <!-- Player UI overlay -->
+  <div id="ui-overlay">
+    <!-- Top bar: visualization mode -->
+    <div id="top-bar">
+      <div id="viz-modes">
+        <button class="viz-btn" data-mode="blank">Blank</button>
+        <button class="viz-btn" data-mode="bars">Bars</button>
+        <button class="viz-btn" data-mode="waveform">Wave</button>
+        <button class="viz-btn" data-mode="circular">Circular</button>
+        <button class="viz-btn active" data-mode="starrynight">Starry Night</button>
+      </div>
+      <div id="viz-options" class="viz-options hidden"></div>
+    </div>
+
+    <!-- Bottom bar: player controls -->
+    <div id="bottom-bar">
+      <div id="track-info">
+        <div id="track-category"></div>
+        <div id="track-name">Click play to start vibing</div>
+      </div>
+
+      <div id="progress-container">
+        <span id="time-current">0:00</span>
+        <input type="range" id="progress-bar" min="0" max="100" value="0" step="0.1">
+        <span id="time-total">0:00</span>
+      </div>
+
+      <div id="controls">
+        <button id="btn-shuffle" class="ctrl-btn" title="Shuffle (S)">⇄</button>
+        <button id="btn-prev" class="ctrl-btn" title="Previous (←)">⏮</button>
+        <button id="btn-play" class="ctrl-btn ctrl-play" title="Play/Pause (Space)">▶</button>
+        <button id="btn-next" class="ctrl-btn" title="Next (→)">⏭</button>
+        <div id="volume-control">
+          <button id="btn-mute" class="ctrl-btn" title="Mute (M)">🔊</button>
+          <input type="range" id="volume-slider" min="0" max="1" value="0.7" step="0.01">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transition controls (bottom-left, mirrors queue panel) -->
+  <div id="transition-controls">
+    <button id="btn-transition" class="ctrl-btn-sm" title="Toggle Transition (T)">🌅</button>
+    <input type="range" id="transition-slider" min="1" max="15" value="5" step="0.5">
+    <span id="transition-label">5s</span>
+    <span class="tx-sep">│</span>
+    <button id="btn-sun-arc" class="ctrl-btn-sm" title="Persistent Sun">☀</button>
+    <button id="btn-lofi-grid" class="ctrl-btn-sm" title="Pixel Edges (L)">▦</button>
+    <button id="btn-amp-bars" class="ctrl-btn-sm" title="Amplitude Bars (A)">≡</button>
+    <button id="btn-mouse-fx" class="ctrl-btn-sm" title="Mouse Particles">✦</button>
+    <span class="tx-sep">│</span>
+    <button id="btn-shuffle-fx" class="ctrl-btn-sm" title="Shuffle Settings (R)">🎲</button>
+    <button id="btn-reset-defaults" class="ctrl-btn-sm" title="Reset Defaults (0)">⟲</button>
+  </div>
+
+  <!-- Floating vibe mode button (outside UI overlay so it can persist) -->
+  <div id="vibe-toggle">
+    <button id="btn-vibe" title="Vibe Mode (F)">⟐ VIBE MODE</button>
+  </div>
+
+  <!-- Mouse interaction effects layer -->
+  <canvas id="mouse-fx"></canvas>
+
+  <!-- Info button (bottom-left, ghost until hover) -->
+  <div id="info-btn-wrap">
+    <button id="btn-info" title="About Vibe Machine">i</button>
+  </div>
+
+  <!-- Info overlay -->
+  <div id="info-overlay" class="info-hidden">
+    <div id="info-content">
+      <div id="info-close-wrap">
+        <button id="btn-info-close" title="Close">✕</button>
+      </div>
+      <div id="info-body">
+        <div id="info-logo">⟐</div>
+        <h2 id="info-title">Vibe Machine</h2>
+        <p class="info-tagline">Real-time audio-reactive visualizer.<br>No frameworks. No build tools. Just vibes.</p>
+        <p class="info-version">v1.0</p>
+
+        <div class="info-divider"></div>
+
+        <div class="info-section">
+          <h3>The Numbers</h3>
+          <div class="info-stats">
+            <div class="info-stat">
+              <span class="info-stat-val">10</span>
+              <span class="info-stat-label">Visualizers</span>
+            </div>
+            <div class="info-stat">
+              <span class="info-stat-val">4</span>
+              <span class="info-stat-label">Effects</span>
+            </div>
+            <div class="info-stat">
+              <span class="info-stat-val">4</span>
+              <span class="info-stat-label">Sky Modes</span>
+            </div>
+            <div class="info-stat info-stat-big">
+              <span class="info-stat-val">640</span>
+              <span class="info-stat-label">Possible Combinations</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>Built With</h3>
+          <p class="info-stack-items">
+            <span class="info-chip">HTML5 Canvas</span>
+            <span class="info-chip">Web Audio API</span>
+            <span class="info-chip">Vanilla JS</span>
+            <span class="info-chip">Zero deps</span>
+          </p>
+        </div>
+
+        <div class="info-divider"></div>
+
+        <p class="info-footer">Built with questionable amounts of vibe-coding.</p>
+        <p class="info-legal">&copy; 2026 Jeremy Brachle. All rights reserved. No part of this software, its design, visual identity, or underlying concepts and vibes may be reproduced, distributed, modified, or re-vibed in any form without prior written permission from the author. Unauthorized publication or vibery will be met with the full extent of applicable intellectual property law.<br>Happy Vibing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard hints (shown briefly on load) -->
+  <div id="help-overlay" class="hidden">
+    <div id="help-content">
+      <h2>⌨ Keyboard Shortcuts</h2>
+      <div class="help-grid">
+        <kbd>Space</kbd> <span>Play / Pause</span>
+        <kbd>→</kbd> <span>Next track</span>
+        <kbd>←</kbd> <span>Previous track</span>
+        <kbd>S</kbd> <span>Toggle shuffle</span>
+        <kbd>V</kbd> <span>Cycle visualizer</span>
+        <kbd>F</kbd> <span>Complete vibe mode</span>
+        <kbd>M</kbd> <span>Mute / Unmute</span>
+        <kbd>↑↓</kbd> <span>Volume</span>
+        <kbd>1-9</kbd> <span>Jump to visualizer</span>
+        <kbd>T</kbd> <span>Toggle transition</span>
+        <kbd>L</kbd> <span>Pixel edges</span>
+        <kbd>A</kbd> <span>Amplitude bars</span>
+        <kbd>R</kbd> <span>Shuffle settings</span>
+        <kbd>0</kbd> <span>Reset defaults</span>
+        <kbd>Q</kbd> <span>Toggle queue panel</span>
+        <kbd>?</kbd> <span>Show/hide this help</span>
+      </div>
+      <p class="help-dismiss">Press any key to dismiss</p>
+    </div>
+  </div>
+
+  <script src="visualizers/blank.js?v=3"></script>
+  <script src="visualizers/bars.js?v=3"></script>
+  <script src="visualizers/waveform.js?v=3"></script>
+  <script src="visualizers/circular.js?v=3"></script>
+  <script src="visualizers/starrynight.js?v=3"></script>
+  <script src="app.js?v=8"></script>
+  <script src="portfolio-embed.js"></script>
+  <script>
+    // Apply config-driven branding to DOM
+    (function() {
+      const cfg = window.VIBE_CONFIG || {};
+      if (cfg.title) document.title = cfg.title;
+      const t = cfg.theme || {};
+      const root = document.documentElement.style;
+      if (t.accent)       root.setProperty('--accent', t.accent);
+      if (t.accentRGB)    root.setProperty('--accent-rgb', t.accentRGB);
+      if (t.secondary)    root.setProperty('--secondary', t.secondary);
+      if (t.secondaryRGB) root.setProperty('--secondary-rgb', t.secondaryRGB);
+      if (t.bg)           root.setProperty('--bg', t.bg);
+      if (t.textPrimary)  root.setProperty('--text-primary', t.textPrimary);
+      if (t.textSecondary) root.setProperty('--text-secondary', t.textSecondary);
+      if (t.textDim)      root.setProperty('--text-dim', t.textDim);
+    })();
+  </script>
+</body>
+</html>

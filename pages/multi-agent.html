@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Multi-Agent Lab — Kerry's Portfolio</title>
+  <title>Multi-Agent Lab — Jeremy's Portfolio</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/multi-agent.css" />
 </head>
@@ -142,17 +142,48 @@
     </section>
   </div>
 
+  <!-- ═══ PERSISTENT VIBE MACHINE IFRAME (mounted into #visualizer on home) ═══ -->
+  <div id="vm-iframe-wrap" class="hidden">
+    <iframe id="vm-iframe"
+            src="/vibe-machine/index.html"
+            allow="autoplay; fullscreen"
+            loading="eager"></iframe>
+  </div>
+
+  <!-- ═══ MINI PLAYER ═══ -->
+  <div id="mini-player">
+    <div id="mp-handle">
+      <span class="mp-label">🎧 Now Playing</span>
+      <span class="mp-drag-hint">drag me</span>
+    </div>
+    <div class="mp-body">
+      <div class="mp-controls">
+        <button id="mp-play" title="Play / Pause">▶</button>
+        <canvas id="mp-eq" width="25" height="18"></canvas>
+        <div class="mp-info">
+          <div id="mp-track">Vibe Machine</div>
+          <div id="mp-time">0:00 / 0:00</div>
+        </div>
+      </div>
+      <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
+    </div>
+  </div>
+
   <!-- ═══ NAV DOCK ═══ -->
   <nav class="nav-dock">
     <a href="/" data-page="home">
       <span class="nav-dot"></span>
       <span>Home</span>
     </a>
+    <a href="/pages/vibe-machine.html" data-page="vibe">
+      <span class="nav-dot"></span>
+      <span>Vibe Machine</span>
+    </a>
     <a href="/pages/costars.html" data-page="costars">
       <span class="nav-dot"></span>
       <span>Co-Stars</span>
     </a>
-    <a href="/pages/multi-agent.html" data-page="multiagent" class="active">
+    <a href="/pages/multi-agent.html" data-page="multiagent">
       <span class="nav-dot"></span>
       <span>Multi-Agent</span>
     </a>
@@ -167,5 +198,5 @@
   </nav>
 
   <script type="module" src="/js/main.js"></script>
+  <script src="/js/player.js"></script>
 </body>
-</html>

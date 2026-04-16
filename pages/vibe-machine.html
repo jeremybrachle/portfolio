@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe Machine — Jeremy's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/vibe-machine.css" />
+</head>
+<body class="vibe-body">
+  <div class="vibe-bg"></div>
+
+  <div class="vibe-content page-content">
+
+    <section class="vibe-hero">
+      <h1 class="vibe-title">Vibe Machine</h1>
+      <p class="vibe-subtitle">Real-time audio visualizer — zero dependencies, pure vibes.</p>
+    </section>
+
+    <!-- ═══ SCREENSHOT SHOWCASE ═══ -->
+    <div class="vibe-embed-stage">
+      <div class="vibe-screenshot-frame">
+        <!-- Replace this placeholder with an actual screenshot later -->
+        <div class="vibe-screenshot-placeholder">
+          <div class="vibe-screenshot-icon">🎧</div>
+          <div class="vibe-screenshot-label">Screenshot Coming Soon</div>
+          <div class="vibe-screenshot-hint">Head to <a href="/" class="vibe-home-link">Home</a> to see it live</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="vibe-about">
+      <h2>What Is This</h2>
+      <p class="vibe-about-text">
+        A browser-based audio visualizer built entirely with <em>vanilla JavaScript</em>,
+        HTML Canvas, and the Web Audio API. No frameworks. No build tools. No npm install.
+        Drop in any audio file and watch it come alive across five visualization modes.
+      </p>
+
+      <div class="vibe-tech">
+        <span class="tech-badge">Vanilla JS</span>
+        <span class="tech-badge">Canvas 2D</span>
+        <span class="tech-badge">Web Audio API</span>
+        <span class="tech-badge">Node.js</span>
+        <span class="tech-badge">Electron</span>
+      </div>
+
+      <!-- <a href="https://github.com/jeremybrachle/vibe-machine" target="_blank" rel="noopener" class="github-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Source on GitHub
+      </a> -->
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="vibe-features">
+      <h2>Features</h2>
+
+      <div class="vibe-feature-grid">
+        <div class="vibe-feature-card">
+          <h3>🎨 5+ Visualization Modes</h3>
+          <p>
+            Bars, Waveform, Circular, Particles, Starfield, Starry Night, Pixel Grid,
+            Sunset, and Piano — each a standalone rendering module driven by
+            real-time frequency data.
+          </p>
+        </div>
+
+        <div class="vibe-feature-card">
+          <h3>🎵 Drag &amp; Drop Audio</h3>
+          <p>
+            Drop any audio file onto the canvas. The Web Audio API's AnalyserNode
+            extracts frequency data at 60fps and feeds it directly into the
+            active visualizer's draw loop.
+          </p>
+        </div>
+
+        <div class="vibe-feature-card">
+          <h3>⌨️ Keyboard Shortcuts</h3>
+          <p>
+            Switch modes, toggle fullscreen Vibe Mode, skip tracks, adjust
+            volume — all without touching the mouse. Built for flow state.
+          </p>
+        </div>
+
+        <div class="vibe-feature-card">
+          <h3>🖥️ Electron Desktop App</h3>
+          <p>
+            Ships as both a web app and an Electron desktop application.
+            Same codebase, same visualizers, native window controls.
+          </p>
+        </div>
+
+        <div class="vibe-feature-card">
+          <h3>🔧 Zero Dependencies</h3>
+          <p>
+            No React, no Tailwind, no webpack. Pure vanilla JavaScript,
+            HTML Canvas 2D, and the browser's built-in Web Audio API.
+            The entire app is the app.
+          </p>
+        </div>
+
+        <div class="vibe-feature-card">
+          <h3>🎧 Queue Management</h3>
+          <p>
+            Drag-to-reorder queue with track progression. Load up a playlist
+            and let the visualizer ride through your entire collection.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ PERSISTENT VIBE MACHINE IFRAME (mounted into #visualizer on home) ═══ -->
+  <div id="vm-iframe-wrap" class="hidden">
+    <iframe id="vm-iframe"
+            src="/vibe-machine/index.html"
+            allow="autoplay; fullscreen"
+            loading="eager"></iframe>
+  </div>
+
+  <!-- ═══ MINI PLAYER ═══ -->
+  <div id="mini-player">
+    <div id="mp-handle">
+      <span class="mp-label">🎧 Now Playing</span>
+      <span class="mp-drag-hint">drag me</span>
+    </div>
+    <div class="mp-body">
+      <div class="mp-controls">
+        <button id="mp-play" title="Play / Pause">▶</button>
+        <canvas id="mp-eq" width="25" height="18"></canvas>
+        <div class="mp-info">
+          <div id="mp-track">Vibe Machine</div>
+          <div id="mp-time">0:00 / 0:00</div>
+        </div>
+      </div>
+      <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ NAV DOCK ═══ -->
+  <nav class="nav-dock">
+    <a href="/" data-page="home">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/vibe-machine.html" data-page="vibe">
+      <span class="nav-dot"></span>
+      <span>Vibe Machine</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+    <a href="/pages/portfolio.html" data-page="portfolio">
+      <span class="nav-dot"></span>
+      <span>This Site</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+  <script src="/js/player.js"></script>
+</body>

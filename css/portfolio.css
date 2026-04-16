@@ -66,7 +66,9 @@
 }
 
 /* ── 2. Building Stage ── */
+/* Currently hidden — set display:block to re-enable */
 .building-stage {
+  display: none;
   max-width: 700px;
   margin: 20px auto 50px;
   text-align: center;
@@ -283,7 +285,545 @@
   box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
 }
 
-/* ── 10. Responsive ── */
+/* ── 11. The Mirror (Droste recursion) ── */
+.mirror-section {
+  max-width: 750px;
+  margin: 60px auto 70px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.mirror-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: rgba(200, 230, 255, 0.85);
+  margin-bottom: 8px;
+}
+
+.mirror-tagline {
+  font-size: 0.9rem;
+  color: rgba(34, 211, 238, 0.4);
+  font-style: italic;
+  margin-bottom: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mirror-stage {
+  perspective: 1200px;
+}
+
+/* Mirror frames */
+.mirror-frame {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* ── GitHub frames (depth 0, 2, 4) — warm slate/grey ── */
+.mirror-frame[data-depth="0"] {
+  background: rgba(13, 17, 23, 0.95);
+  border: 1px solid rgba(48, 54, 61, 0.8);
+  animation: mirrorBreathe 10s ease-in-out infinite;
+  box-shadow:
+    0 0 40px rgba(48, 54, 61, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.mirror-frame[data-depth="2"] {
+  background: rgba(13, 17, 23, 0.93);
+  border: 1px solid rgba(48, 54, 61, 0.6);
+  box-shadow: 0 0 15px rgba(48, 54, 61, 0.1);
+}
+
+.mirror-frame[data-depth="4"] {
+  background: rgba(13, 17, 23, 0.95);
+  border: 1px solid rgba(48, 54, 61, 0.4);
+  box-shadow: 0 0 10px rgba(48, 54, 61, 0.08);
+}
+
+/* ── Website preview frames (depth 1, 3) — cyan/electric ── */
+.mirror-frame[data-depth="1"] {
+  background: rgba(6, 14, 28, 0.92);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.08);
+}
+
+.mirror-frame[data-depth="3"] {
+  background: rgba(6, 14, 28, 0.95);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.06);
+}
+
+/* ── Infinity well ── */
+.mirror-frame[data-depth="5"] {
+  background: rgba(6, 14, 28, 0.98);
+  border: 1px solid rgba(34, 211, 238, 0.08);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.08);
+}
+
+@keyframes mirrorBreathe {
+  0%, 100% { transform: rotateX(1deg) rotateY(-0.5deg); }
+  50%      { transform: rotateX(-1deg) rotateY(0.5deg); }
+}
+
+/* Scanline overlay on website preview levels */
+.mirror-frame[data-depth="1"]::before,
+.mirror-frame[data-depth="3"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(34, 211, 238, 0.015) 2px,
+    rgba(34, 211, 238, 0.015) 4px
+  );
+}
+
+/* Chrome bar */
+.frame-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+/* GitHub chrome (depth 0, 2, 4) */
+.mirror-frame[data-depth="0"] > .frame-chrome,
+.mirror-frame[data-depth="2"] > .frame-chrome,
+.mirror-frame[data-depth="4"] > .frame-chrome {
+  background: rgba(22, 27, 34, 0.98);
+  border-bottom-color: rgba(48, 54, 61, 0.6);
+}
+
+/* Website chrome (depth 1, 3) */
+.mirror-frame[data-depth="1"] > .frame-chrome,
+.mirror-frame[data-depth="3"] > .frame-chrome {
+  background: rgba(6, 12, 24, 0.98);
+  border-bottom-color: rgba(34, 211, 238, 0.12);
+}
+
+.chrome-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chrome-dot.red    { background: #ff5f56; opacity: 0.7; }
+.chrome-dot.yellow { background: #ffbd2e; opacity: 0.7; }
+.chrome-dot.green  { background: #27c93f; opacity: 0.7; }
+
+.chrome-url {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.65rem;
+  color: rgba(139, 148, 158, 0.7);
+  margin-left: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cyan URL for website frames */
+.mirror-frame[data-depth="1"] .chrome-url,
+.mirror-frame[data-depth="3"] .chrome-url {
+  color: rgba(34, 211, 238, 0.4);
+}
+
+/* Frame body */
+.frame-body {
+  padding: 14px 16px;
+}
+
+/* GitHub data */
+.gh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.gh-repo-name {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  color: #58a6ff;
+}
+
+.gh-repo-name strong {
+  font-weight: 700;
+}
+
+.gh-repo-name.mini {
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+}
+
+.gh-stars {
+  font-size: 0.75rem;
+  color: rgba(139, 148, 158, 0.7);
+}
+
+.gh-desc {
+  font-size: 0.78rem;
+  color: rgba(201, 209, 217, 0.6);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* File tree */
+.gh-tree {
+  margin-bottom: 14px;
+  border: 1px solid rgba(48, 54, 61, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gh-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.72rem;
+  color: rgba(201, 209, 217, 0.65);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  transition: background 0.2s;
+}
+
+.gh-file:last-child {
+  border-bottom: none;
+}
+
+.gh-file:hover {
+  background: rgba(48, 54, 61, 0.2);
+}
+
+.gh-file.highlight {
+  background: rgba(56, 139, 253, 0.08);
+  color: #58a6ff;
+}
+
+.gh-you-are-here {
+  font-size: 0.6rem;
+  color: rgba(139, 148, 158, 0.5);
+  margin-left: auto;
+  animation: hereFlicker 4s ease-in-out infinite;
+}
+
+@keyframes hereFlicker {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.8; }
+}
+
+.gh-file-icon {
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.gh-file.mini {
+  padding: 3px 6px;
+  font-size: 0.6rem;
+  gap: 4px;
+}
+
+.gh-tree.mini {
+  margin-bottom: 8px;
+}
+
+/* Commits */
+.gh-commits {
+  margin-bottom: 4px;
+}
+
+.gh-commits-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(139, 148, 158, 0.6);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gh-commit {
+  padding: 6px 0 6px 10px;
+  border-left: 2px solid rgba(48, 54, 61, 0.5);
+  margin-bottom: 6px;
+}
+
+.gh-commit-msg {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.72rem;
+  color: rgba(201, 209, 217, 0.7);
+}
+
+.gh-commit-meta {
+  font-size: 0.62rem;
+  color: rgba(139, 148, 158, 0.5);
+  margin-top: 2px;
+}
+
+/* Nesting / recursion */
+.mirror-nest {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(48, 54, 61, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cyan border for nests inside website frames */
+.mirror-frame[data-depth="1"] .mirror-nest,
+.mirror-frame[data-depth="3"] .mirror-nest {
+  border-top-color: rgba(34, 211, 238, 0.08);
+}
+
+.mirror-label {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.6rem;
+  color: rgba(139, 148, 158, 0.4);
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+
+.mirror-nest > .mirror-frame {
+  width: 94%;
+}
+
+.mirror-nest .mirror-nest > .mirror-frame {
+  width: 92%;
+}
+
+.mirror-nest .mirror-nest .mirror-nest > .mirror-frame {
+  width: 88%;
+}
+
+/* Page preview (Level 1) */
+.page-preview {
+  text-align: center;
+  padding: 16px 14px;
+}
+
+.pv-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #22d3ee, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.pv-building-svg {
+  width: 80px;
+  height: 60px;
+  display: block;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.15));
+}
+
+.pv-caption {
+  font-size: 0.65rem;
+  color: rgba(200, 230, 255, 0.3);
+  font-style: italic;
+}
+
+/* Infinity well (Level 3) */
+.infinity-well {
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.infinity-glow {
+  display: inline-block;
+  animation: infinityPulse 3s ease-in-out infinite;
+}
+
+.infinity-symbol {
+  font-size: 1.4rem;
+  color: rgba(34, 211, 238, 0.5);
+}
+
+@keyframes infinityPulse {
+  0%, 100% { opacity: 0.3; filter: drop-shadow(0 0 5px transparent); }
+  50%      { opacity: 0.9; filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.4)); }
+}
+
+/* Mirror caption */
+.mirror-caption {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: rgba(200, 230, 255, 0.3);
+  font-style: italic;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ── 11b. GitHub README rendering ── */
+.gh-readme {
+  margin-top: 14px;
+  border: 1px solid rgba(48, 54, 61, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.gh-readme-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(22, 27, 34, 0.6);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(201, 209, 217, 0.65);
+}
+
+.gh-readme-icon {
+  font-size: 0.7rem;
+}
+
+.gh-readme-body {
+  padding: 14px 16px;
+}
+
+.gh-readme-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(201, 209, 217, 0.85);
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  padding-bottom: 8px;
+}
+
+.gh-readme-text {
+  font-size: 0.78rem;
+  color: rgba(201, 209, 217, 0.55);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.gh-readme-subhead {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(201, 209, 217, 0.7);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.2);
+}
+
+/* Mini README in deeper levels */
+.gh-readme-mini {
+  margin-top: 8px;
+  border: 1px solid rgba(48, 54, 61, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gh-readme-mini-header {
+  padding: 4px 8px;
+  background: rgba(22, 27, 34, 0.5);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: rgba(201, 209, 217, 0.5);
+}
+
+.gh-readme-mini-img {
+  padding: 6px 8px;
+}
+
+.readme-img-placeholder {
+  width: 100%;
+  height: 28px;
+  border-radius: 3px;
+  background: linear-gradient(135deg,
+    rgba(48, 54, 61, 0.2) 0%,
+    rgba(48, 54, 61, 0.08) 50%,
+    rgba(48, 54, 61, 0.25) 100%
+  );
+  border: 1px solid rgba(48, 54, 61, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.readme-img-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(201, 209, 217, 0.04), transparent);
+  animation: readmeShimmer 3s ease-in-out infinite;
+}
+
+@keyframes readmeShimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Page preview subtitle */
+.pv-subtitle {
+  font-size: 0.6rem;
+  color: rgba(34, 211, 238, 0.3);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* Smaller title for deeper levels */
+.pv-title-sm {
+  font-size: 0.7rem;
+}
+
+/* Nested easter egg file styling */
+.ee-file-nested {
+  color: rgba(201, 209, 217, 0.3) !important;
+  font-style: italic;
+}
+
+/* Scanline overlay on deeper levels */
+.mirror-frame[data-depth="3"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(34, 211, 238, 0.02) 2px,
+    rgba(34, 211, 238, 0.02) 4px
+  );
+}
+
+/* Additional nesting width rules */
+.mirror-nest .mirror-nest .mirror-nest .mirror-nest > .mirror-frame {
+  width: 86%;
+}
+
+.mirror-nest .mirror-nest .mirror-nest .mirror-nest .mirror-nest > .mirror-frame {
+  width: 82%;
+}
+
+/* Infinity label */
+.infinity-label {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.55rem;
+  color: rgba(34, 211, 238, 0.25);
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+  animation: infinityPulse 3s ease-in-out infinite;
+}
+
+/* ── 12. Responsive ── */
 @media (max-width: 768px) {
   .portfolio-hero {
     padding: 80px 16px 16px;
@@ -308,6 +848,22 @@
   .portfolio-about {
     padding: 0 16px 40px;
   }
+
+  .mirror-section {
+    margin: 40px auto 50px;
+  }
+
+  .mirror-frame[data-depth="0"] {
+    animation: none;
+  }
+
+  .gh-file {
+    font-size: 0.65rem;
+  }
+
+  .chrome-url {
+    font-size: 0.55rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -317,5 +873,230 @@
 
   .code-on-path {
     font-size: 4px;
+  }
+
+  .mirror-nest .mirror-nest .mirror-nest {
+    display: none;
+  }
+
+  .gh-desc {
+    display: none;
+  }
+}
+
+/* ── 13. Easter Egg ── */
+/* Trigger file in tree */
+.easter-egg-file {
+  cursor: pointer;
+  color: rgba(201, 209, 217, 0.35) !important;
+  transition: color 0.3s, background 0.3s;
+}
+
+.easter-egg-file:hover {
+  color: #ff5f56 !important;
+  background: rgba(255, 95, 86, 0.08) !important;
+}
+
+/* Full-screen overlay */
+.ee-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+/* Phase 1: Loading terminal */
+.ee-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 550px;
+}
+
+.ee-terminal {
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: 100%;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: #0f0;
+  text-align: left;
+}
+
+.ee-term-line.ee-code {
+  color: #8be9fd;
+}
+
+.ee-term-line.ee-danger {
+  color: #ff5555;
+  font-weight: 700;
+}
+
+.ee-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ee-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0f0, #ff5555);
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.ee-progress-label {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Phase 2: Glass shatter */
+.ee-shatter {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.ee-glass-pane {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  animation: glassFlash 0.6s ease-out;
+}
+
+@keyframes glassFlash {
+  0%   { background: rgba(255, 255, 255, 0.2); }
+  100% { background: rgba(255, 255, 255, 0.02); }
+}
+
+.ee-crack {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  transform-origin: center;
+  animation: crackGrow 0.4s ease-out forwards;
+}
+
+.ee-crack-1 { top: 50%; left: 50%; width: 2px; height: 0; transform: rotate(25deg); }
+.ee-crack-2 { top: 50%; left: 50%; width: 2px; height: 0; transform: rotate(-40deg); }
+.ee-crack-3 { top: 50%; left: 50%; width: 2px; height: 0; transform: rotate(70deg); }
+.ee-crack-4 { top: 50%; left: 50%; width: 2px; height: 0; transform: rotate(-15deg); }
+.ee-crack-5 { top: 50%; left: 50%; width: 2px; height: 0; transform: rotate(110deg); }
+
+.ee-crack-1 { animation-delay: 0s; }
+.ee-crack-2 { animation-delay: 0.05s; }
+.ee-crack-3 { animation-delay: 0.1s; }
+.ee-crack-4 { animation-delay: 0.15s; }
+.ee-crack-5 { animation-delay: 0.08s; }
+
+@keyframes crackGrow {
+  to { height: 120vh; }
+}
+
+/* Screen shake */
+.ee-shake {
+  animation: eeShake 0.5s ease-in-out;
+}
+
+@keyframes eeShake {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-8px, 4px); }
+  20%  { transform: translate(6px, -6px); }
+  30%  { transform: translate(-4px, 8px); }
+  40%  { transform: translate(8px, -2px); }
+  50%  { transform: translate(-6px, 6px); }
+  60%  { transform: translate(4px, -8px); }
+  70%  { transform: translate(-8px, 2px); }
+  80%  { transform: translate(6px, 6px); }
+  90%  { transform: translate(-2px, -4px); }
+}
+
+/* Phase 3: BSOD */
+.ee-bsod {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0078d7;
+  color: white;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  animation: bsodFadeIn 0.3s ease;
+}
+
+@keyframes bsodFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ee-bsod-content {
+  max-width: 600px;
+  padding: 40px;
+}
+
+.ee-bsod-frown {
+  font-size: 6rem;
+  font-weight: 200;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.ee-bsod-title {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.ee-bsod-detail {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+.ee-bsod-pct {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 24px;
+}
+
+.ee-bsod-fine {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* Mobile adjustments for easter egg */
+@media (max-width: 480px) {
+  .ee-terminal {
+    font-size: 0.6rem;
+    padding: 12px;
+  }
+
+  .ee-bsod-frown {
+    font-size: 4rem;
+  }
+
+  .ee-bsod-title {
+    font-size: 1.1rem;
+  }
+
+  .ee-bsod-content {
+    padding: 24px;
   }
 }
