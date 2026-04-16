@@ -1,0 +1,321 @@
+/* ── PORTFOLIO PAGE: The Impossible Building ── */
+/* Cyan/electric blue, Penrose-style isometric staircase with code flowing through it */
+
+.portfolio-body {
+  background: #060b14;
+  color: #d4eeff;
+  overflow-x: hidden;
+}
+
+/* Animated background */
+.portfolio-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(6, 182, 212, 0.1), transparent),
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(14, 116, 144, 0.14), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(34, 211, 238, 0.08), transparent),
+    #060b14;
+  animation: bgDrift 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgDrift {
+  0%   { filter: hue-rotate(0deg) brightness(1); }
+  50%  { filter: hue-rotate(-8deg) brightness(1.03); }
+  100% { filter: hue-rotate(8deg) brightness(1); }
+}
+
+.portfolio-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 1. Hero ── */
+.portfolio-hero {
+  padding: 100px 24px 20px;
+  text-align: center;
+}
+
+.portfolio-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #22d3ee, #06b6d4, #67e8f9, #a5f3fc);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.portfolio-subtitle {
+  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+  color: rgba(34, 211, 238, 0.45);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* ── 2. Building Stage ── */
+.building-stage {
+  max-width: 700px;
+  margin: 20px auto 50px;
+  text-align: center;
+}
+
+.impossible-svg {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(34, 211, 238, 0.06));
+}
+
+/* Walls */
+.wall {
+  stroke: rgba(34, 211, 238, 0.2);
+  stroke-width: 1;
+  fill: none;
+}
+
+.wall-back  { fill: rgba(6, 18, 35, 0.5); stroke: rgba(34, 211, 238, 0.12); }
+.wall-left  { fill: rgba(8, 22, 42, 0.6); stroke: rgba(34, 211, 238, 0.18); }
+.wall-right { fill: rgba(4, 14, 28, 0.7); stroke: rgba(34, 211, 238, 0.15); }
+.wall-floor { fill: rgba(10, 25, 50, 0.4); stroke: rgba(34, 211, 238, 0.1); }
+
+/* Stair treads & risers */
+.stair-tread {
+  fill: rgba(14, 40, 70, 0.8);
+  stroke: rgba(34, 211, 238, 0.35);
+  stroke-width: 1.2;
+}
+
+.stair-tread.top-landing {
+  fill: rgba(20, 50, 85, 0.7);
+  stroke: rgba(34, 211, 238, 0.4);
+}
+
+.stair-riser {
+  fill: rgba(8, 24, 48, 0.9);
+  stroke: rgba(34, 211, 238, 0.25);
+  stroke-width: 1;
+}
+
+.stair-impossible {
+  stroke: rgba(34, 211, 238, 0.5);
+  stroke-dasharray: 4 3;
+  animation: impossiblePulse 2s ease-in-out infinite;
+}
+
+@keyframes impossiblePulse {
+  0%, 100% { stroke: rgba(34, 211, 238, 0.3); }
+  50%      { stroke: rgba(34, 211, 238, 0.7); }
+}
+
+/* The impossible reconnection line */
+.impossible-edge {
+  stroke: rgba(34, 211, 238, 0.25);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  animation: impossiblePulse 2s ease-in-out infinite;
+}
+
+/* ── 3. Code Flow Paths ── */
+.code-path {
+  fill: none;
+  stroke: rgba(34, 211, 238, 0.12);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ── 4. Animated Particles ── */
+.particle {
+  fill: #22d3ee;
+  opacity: 0.8;
+}
+
+.p1 { fill: #22d3ee; }
+.p2 { fill: #67e8f9; }
+.p3 { fill: #06b6d4; }
+.p4 { fill: #a5f3fc; opacity: 0.5; }
+.p5 { fill: #67e8f9; opacity: 0.5; }
+
+/* ── 5. Code Text on Paths ── */
+.code-on-path {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  fill: rgba(34, 211, 238, 0.55);
+}
+
+.code-on-path-1 { fill: rgba(86, 156, 214, 0.6); }   /* blue — tags */
+.code-on-path-2 { fill: rgba(206, 145, 120, 0.6); }   /* orange — strings */
+.code-on-path-3 { fill: rgba(34, 211, 238, 0.5); }    /* cyan */
+.code-on-path-4 { fill: rgba(156, 220, 254, 0.5); }   /* light blue — attrs */
+.code-on-path-5 { fill: rgba(106, 153, 85, 0.5); }    /* green — comments */
+
+/* ── 6. Step Labels ── */
+.step-label {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 8px;
+  fill: rgba(34, 211, 238, 0.4);
+  text-anchor: middle;
+}
+
+.impossible-label {
+  fill: rgba(34, 211, 238, 0.65);
+  animation: impossiblePulse 2s ease-in-out infinite;
+}
+
+/* ── 7. Caption ── */
+.building-caption {
+  font-size: 0.85rem;
+  color: rgba(200, 230, 255, 0.4);
+  max-width: 500px;
+  margin: 16px auto 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── 8. About Section ── */
+.portfolio-about {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  text-align: center;
+}
+
+.portfolio-about h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: rgba(200, 230, 255, 0.85);
+  margin-bottom: 16px;
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(200, 230, 255, 0.6);
+  margin-bottom: 28px;
+}
+
+.about-text em {
+  color: #67e8f9;
+  font-style: italic;
+}
+
+.portfolio-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.portfolio-tech .tech-badge {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ── 9. Feature Cards ── */
+.portfolio-features {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 160px;
+}
+
+.portfolio-features h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 48px;
+  color: rgba(200, 230, 255, 0.8);
+}
+
+.portfolio-feature-card {
+  background: rgba(6, 20, 40, 0.5);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.portfolio-feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.3);
+}
+
+.portfolio-feature-card h3 {
+  font-size: 1.15rem;
+  color: #67e8f9;
+  margin-bottom: 10px;
+}
+
+.portfolio-feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(200, 230, 255, 0.6);
+}
+
+/* GitHub link override */
+.portfolio-body .github-link {
+  border-color: rgba(34, 211, 238, 0.3);
+  color: #67e8f9;
+}
+
+.portfolio-body .github-link:hover {
+  border-color: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+}
+
+/* ── 10. Responsive ── */
+@media (max-width: 768px) {
+  .portfolio-hero {
+    padding: 80px 16px 16px;
+  }
+
+  .building-stage {
+    margin: 16px 12px 40px;
+  }
+
+  .impossible-svg {
+    max-width: 100%;
+  }
+
+  .step-label {
+    font-size: 6px;
+  }
+
+  .code-on-path {
+    font-size: 5px;
+  }
+
+  .portfolio-about {
+    padding: 0 16px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-label {
+    display: none;
+  }
+
+  .code-on-path {
+    font-size: 4px;
+  }
+}

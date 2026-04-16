@@ -76,6 +76,7 @@ img { max-width: 100%; display: block; }
 .nav-dock a[data-page="costars"] .nav-dot { background: #f472b6; box-shadow: 0 0 8px #f472b6; }
 .nav-dock a[data-page="multiagent"] .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
 .nav-dock a[data-page="apk"] .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; }
+.nav-dock a[data-page="portfolio"] .nav-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; }
 
 /* ── Page Transition Fade ── */
 .page-content {

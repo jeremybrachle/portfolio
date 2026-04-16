@@ -270,3 +270,12 @@
 .card--apk .card-accent { background: linear-gradient(90deg, #ea580c, #fb923c); }
 .card--apk h3 { color: #fdba74; }
 .card--apk .tech-badge { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
+
+.card--portfolio {
+  background: rgba(6, 120, 140, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  box-shadow: 0 4px 30px rgba(34, 211, 238, 0.08);
+}
+.card--portfolio .card-accent { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+.card--portfolio h3 { color: #67e8f9; }
+.card--portfolio .tech-badge { background: rgba(34, 211, 238, 0.2); color: #67e8f9; }

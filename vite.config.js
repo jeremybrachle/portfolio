@@ -9,6 +9,7 @@ export default defineConfig({
         costars: resolve(__dirname, 'pages/costars.html'),
         multiagent: resolve(__dirname, 'pages/multi-agent.html'),
         apk: resolve(__dirname, 'pages/apk-archeologist.html'),
+        portfolio: resolve(__dirname, 'pages/portfolio.html'),
       },
     },
   },
