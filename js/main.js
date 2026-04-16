@@ -42,7 +42,7 @@ function showSection(id, pushState) {
   if (bg) bg.className = 'page-bg ' + (target.dataset.bgClass || '');
 
   // Update title
-  document.title = target.dataset.title || "Jeremy's Portfolio";
+  document.title = target.dataset.title || "Jeremy Brachle — Portfolio";
 
   // Update URL
   var path = sectionPaths[id] || '/';

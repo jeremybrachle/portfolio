@@ -4,7 +4,9 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  scrollbar-width: none;           /* Firefox */
 }
+html::-webkit-scrollbar { display: none; }  /* Chrome, Safari, Edge */
 
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -402,4 +404,19 @@ img { max-width: 100%; display: block; }
 /* ── Hide mini-player when iframe is visible (home page) ── */
 #mini-player.mp-hidden {
   display: none;
+}
+
+/* ── Site Footer ── */
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(200, 190, 255, 0.25);
+  padding: 6px 0 8px;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 0.03em;
 }

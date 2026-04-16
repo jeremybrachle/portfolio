@@ -34,7 +34,7 @@
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.65;
   background: linear-gradient(135deg, #c084fc, #818cf8, #a78bfa, #f0abfc);
   background-size: 300% 300%;
   -webkit-background-clip: text;
@@ -77,6 +77,14 @@
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.viz-copyright {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(200, 190, 255, 0.35);
+  margin-top: 8px;
+  letter-spacing: 0.03em;
 }
 
 /* Fake bar animation for placeholder */
