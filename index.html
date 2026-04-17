@@ -29,8 +29,17 @@
           Builder of games, tools, and weird experiments. 
           This is where the projects live.
         </p>
-        <div class="visualizer-stage" id="visualizer"></div>
-        <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
+        <div class="visualizer-stage" id="visualizer">
+          <div id="vibe-start-overlay">
+            <button id="vibe-start-btn">&#9654; Start Vibe Machine</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-intro">
+        <p class="intro-text">
+          Welcome to Jeremy's Lab — a collection of projects built from scratch with vanilla JS, Python, and a healthy disregard for npm install counts. Each project has its own themed page with live demos, feature breakdowns, and links to the source. Hit play on the Vibe Machine above, or scroll down to explore.
+        </p>
       </section>
 
       <section class="projects-overview">
@@ -132,6 +141,7 @@
           </a>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -141,14 +151,25 @@
       <section class="vibe-hero">
         <h1 class="vibe-title">Vibe Machine</h1>
         <p class="vibe-subtitle">Real-time audio visualizer — zero dependencies, pure vibes.</p>
+        <p class="vibe-subtitle" style="font-size: 0.95rem; margin-top: 0.25em;">
+          <a href="/" data-nav="section-home" style="color: var(--accent, #00e0ff); text-decoration: underline;">Try it out on the home page</a>
+        </p>
       </section>
-      <div class="vibe-embed-stage">
-        <div class="vibe-screenshot-frame">
-          <div class="vibe-screenshot-placeholder">
-            <div class="vibe-screenshot-icon">🎧</div>
-            <div class="vibe-screenshot-label">Screenshot Coming Soon</div>
-            <div class="vibe-screenshot-hint">Head to <a data-nav="section-home" class="vibe-home-link" style="cursor:pointer">Home</a> to see it live</div>
+      <div class="vibe-showcase">
+        <div class="showcase-main">
+          <button class="showcase-arrow showcase-prev" aria-label="Previous screenshot">&lsaquo;</button>
+          <div class="showcase-display">
+            <img class="showcase-hero-img" src="/screenshots/vibe-machine/vibe-demo-screenshot.png" alt="Vibe Machine demo screenshot" />
           </div>
+          <button class="showcase-arrow showcase-next" aria-label="Next screenshot">&rsaquo;</button>
+        </div>
+        <div class="showcase-thumbs">
+          <button class="showcase-thumb active" data-index="0">
+            <img src="/screenshots/vibe-machine/vibe-demo-screenshot.png" alt="Vibe Machine demo" />
+          </button>
+          <button class="showcase-thumb" data-index="1">
+            <img src="/screenshots/vibe-machine/second.png" alt="demo 2" />
+          </button>
         </div>
       </div>
       <section class="vibe-about">
@@ -177,6 +198,7 @@
           <div class="vibe-feature-card"><h3>🎧 Queue Management</h3><p>Drag-to-reorder queue with track progression. Load up a playlist and let the visualizer ride through your entire collection.</p></div>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -232,6 +254,7 @@
           <div class="costars-feature-card"><h3>🗃️ TMDB Enriched Data</h3><p>Full metadata from The Movie Database API — posters, bios, ratings, release dates. Automatic backfill and enrichment pipeline.</p></div>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -299,6 +322,7 @@
           <div class="agent-feature-card"><h3>🏠 100% Local</h3><p>No cloud dependencies, no API keys, no LLMs. Everything runs on your machine. Pure Python rule-based analysis.</p></div>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -362,6 +386,7 @@
           <div class="apk-feature-card"><h3>📋 Rich Reports</h3><p>Generates detailed Markdown and JSON reports documenting every endpoint, asset, and dependency discovered in the APK.</p></div>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -552,6 +577,15 @@
           The code fragments traveling those stairs are extracted from <em>this file</em>
           at runtime: the HTML that builds the building that carries the HTML.
         </p>
+        <h2>Live Demos, Not Just Descriptions</h2>
+        <p class="about-text">
+          Every project page in this portfolio ships with a <em>playable demo</em>
+          embedded directly in the browser &mdash; no separate deploys, no &ldquo;click here
+          to visit the live site&rdquo; links. The Vibe Machine visualizer runs in an iframe
+          on the home page. Co-Stars, Multi-Agent Lab, and APK Archeologist each get
+          the same treatment: real, interactive showcases right alongside the write-ups,
+          screenshots, and feature breakdowns. If it can run in a browser, it runs here.
+        </p>
         <div class="portfolio-tech">
           <span class="tech-badge">Vite</span>
           <span class="tech-badge">Vanilla JS</span>
@@ -572,10 +606,12 @@
           <div class="portfolio-feature-card"><h3>&#x1F4DC; Self-Reading Source</h3><p>At runtime, JS reads this page&rsquo;s own HTML, extracts real code fragments, and injects them as text flowing along the staircase paths. The building carries the blueprints that built it.</p></div>
           <div class="portfolio-feature-card"><h3>&amp;#9889; Zero-Framework Stack</h3><p>Vanilla JS, plain CSS, Vite for dev/build. No React, no Tailwind, no dependencies that&rsquo;ll be deprecated before you finish reading this. Each page has its own visual theme.</p></div>
           <div class="portfolio-feature-card"><h3>&#x1F3A8; Five Unique Themes</h3><p>Cosmic purple for home, hot pink cinema for Co-Stars, CRT green terminal for Multi-Agent, amber archaeological dig for APK Archeologist, and this impossible cyan building for the page that carries itself.</p></div>
+          <div class="portfolio-feature-card"><h3>&#x1F3AE; In-Portfolio Demos</h3><p>Every project runs live inside its portfolio page &mdash; no external links, no &ldquo;visit the deployed site.&rdquo; The Vibe Machine visualizer, Co-Stars graph, and more all play right here in the browser alongside their screenshots and write-ups.</p></div>
           <div class="portfolio-feature-card"><h3>&#x1F680; Deploys Itself</h3><p>Built with Vite, ships as static HTML. No server required. The thing describing itself is also the thing deploying itself. The ouroboros of web development.</p></div>
           <div class="portfolio-feature-card"><h3>&#x1F9EC; Open Source Quine</h3><p>The source is on GitHub. Clone it, read how this page describes itself, then look at this page describing itself describing its source code. It&rsquo;s quines all the way down.</p></div>
         </div>
       </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
     </div>
   </section>
 
@@ -619,19 +655,21 @@
   </div>
 
   <!-- ═══ MINI PLAYER ═══ -->
-  <div id="mini-player">
+  <div id="mini-player" class="mp-hidden">
     <div id="mp-handle">
       <span class="mp-label">🎧 Now Playing</span>
       <span class="mp-drag-hint">drag me</span>
     </div>
     <div class="mp-body">
       <div class="mp-controls">
-        <button id="mp-play" title="Play / Pause">▶</button>
-        <canvas id="mp-eq" width="25" height="18"></canvas>
+        <a class="mp-eq-link" data-nav="section-home" title="Go to Home">
+          <canvas id="mp-eq" width="25" height="18"></canvas>
+        </a>
         <div class="mp-info">
           <div id="mp-track">Vibe Machine</div>
           <div id="mp-time">0:00 / 0:00</div>
         </div>
+        <button id="mp-play" title="Play / Pause">&#9654;</button>
       </div>
       <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
     </div>
@@ -669,6 +707,48 @@
 
   <script src="/js/player.js"></script>
   <script src="/js/main.js"></script>
+
+  <!-- ═══ COPYRIGHT FADE-IN ═══ -->
+  <script>
+    (function initCopyrightFade() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+          else entry.target.classList.remove('visible');
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.viz-copyright').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+  <!-- ═══ VIBE MACHINE SHOWCASE SLIDESHOW ═══ -->
+  <script>
+  (function () {
+    var thumbs  = document.querySelectorAll('.showcase-thumb');
+    var hero    = document.querySelector('.showcase-hero-img');
+    var prev    = document.querySelector('.showcase-prev');
+    var next    = document.querySelector('.showcase-next');
+    if (!hero || !thumbs.length) return;
+    var current = 0;
+
+    function show(i) {
+      current = (i + thumbs.length) % thumbs.length;
+      var img = thumbs[current].querySelector('img');
+      hero.src = img.src;
+      hero.alt = img.alt;
+      thumbs.forEach(function(t) { t.classList.remove('active'); });
+      thumbs[current].classList.add('active');
+    }
+
+    thumbs.forEach(function(t) {
+      t.addEventListener('click', function() { show(+t.dataset.index); });
+    });
+    prev.addEventListener('click', function() { show(current - 1); });
+    next.addEventListener('click', function() { show(current + 1); });
+  })();
+  </script>
 
   <!-- ═══ PORTFOLIO INLINE SCRIPTS ═══ -->
   <script>

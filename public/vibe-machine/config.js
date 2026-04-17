@@ -45,8 +45,8 @@ window.VIBE_CONFIG = {
   // ── Transitions ──
   transitionEnabled: true,
   transitionDuration: 5,
-  sunArcEnabled: false,
+  sunArcDefault: 'off',
   lofiGridEnabled: false,
   ampBarsEnabled: false,
-  mouseFxEnabled: false,
+  mouseFxEnabled: true,
 };

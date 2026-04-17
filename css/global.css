@@ -73,13 +73,13 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 
-/* Per-page nav dot colors */
-.nav-dock a[data-page="home"] .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; }
-.nav-dock a[data-page="vibe"] .nav-dot { background: #c084fc; box-shadow: 0 0 8px #c084fc; }
-.nav-dock a[data-page="costars"] .nav-dot { background: #f472b6; box-shadow: 0 0 8px #f472b6; }
-.nav-dock a[data-page="multiagent"] .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
-.nav-dock a[data-page="apk"] .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; }
-.nav-dock a[data-page="portfolio"] .nav-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; }
+/* Infinity Stone nav dot colors — cycles every 6 entries */
+.nav-dock a:nth-child(6n+1) .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; } /* Power Stone   — Purple */
+.nav-dock a:nth-child(6n+2) .nav-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; } /* Reality Stone — Red    */
+.nav-dock a:nth-child(6n+3) .nav-dot { background: #facc15; box-shadow: 0 0 8px #facc15; } /* Mind Stone    — Yellow */
+.nav-dock a:nth-child(6n+4) .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; } /* Time Stone   — Green  */
+.nav-dock a:nth-child(6n+5) .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; } /* Soul Stone   — Orange */
+.nav-dock a:nth-child(6n)   .nav-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; } /* Space Stone  — Blue   */
 
 /* ── Page Transition Fade ── */
 .page-content {
@@ -305,6 +305,7 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  order: 3;
 }
 
 #mp-play:hover {
@@ -316,6 +317,7 @@ img { max-width: 100%; display: block; }
   flex: 1;
   min-width: 0;
   overflow: hidden;
+  order: 2;
 }
 
 #mp-track {
@@ -355,7 +357,22 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
 }
 
-/* ── Mini Equalizer ── */
+/* ── Mini Equalizer (clickable → home) ── */
+.mp-eq-link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  order: 1;
+  border-radius: 4px;
+  padding: 2px;
+  transition: background 0.2s ease;
+}
+
+.mp-eq-link:hover {
+  background: rgba(168, 85, 247, 0.15);
+}
+
 #mp-eq {
   flex-shrink: 0;
   display: block;
@@ -404,6 +421,23 @@ img { max-width: 100%; display: block; }
 /* ── Hide mini-player when iframe is visible (home page) ── */
 #mini-player.mp-hidden {
   display: none;
+}
+
+/* ── Scroll-Fade Copyright ── */
+.viz-copyright {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(200, 190, 255, 0.35);
+  letter-spacing: 0.03em;
+  padding: 20px 0 120px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.viz-copyright.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ── Site Footer ── */

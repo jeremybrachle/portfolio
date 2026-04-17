@@ -1,9 +1,9 @@
 /* ── VIBE MACHINE PAGE ── */
-/* Cosmic purple theme — matches home but for the dedicated Vibe Machine showcase */
+/* Reality Stone red theme — crimson energy for the Vibe Machine showcase */
 
 .vibe-body {
-  background: #0a0612;
-  color: #e2d5f3;
+  background: #120606;
+  color: #f3d5d5;
   overflow-x: hidden;
 }
 
@@ -13,10 +13,10 @@
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(168, 85, 247, 0.08), transparent),
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139, 92, 246, 0.1), transparent),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(192, 132, 252, 0.06), transparent),
-    #0a0612;
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(239, 68, 68, 0.08), transparent),
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(220, 38, 38, 0.1), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(252, 129, 129, 0.06), transparent),
+    #120606;
   animation: vibeBgDrift 15s ease-in-out infinite alternate;
 }
 
@@ -42,7 +42,7 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1;
-  background: linear-gradient(135deg, #a855f7, #c084fc, #e9d5ff, #c084fc);
+  background: linear-gradient(135deg, #ef4444, #f87171, #fecaca, #f87171);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,7 +58,7 @@
 
 .vibe-subtitle {
   font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-  color: rgba(192, 132, 252, 0.45);
+  color: rgba(252, 129, 129, 0.45);
   font-style: italic;
   letter-spacing: 0.04em;
   max-width: 550px;
@@ -78,11 +78,11 @@
   aspect-ratio: 16 / 10;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.2);
   box-shadow:
-    0 0 60px rgba(168, 85, 247, 0.08),
+    0 0 60px rgba(239, 68, 68, 0.08),
     0 20px 60px rgba(0, 0, 0, 0.4);
-  background: #0a0612;
+  background: #120606;
 }
 
 .vibe-embed-frame iframe {
@@ -109,64 +109,116 @@
   opacity: 0.6;
 }
 
-/* ── Screenshot Placeholder ── */
-.vibe-screenshot-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  box-shadow:
-    0 0 60px rgba(168, 85, 247, 0.08),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  background: #0a0612;
+/* ── Steam-style Screenshot Showcase ── */
+.vibe-showcase {
+  max-width: 960px;
+  margin: 40px auto 50px;
+  padding: 0 24px;
 }
 
-.vibe-screenshot-frame img {
+/* Main display area */
+.showcase-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  background: #0a0202;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-bottom: none;
+  box-shadow:
+    0 0 60px rgba(239, 68, 68, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.showcase-display {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+/* Nav arrows */
+.showcase-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 40px;
+  height: 72px;
+  background: rgba(10, 2, 2, 0.6);
+  color: rgba(248, 113, 113, 0.7);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  opacity: 0;
+}
+
+.showcase-main:hover .showcase-arrow {
+  opacity: 1;
+}
+
+.showcase-arrow:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fecaca;
+}
+
+.showcase-prev { left: 0; border-radius: 0 4px 4px 0; }
+.showcase-next { right: 0; border-radius: 4px 0 0 4px; }
+
+/* Thumbnail strip */
+.showcase-thumbs {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  background: rgba(10, 2, 2, 0.8);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(239, 68, 68, 0.3) transparent;
+}
+
+.showcase-thumb {
+  flex: 0 0 auto;
+  width: 116px;
+  height: 65px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.showcase-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.vibe-screenshot-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: rgba(192, 132, 252, 0.45);
+.showcase-thumb:hover {
+  opacity: 0.8;
 }
 
-.vibe-screenshot-icon {
-  font-size: 3rem;
-  opacity: 0.5;
-}
-
-.vibe-screenshot-label {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.vibe-screenshot-hint {
-  font-size: 0.8rem;
-  color: rgba(192, 132, 252, 0.3);
-}
-
-.vibe-home-link {
-  color: #c084fc;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.2s;
-}
-
-.vibe-home-link:hover {
-  color: #e9d5ff;
+.showcase-thumb.active {
+  opacity: 1;
+  border-color: #f87171;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
 }
 
 /* ── About ── */
@@ -180,19 +232,19 @@
 .vibe-about h2 {
   font-size: 1.6rem;
   font-weight: 800;
-  color: rgba(226, 213, 243, 0.85);
+  color: rgba(243, 213, 213, 0.85);
   margin-bottom: 16px;
 }
 
 .vibe-about-text {
   font-size: 1rem;
   line-height: 1.7;
-  color: rgba(226, 213, 243, 0.6);
+  color: rgba(243, 213, 213, 0.6);
   margin-bottom: 28px;
 }
 
 .vibe-about-text em {
-  color: #c084fc;
+  color: #f87171;
   font-style: italic;
 }
 
@@ -205,8 +257,8 @@
 }
 
 .vibe-tech .tech-badge {
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
   padding: 4px 14px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -226,7 +278,7 @@
   font-weight: 800;
   text-align: center;
   margin-bottom: 48px;
-  color: rgba(226, 213, 243, 0.8);
+  color: rgba(243, 213, 213, 0.8);
 }
 
 .vibe-feature-grid {
@@ -236,8 +288,8 @@
 }
 
 .vibe-feature-card {
-  background: rgba(20, 10, 40, 0.5);
-  border: 1px solid rgba(168, 85, 247, 0.12);
+  background: rgba(40, 10, 10, 0.5);
+  border: 1px solid rgba(239, 68, 68, 0.12);
   border-radius: 16px;
   padding: 28px;
   transition: transform 0.3s ease, border-color 0.3s ease;
@@ -245,19 +297,19 @@
 
 .vibe-feature-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(168, 85, 247, 0.3);
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
 .vibe-feature-card h3 {
   font-size: 1.15rem;
-  color: #c084fc;
+  color: #f87171;
   margin-bottom: 10px;
 }
 
 .vibe-feature-card p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(226, 213, 243, 0.6);
+  color: rgba(243, 213, 213, 0.6);
 }
 
 /* GitHub link */
@@ -266,9 +318,9 @@
   align-items: center;
   gap: 8px;
   padding: 10px 24px;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 30px;
-  color: #c084fc;
+  color: #f87171;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -276,14 +328,35 @@
 }
 
 .vibe-body .github-link:hover {
-  border-color: rgba(168, 85, 247, 0.6);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .vibe-hero {
     padding: 80px 16px 16px;
+  }
+
+  .vibe-showcase {
+    margin: 24px auto 40px;
+    padding: 0 12px;
+  }
+
+  .showcase-main {
+    aspect-ratio: 16 / 10;
+  }
+
+  .showcase-thumb {
+    width: 80px;
+    height: 45px;
+  }
+
+  .showcase-arrow {
+    width: 32px;
+    height: 56px;
+    font-size: 1.5rem;
+    opacity: 1;
   }
 
   .vibe-embed-stage {

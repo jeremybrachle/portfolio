@@ -1,9 +1,9 @@
-/* ── CO-STARS PAGE: Hot Pink Cinema Theme ── */
-/* Film noir meets neon — hot pinks, deep magentas, film grain */
+/* ── CO-STARS PAGE: Mind Stone Gold Theme ── */
+/* Cinema noir meets golden glow — warm yellows, deep amber, film grain */
 
 .costars-body {
-  background: #12060e;
-  color: #fce4ec;
+  background: #12100a;
+  color: #fef3c7;
 }
 
 /* Film grain overlay */
@@ -22,9 +22,9 @@
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 30% 70%, rgba(236, 72, 153, 0.2), transparent),
-    radial-gradient(ellipse 50% 60% at 75% 25%, rgba(190, 24, 93, 0.15), transparent),
-    #12060e;
+    radial-gradient(ellipse 70% 50% at 30% 70%, rgba(250, 204, 21, 0.2), transparent),
+    radial-gradient(ellipse 50% 60% at 75% 25%, rgba(202, 138, 4, 0.15), transparent),
+    #12100a;
 }
 
 .costars-content {
@@ -36,7 +36,7 @@
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #f472b6, #ec4899, #db2777, #f9a8d4);
+  background: linear-gradient(135deg, #fbbf24, #facc15, #eab308, #fde68a);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -47,7 +47,7 @@
 
 .costars-tagline {
   font-size: 1.2rem;
-  color: rgba(252, 228, 236, 0.5);
+  color: rgba(254, 243, 199, 0.5);
   font-weight: 300;
   margin-bottom: 32px;
 }
@@ -56,7 +56,7 @@
   max-width: 700px;
   font-size: 1.1rem;
   line-height: 1.8;
-  color: rgba(252, 228, 236, 0.75);
+  color: rgba(254, 243, 199, 0.75);
   margin-bottom: 32px;
 }
 
@@ -74,8 +74,8 @@
   width: 120px;
   height: 80px;
   border-radius: 8px;
-  background: rgba(236, 72, 153, 0.08);
-  border: 1px solid rgba(236, 72, 153, 0.2);
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +85,7 @@
 
 .film-frame:hover {
   transform: scale(1.08);
-  background: rgba(236, 72, 153, 0.15);
+  background: rgba(250, 204, 21, 0.15);
 }
 
 /* Features section */
@@ -100,31 +100,31 @@
   font-weight: 800;
   text-align: center;
   margin-bottom: 48px;
-  color: #f9a8d4;
+  color: #fde68a;
 }
 
 .costars-feature-card {
-  background: rgba(236, 72, 153, 0.06);
-  border: 1px solid rgba(236, 72, 153, 0.15);
+  background: rgba(250, 204, 21, 0.06);
+  border: 1px solid rgba(250, 204, 21, 0.15);
   border-radius: 16px;
   padding: 28px;
 }
 
 .costars-feature-card h3 {
   font-size: 1.15rem;
-  color: #f472b6;
+  color: #fbbf24;
   margin-bottom: 8px;
 }
 
 .costars-feature-card p {
-  color: rgba(252, 228, 236, 0.65);
+  color: rgba(254, 243, 199, 0.65);
   line-height: 1.6;
   font-size: 0.95rem;
 }
 
 .costars-tech .tech-badge {
-  background: rgba(236, 72, 153, 0.15);
-  color: #f9a8d4;
+  background: rgba(250, 204, 21, 0.15);
+  color: #fde68a;
 }
 
 @keyframes gradientShift {

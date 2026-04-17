@@ -3,5 +3,10 @@
     "name": "Clair de Lune - Debussy",
     "file": "tracks/classical/Clair de Lune - Debussy.ogg",
     "category": "classical"
+  },
+  {
+    "name": "In the Hall of the Mountain King - Grieg",
+    "file": "tracks/classical/In the Hall of the Mountain King - Grieg.ogg",
+    "category": "classical"
   }
 ]

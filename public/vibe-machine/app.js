@@ -29,8 +29,10 @@
   let transitionEnabled = (CFG.transitionEnabled === true);
   let transitionDuration = CFG.transitionDuration || 5;
   let transitionAlpha = 1;
-  let sunArcMode = CFG.sunArcEnabled === true ? 'sun' : 'off';
+  let sunArcMode = CFG.sunArcDefault || (CFG.sunArcEnabled === true ? 'sun' : 'off');
   const SUN_ARC_MODES = ['off', 'sun', 'moon', 'disco'];
+  let sunriseComplete = false;
+  let sunArcFadeIn = 0; // 0..1, smoothly ramps up after sunrise completes
   const SUN_ARC_ICONS = { off: '☀', sun: '☀', moon: '🌙', disco: '🪩' };
   let lofiGridEnabled = (CFG.lofiGridEnabled === true);
   let ampBarsEnabled = (CFG.ampBarsEnabled === true);
@@ -158,6 +160,8 @@
 
   function loadTrack(index) {
     if (!tracks.length) return;
+    sunriseComplete = false;
+    sunArcFadeIn = 0;
     currentIndex = ((index % tracks.length) + tracks.length) % tracks.length;
     const track = tracks[getTrackIndex()];
     audio.src = track.file;
@@ -714,6 +718,11 @@
 
     transitionAlpha += (target - transitionAlpha) * 0.06;
     if (Math.abs(transitionAlpha - target) < 0.001) transitionAlpha = target;
+
+    // Track sunrise completion for deferred sun arc display
+    if (!sunriseComplete && transitionAlpha < 0.05 && audio && isFinite(audio.duration) && audio.currentTime > transitionDuration + 1) {
+      sunriseComplete = true;
+    }
   }
 
   function renderTransition() {
@@ -824,7 +833,7 @@
 
     const arcNX = 0.08 + progress * 0.84;
     const norm = 2 * progress - 1;
-    const horizon = 0.78;
+    const horizon = 0.70;
     const zenith = 0.08;
     const arcNY = horizon - (horizon - zenith) * (1 - norm * norm);
 
@@ -834,6 +843,13 @@
   function renderSunArc() {
     if (sunArcMode === 'off' || !audio || !isFinite(audio.duration) || audio.duration === 0) return;
     if (!isPlaying && audio.currentTime === 0) return;
+    // Only show after sunrise transition completes
+    if (transitionEnabled && !sunriseComplete) return;
+
+    // Smooth fade-in after sunrise
+    if (sunArcFadeIn < 1) {
+      sunArcFadeIn = Math.min(1, sunArcFadeIn + 0.008);
+    }
 
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -959,7 +975,7 @@
 
         if (alpha < 0.01 || lum < 1) continue;
 
-        mfxCtx.globalAlpha = Math.min(1, alpha);
+        mfxCtx.globalAlpha = Math.min(1, alpha * sunArcFadeIn);
         mfxCtx.fillStyle = `hsl(${hue},${sat}%,${Math.max(0, Math.min(100, lum))}%)`;
         const pxGap = lofiGridEnabled ? 2 : 1;
         mfxCtx.fillRect(bx, by, px - pxGap, px - pxGap);
@@ -1018,77 +1034,31 @@
     mfxCtx.restore();
   }
 
-  // Per-visualizer mouse particle styles
+  // Sparkle particle factory
+  function mkSparkle(x, y, click, hue) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = click ? 3 + Math.random() * 5 : 0.5 + Math.random() * 2;
+    return {
+      x: x + (Math.random() - 0.5) * 8,
+      y: y + (Math.random() - 0.5) * 8,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - (click ? 2 : 0.5),
+      life: 1.0,
+      decay: 0.012 + Math.random() * 0.018,
+      size: click ? 3 + Math.random() * 4 : 1.5 + Math.random() * 3,
+      hue: hue,
+      angle: Math.random() * Math.PI,
+      shape: 'sparkle',
+    };
+  }
+
+  // Per-visualizer sparkle color palettes
   const mouseStyles = {
-    // 0 = bars: vertical sparks
-    0: (x, y, click) => ({
-      x, y,
-      vx: (Math.random() - 0.5) * (click ? 8 : 2),
-      vy: -(Math.random() * (click ? 14 : 6) + 2),
-      life: 1.0,
-      decay: 0.02 + Math.random() * 0.02,
-      size: click ? 4 + Math.random() * 4 : 2 + Math.random() * 2,
-      hue: 140 - Math.random() * 200,
-      shape: 'rect',
-    }),
-    // 1 = waveform: horizontal streaks
-    1: (x, y, click) => ({
-      x, y,
-      vx: (Math.random() - 0.5) * (click ? 16 : 8),
-      vy: (Math.random() - 0.5) * 2,
-      life: 1.0,
-      decay: 0.015 + Math.random() * 0.015,
-      size: click ? 3 : 1.5,
-      length: click ? 20 + Math.random() * 20 : 8 + Math.random() * 12,
-      hue: 160,
-      shape: 'line',
-    }),
-    // 2 = circular: ring bursts
-    2: (x, y, click) => {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = click ? 4 + Math.random() * 6 : 1 + Math.random() * 3;
-      return {
-        x, y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1.0,
-        decay: 0.015 + Math.random() * 0.02,
-        size: click ? 3 + Math.random() * 3 : 1.5 + Math.random() * 2,
-        hue: Math.random() * 360,
-        shape: 'ring',
-      };
-    },
-    // 3 = particles: explosion clusters
-    3: (x, y, click) => {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = click ? 6 + Math.random() * 8 : 2 + Math.random() * 4;
-      return {
-        x, y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1.0,
-        decay: 0.01 + Math.random() * 0.02,
-        size: click ? 5 + Math.random() * 5 : 2 + Math.random() * 3,
-        hue: 320 + Math.random() * 40,
-        shape: 'glow',
-      };
-    },
-    // 4 = starfield: comet trails
-    4: (x, y, click) => {
-      const angle = Math.atan2(y - window.innerHeight / 2, x - window.innerWidth / 2) + (Math.random() - 0.5) * 0.5;
-      const speed = click ? 8 + Math.random() * 10 : 3 + Math.random() * 5;
-      return {
-        x, y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1.0,
-        decay: 0.008 + Math.random() * 0.012,
-        size: click ? 3 : 1.5,
-        hue: 200 + Math.random() * 60,
-        shape: 'comet',
-        trail: [],
-      };
-    },
+    0: (x, y, click) => mkSparkle(x, y, click, 40 + Math.random() * 30),   // gold
+    1: (x, y, click) => mkSparkle(x, y, click, 190 + Math.random() * 40),  // cyan
+    2: (x, y, click) => mkSparkle(x, y, click, Math.random() * 360),       // rainbow
+    3: (x, y, click) => mkSparkle(x, y, click, 300 + Math.random() * 40),  // pink
+    4: (x, y, click) => mkSparkle(x, y, click, 210 + Math.random() * 40),  // blue
   };
 
   function spawnMouseParticles(x, y, click) {
@@ -1120,7 +1090,7 @@
       const p = mouseParticles[i];
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.05; // slight gravity
+      p.vy += 0.01; // gentle float
       p.life -= p.decay;
 
       if (p.life <= 0) {
@@ -1136,52 +1106,44 @@
       mfxCtx.globalAlpha = alpha;
 
       switch (p.shape) {
+        case 'sparkle': {
+          const sz = p.size;
+          mfxCtx.save();
+          mfxCtx.translate(p.x, p.y);
+          mfxCtx.rotate((p.angle || 0) + p.life * 2);
+
+          // 4-pointed star
+          mfxCtx.fillStyle = `hsl(${p.hue}, 70%, ${light}%)`;
+          mfxCtx.beginPath();
+          for (let s = 0; s < 8; s++) {
+            const r = s % 2 === 0 ? sz : sz * 0.2;
+            const a = (s / 8) * Math.PI * 2;
+            if (s === 0) mfxCtx.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+            else mfxCtx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+          }
+          mfxCtx.closePath();
+          mfxCtx.fill();
+
+          // Bright center
+          mfxCtx.globalAlpha = Math.min(1, alpha * 1.2);
+          mfxCtx.fillStyle = `hsl(${p.hue}, 30%, 95%)`;
+          mfxCtx.beginPath();
+          mfxCtx.arc(0, 0, sz * 0.25, 0, Math.PI * 2);
+          mfxCtx.fill();
+
+          mfxCtx.restore();
+          break;
+        }
+
         case 'rect':
           mfxCtx.fillStyle = `hsl(${p.hue}, 85%, ${light}%)`;
           mfxCtx.fillRect(p.x - p.size / 2, p.y - p.size * 2, p.size, p.size * 4);
-          break;
-
-        case 'line':
-          mfxCtx.strokeStyle = `hsl(${p.hue}, 80%, ${light}%)`;
-          mfxCtx.lineWidth = p.size;
-          mfxCtx.beginPath();
-          mfxCtx.moveTo(p.x, p.y);
-          mfxCtx.lineTo(p.x - p.vx * (p.length / Math.abs(p.vx || 1)), p.y);
-          mfxCtx.stroke();
-          break;
-
-        case 'ring':
-          mfxCtx.strokeStyle = `hsl(${p.hue}, 80%, ${light}%)`;
-          mfxCtx.lineWidth = 1.5;
-          mfxCtx.beginPath();
-          mfxCtx.arc(p.x, p.y, p.size * (1 + (1 - p.life) * 3), 0, Math.PI * 2);
-          mfxCtx.stroke();
           break;
 
         case 'glow':
           mfxCtx.fillStyle = `hsl(${p.hue}, 90%, ${light}%)`;
           mfxCtx.beginPath();
           mfxCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          mfxCtx.fill();
-          break;
-
-        case 'comet':
-          if (p.trail) {
-            p.trail.push({ x: p.x, y: p.y });
-            if (p.trail.length > 12) p.trail.shift();
-            mfxCtx.strokeStyle = `hsl(${p.hue}, 70%, ${light}%)`;
-            mfxCtx.lineWidth = p.size;
-            mfxCtx.beginPath();
-            for (let t = 0; t < p.trail.length; t++) {
-              const pt = p.trail[t];
-              if (t === 0) mfxCtx.moveTo(pt.x, pt.y);
-              else mfxCtx.lineTo(pt.x, pt.y);
-            }
-            mfxCtx.stroke();
-          }
-          mfxCtx.fillStyle = `hsl(${p.hue}, 80%, 85%)`;
-          mfxCtx.beginPath();
-          mfxCtx.arc(p.x, p.y, p.size * 1.5, 0, Math.PI * 2);
           mfxCtx.fill();
           break;
       }
@@ -1410,6 +1372,22 @@
   btnAmpBars.classList.toggle('active', ampBarsEnabled);
   btnMouseFx.classList.toggle('active', mouseFxEnabled);
   btnTransition.classList.toggle('active', transitionEnabled);
+
+  // ── Dynamic info stats ──
+  const NUM_VIZ = 5; // Blank, Bars, Wave, Circular, Starry Night (visible viz buttons)
+  const NUM_DISPLAY_FX = 6; // lofiGrid, ampBars, mouseFx + sun, moon, disco
+  const NUM_BINARY_FX = 3; // lofiGrid, ampBars, mouseFx — each on/off
+  const NUM_SKY = SUN_ARC_MODES.length; // off/sun/moon/disco
+  const NUM_SUNSET = 2; // on/off
+  const NUM_COMBOS = NUM_VIZ * Math.pow(2, NUM_BINARY_FX) * NUM_SKY * NUM_SUNSET;
+  const elViz = document.getElementById('info-viz-count');
+  const elFx = document.getElementById('info-fx-count');
+  const elSky = document.getElementById('info-sky-count');
+  const elCombo = document.getElementById('info-combo-count');
+  if (elViz) elViz.textContent = NUM_VIZ;
+  if (elFx) elFx.textContent = NUM_DISPLAY_FX;
+  if (elSky) elSky.textContent = NUM_SUNSET;
+  if (elCombo) elCombo.textContent = NUM_COMBOS.toLocaleString();
 
   // ── Info overlay ──
   const infoOverlay = document.getElementById('info-overlay');

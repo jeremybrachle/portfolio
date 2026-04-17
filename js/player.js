@@ -11,11 +11,17 @@
 
 const STORAGE_KEY = 'portfolio-player';
 
+// Global flag — only set true by the Start Vibe Machine button click
+window.__vibeStarted = false;
+
 function initPlayer() {
   /* ── elements ── */
   var el   = document.getElementById('mini-player');
   var iframe = document.getElementById('vm-iframe');
   if (!el || !iframe) return;
+
+  // Always start hidden — only the start button reveals it
+  el.classList.add('mp-hidden');
 
   var playBtn      = el.querySelector('#mp-play');
   var trackEl      = el.querySelector('#mp-track');
@@ -199,11 +205,23 @@ function initPlayer() {
 
   window.__vizMount = function () {
     if (!iframeWrap) return;
-    iframeWrap.classList.add('mounted');
-    iframeWrap.classList.remove('hidden');
-    iframeWrap.style.pointerEvents = '';
+    // If the start overlay is visible, position iframe behind it but don't show yet
+    var overlay = document.getElementById('vibe-start-overlay');
+    if (overlay && !overlay.classList.contains('hidden')) {
+      // Position iframe behind the overlay (invisible until started)
+      iframeWrap.classList.remove('hidden');
+      iframeWrap.style.pointerEvents = 'none';
+      iframeWrap.style.opacity = '0';
+      positionOverStage();
+    } else {
+      // Already started — show normally
+      iframeWrap.classList.add('mounted');
+      iframeWrap.classList.remove('hidden');
+      iframeWrap.style.pointerEvents = '';
+      iframeWrap.style.opacity = '';
+      positionOverStage();
+    }
     el.classList.add('mp-hidden');          // hide mini-player on home
-    positionOverStage();                   // start tracking position
   };
 
   window.__vizUnmount = function () {
@@ -212,10 +230,34 @@ function initPlayer() {
     iframeWrap.classList.remove('mounted');
     iframeWrap.classList.add('hidden');
     iframeWrap.style.pointerEvents = 'none';
-    el.classList.remove('mp-hidden');        // show mini-player on sub-pages
+    if (window.__vibeStarted) {
+      el.classList.remove('mp-hidden');
+    } else {
+      el.classList.add('mp-hidden');
+    }
   };
 
   // Initial mount is handled by main.js showSection()
+
+  /* ═══════════════════════════════════════════════════════════════
+     START VIBE MACHINE BUTTON — shows on home page visualizer
+     ═══════════════════════════════════════════════════════════════ */
+  var startBtn = document.getElementById('vibe-start-btn');
+  var startOverlay = document.getElementById('vibe-start-overlay');
+  if (startBtn && startOverlay) {
+    startBtn.addEventListener('click', function () {
+      // Mark music as globally started
+      window.__vibeStarted = true;
+      // Hide the overlay
+      startOverlay.classList.add('hidden');
+      // Reveal the iframe
+      iframeWrap.classList.add('mounted');
+      iframeWrap.style.pointerEvents = '';
+      iframeWrap.style.opacity = '';
+      // Tell the iframe to play + enter vibe mode
+      sendCmd('startVibe');
+    });
+  }
 }
 
 initPlayer();

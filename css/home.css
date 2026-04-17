@@ -62,7 +62,7 @@
 .visualizer-stage {
   width: 100%;
   max-width: 1000px;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16/9.5;
   border-radius: 20px;
   background: rgba(15, 10, 30, 0.8);
   border: 1px solid rgba(168, 85, 247, 0.3);
@@ -79,12 +79,42 @@
   display: block;
 }
 
-.viz-copyright {
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(200, 190, 255, 0.35);
-  margin-top: 8px;
-  letter-spacing: 0.03em;
+/* ── Start Vibe Machine Overlay ── */
+#vibe-start-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 6, 18, 0.85);
+  border-radius: 20px;
+  transition: opacity 0.5s ease;
+}
+
+#vibe-start-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#vibe-start-btn {
+  padding: 18px 42px;
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  border-radius: 40px;
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#vibe-start-btn:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+  transform: scale(1.04);
 }
 
 /* Fake bar animation for placeholder */
@@ -176,9 +206,23 @@
   box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
 }
 
+/* ── Site Intro (below visualizer) ── */
+.site-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px 20px;
+  text-align: center;
+}
+
+.intro-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(200, 190, 255, 0.55);
+}
+
 /* ── Project Overview Cards (below hero) ── */
 .projects-overview {
-  padding: 80px 24px 160px;
+  padding: 80px 24px 60px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -245,22 +289,22 @@
 
 /* Card themes */
 .card--vibe {
-  background: rgba(100, 50, 180, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  box-shadow: 0 4px 30px rgba(168, 85, 247, 0.1);
+  background: rgba(180, 50, 50, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  box-shadow: 0 4px 30px rgba(239, 68, 68, 0.1);
 }
-.card--vibe .card-accent { background: linear-gradient(90deg, #7c3aed, #a855f7); }
-.card--vibe h3 { color: #c4b5fd; }
-.card--vibe .tech-badge { background: rgba(168, 85, 247, 0.2); color: #c4b5fd; }
+.card--vibe .card-accent { background: linear-gradient(90deg, #dc2626, #ef4444); }
+.card--vibe h3 { color: #fca5a5; }
+.card--vibe .tech-badge { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
 
 .card--costars {
-  background: rgba(180, 50, 120, 0.12);
-  border: 1px solid rgba(244, 114, 182, 0.25);
-  box-shadow: 0 4px 30px rgba(244, 114, 182, 0.08);
+  background: rgba(180, 150, 20, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  box-shadow: 0 4px 30px rgba(250, 204, 21, 0.08);
 }
-.card--costars .card-accent { background: linear-gradient(90deg, #ec4899, #f472b6); }
-.card--costars h3 { color: #f9a8d4; }
-.card--costars .tech-badge { background: rgba(244, 114, 182, 0.2); color: #f9a8d4; }
+.card--costars .card-accent { background: linear-gradient(90deg, #eab308, #facc15); }
+.card--costars h3 { color: #fde68a; }
+.card--costars .tech-badge { background: rgba(250, 204, 21, 0.2); color: #fde68a; }
 
 .card--agent {
   background: rgba(20, 120, 80, 0.12);

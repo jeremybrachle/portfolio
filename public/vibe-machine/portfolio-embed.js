@@ -53,9 +53,55 @@
       case 'play':   api.play();   break;
       case 'pause':  api.pause();  break;
       case 'seek':   api.seek(e.data.value); break;
+      case 'startVibe':
+        api.play();
+        // Enter vibe mode instantly
+        var btn = document.getElementById('vibe-toggle');
+        if (btn) btn.click();
+        break;
     }
   });
 
   // ── 6. Tell parent iframe is ready ─────────────────────────────
   window.parent.postMessage({ type: 'vm-ready' }, '*');
+
+  // ── 7. Auto-hide UI after 2s of inactivity (embed only) ───────
+  var uiEls = ['ui-overlay', 'queue-panel', 'vibe-toggle', 'transition-controls', 'info-btn-wrap'];
+  var idleTimer = null;
+  var uiHidden = false;
+
+  function hideUI() {
+    uiHidden = true;
+    uiEls.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.style.opacity = '0'; el.style.pointerEvents = 'none'; }
+    });
+    document.body.style.cursor = 'none';
+  }
+
+  function showUI() {
+    uiHidden = false;
+    uiEls.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.style.opacity = ''; el.style.pointerEvents = ''; }
+    });
+    document.body.style.cursor = '';
+  }
+
+  function resetIdleTimer() {
+    if (uiHidden) showUI();
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(hideUI, 2000);
+  }
+
+  // Add transitions for smooth fade
+  uiEls.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.style.transition = (el.style.transition ? el.style.transition + ', ' : '') + 'opacity 0.4s ease';
+  });
+
+  document.addEventListener('mousemove', resetIdleTimer);
+  document.addEventListener('mousedown', resetIdleTimer);
+  document.addEventListener('keydown', resetIdleTimer);
+  resetIdleTimer();
 })();

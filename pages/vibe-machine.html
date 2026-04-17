@@ -15,17 +15,33 @@
     <section class="vibe-hero">
       <h1 class="vibe-title">Vibe Machine</h1>
       <p class="vibe-subtitle">Real-time audio visualizer — zero dependencies, pure vibes.</p>
+      <p class="vibe-subtitle" style="font-size: 0.95rem; margin-top: 0.25em;">
+        <a href="/" style="color: var(--accent, #00e0ff); text-decoration: underline;">Try it out on the home page</a>
+      </p>
     </section>
 
-    <!-- ═══ SCREENSHOT SHOWCASE ═══ -->
-    <div class="vibe-embed-stage">
-      <div class="vibe-screenshot-frame">
-        <!-- Replace this placeholder with an actual screenshot later -->
-        <div class="vibe-screenshot-placeholder">
-          <div class="vibe-screenshot-icon">🎧</div>
-          <div class="vibe-screenshot-label">Screenshot Coming Soon</div>
-          <div class="vibe-screenshot-hint">Head to <a href="/" class="vibe-home-link">Home</a> to see it live</div>
+    <!-- ═══ SCREENSHOT SHOWCASE (Steam-style) ═══ -->
+    <div class="vibe-showcase">
+
+      <!-- Main featured image -->
+      <div class="showcase-main">
+        <button class="showcase-arrow showcase-prev" aria-label="Previous screenshot">&lsaquo;</button>
+        <div class="showcase-display">
+          <img class="showcase-hero-img" src="/screenshots/vibe-machine/vibe-demo-screenshot.png" alt="Vibe Machine demo screenshot" />
         </div>
+        <button class="showcase-arrow showcase-next" aria-label="Next screenshot">&rsaquo;</button>
+      </div>
+
+      <!-- Thumbnail strip -->
+      <div class="showcase-thumbs">
+        <button class="showcase-thumb active" data-index="0">
+          <img src="/screenshots/vibe-machine/vibe-demo-screenshot.png" alt="Vibe Machine demo" />
+        </button>
+        <button class="showcase-thumb" data-index="1">
+          <img src="/screenshots/vibe-machine/second.png" alt="demo 2" />
+        </button>
+        <!-- Add more thumbnails here: copy the <button class="showcase-thumb"> block above,
+             increment data-index, and point src to your new image in /screenshots/vibe-machine/ -->
       </div>
     </div>
 
@@ -168,4 +184,29 @@
 
   <script type="module" src="/js/main.js"></script>
   <script src="/js/player.js"></script>
+
+  <!-- Showcase slideshow -->
+  <script>
+  (function () {
+    const thumbs  = document.querySelectorAll('.showcase-thumb');
+    const hero    = document.querySelector('.showcase-hero-img');
+    const prev    = document.querySelector('.showcase-prev');
+    const next    = document.querySelector('.showcase-next');
+    let current   = 0;
+
+    function show(i) {
+      current = (i + thumbs.length) % thumbs.length;
+      const src = thumbs[current].querySelector('img').src;
+      const alt = thumbs[current].querySelector('img').alt;
+      hero.src = src;
+      hero.alt = alt;
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbs[current].classList.add('active');
+    }
+
+    thumbs.forEach(t => t.addEventListener('click', () => show(+t.dataset.index)));
+    prev.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => show(current + 1));
+  })();
+  </script>
 </body>
