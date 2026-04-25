@@ -73,13 +73,14 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 
-/* Infinity Stone nav dot colors — cycles every 6 entries */
-.nav-dock a:nth-child(6n+1) .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; } /* Power Stone   — Purple */
-.nav-dock a:nth-child(6n+2) .nav-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; } /* Reality Stone — Red    */
-.nav-dock a:nth-child(6n+3) .nav-dot { background: #facc15; box-shadow: 0 0 8px #facc15; } /* Mind Stone    — Yellow */
-.nav-dock a:nth-child(6n+4) .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; } /* Time Stone   — Green  */
-.nav-dock a:nth-child(6n+5) .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; } /* Soul Stone   — Orange */
-.nav-dock a:nth-child(6n)   .nav-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; } /* Space Stone  — Blue   */
+/* Infinity Stone nav dot colors — matched to each page's theme */
+.nav-dock a[data-page="home"]       .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; } /* Power Stone   — Purple */
+.nav-dock a[data-page="vibe"]       .nav-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; } /* Reality Stone — Red    */
+.nav-dock a[data-page="costars"]    .nav-dot { background: #facc15; box-shadow: 0 0 8px #facc15; } /* Mind Stone    — Yellow */
+.nav-dock a[data-page="multiagent"] .nav-dot { background: #34d399; box-shadow: 0 0 8px #34d399; } /* Time Stone    — Green  */
+.nav-dock a[data-page="apk"]        .nav-dot { background: #fb923c; box-shadow: 0 0 8px #fb923c; } /* Soul Stone    — Orange */
+.nav-dock a[data-page="vibecheck"]  .nav-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; } /* Power Stone   — Purple */
+.nav-dock a[data-page="portfolio"]  .nav-dot { background: #22d3ee; box-shadow: 0 0 8px #22d3ee; } /* Space Stone   — Cyan   */
 
 /* ── Page Transition Fade ── */
 .page-content {

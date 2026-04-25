@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe Check — Jeremy's Portfolio</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/vibe-check.css" />
+</head>
+<body class="vibe-check-body">
+  <div class="vibe-check-bg"></div>
+
+  <div class="vibe-check-content page-content">
+    <section class="section-hero vibe-check-hero">
+      <p class="vibe-check-eyebrow">api-first backend // scheduled intelligence pipeline</p>
+      <h1 class="vibe-check-title">Vibe Check</h1>
+      <p class="vibe-check-subtitle">A scheduled backend that converts high-volume tech signals into structured intelligence snapshots — scored, ranked, and ready for frontends.</p>
+      <p class="vibe-check-subtitle vibe-check-subtitle--detail">This portfolio page is the frontend implementation: it consumes the standalone Vibe Check API backend, renders digest snapshots, and demonstrates how the same service can power dashboards and product surfaces without coupling UI and ingestion logic.</p>
+
+      <div class="vibe-check-status" id="vc-status-bar">
+        <div class="pulse-dot" id="vc-pulse" aria-hidden="true"></div>
+        <div>
+          <h2 id="vc-status-title">Connecting…</h2>
+          <p id="vc-status-detail">Checking backend at <code id="vc-api-origin"></code></p>
+        </div>
+        <span class="status-badge checking" id="vc-status-badge">Checking</span>
+      </div>
+    </section>
+
+    <section class="vibe-check-widgets">
+      <div class="dashboard-header">
+        <div class="dashboard-title-block">
+          <span class="dashboard-label">Live Intelligence Feed</span>
+          <span class="dashboard-src">source: hackernews</span>
+        </div>
+        <div id="vc-meta-stats" class="meta-stats"></div>
+      </div>
+
+      <div class="widget-grid">
+
+        <article class="widget-slot widget-slot--wide widget-accent--purple">
+          <div class="slot-label">AI Analysis</div>
+          <h3>Vibe Summary</h3>
+          <div id="vc-summary-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--green">
+          <div class="slot-label">Top Stories</div>
+          <h3>Trending Links</h3>
+          <div id="vc-links-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--cyan">
+          <div class="slot-label">Signal</div>
+          <h3>Excited About</h3>
+          <div id="vc-excited-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--orange">
+          <div class="slot-label">Signal</div>
+          <h3>Skeptical About</h3>
+          <div id="vc-skeptical-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--pink">
+          <div class="slot-label">Tooling</div>
+          <h3>Trending Tools</h3>
+          <div id="vc-tools-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--blue">
+          <div class="slot-label">Today's Themes</div>
+          <h3>Big Topics</h3>
+          <div id="vc-themes-content" class="widget-loading">Loading…</div>
+        </article>
+
+        <article class="widget-slot widget-accent--purple">
+          <div class="slot-label">Deep Dives</div>
+          <h3>Rabbit Holes</h3>
+          <div id="vc-rabbit-content" class="widget-loading">Loading…</div>
+        </article>
+
+      </div>
+    </section>
+  </div>
+
+  <div id="vm-iframe-wrap" class="hidden">
+    <iframe id="vm-iframe"
+            src="/vibe-machine/index.html"
+            allow="autoplay; fullscreen"
+            loading="eager"></iframe>
+  </div>
+
+  <div id="mini-player">
+    <div id="mp-handle">
+      <span class="mp-label">🎧 Now Playing</span>
+      <span class="mp-drag-hint">drag me</span>
+    </div>
+    <div class="mp-body">
+      <div class="mp-controls">
+        <button id="mp-play" title="Play / Pause">▶</button>
+        <canvas id="mp-eq" width="25" height="18"></canvas>
+        <div class="mp-info">
+          <div id="mp-track">Vibe Machine</div>
+          <div id="mp-time">0:00 / 0:00</div>
+        </div>
+      </div>
+      <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
+    </div>
+  </div>
+
+  <nav class="nav-dock">
+    <a href="/" data-page="home">
+      <span class="nav-dot"></span>
+      <span>Home</span>
+    </a>
+    <a href="/pages/vibe-machine.html" data-page="vibe">
+      <span class="nav-dot"></span>
+      <span>Vibe Machine</span>
+    </a>
+    <a href="/pages/costars.html" data-page="costars">
+      <span class="nav-dot"></span>
+      <span>Co-Stars</span>
+    </a>
+    <a href="/pages/multi-agent.html" data-page="multiagent">
+      <span class="nav-dot"></span>
+      <span>Multi-Agent</span>
+    </a>
+    <a href="/pages/apk-archeologist.html" data-page="apk">
+      <span class="nav-dot"></span>
+      <span>APK Archeologist</span>
+    </a>
+    <a href="/pages/vibe-check.html" data-page="vibecheck" class="active">
+      <span class="nav-dot"></span>
+      <span>Vibe Check</span>
+    </a>
+    <a href="/pages/portfolio.html" data-page="portfolio">
+      <span class="nav-dot"></span>
+      <span>This Site</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/main.js"></script>
+  <script src="/js/player.js"></script>
+  <script type="module" src="/js/vibe-check.js"></script>
+</body>
+</html>

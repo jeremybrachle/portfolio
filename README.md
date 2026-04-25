@@ -23,37 +23,41 @@ A personal portfolio site showcasing four software projects — each page has it
 
 **Option A — From a WSL terminal** (recommended):
 ```bash
+# One-time: activate Linux Node via nvm (nvm is installed at ~/.nvm)
+source ~/.nvm/nvm.sh
+nvm use 22
+
 cd /home/kerry/programming/portfolio
 
 # Install (one time)
 npm install
 
 # Dev server with hot reload
-npx vite --host
+npm run dev -- --host --port 4000
 # → http://localhost:4000
 
 # Production build
-npx vite build
+npm run build
 # → outputs to dist/
 
 # Preview production build
-npx vite preview --host
+npm run preview -- --host
 ```
 
 **Option B — From PowerShell / VS Code terminal:**
 ```powershell
 # Install (one time)
-wsl bash -ic "cd /home/kerry/programming/portfolio && npm install"
+wsl -e bash -ic 'source ~/.nvm/nvm.sh; nvm use 22 >/dev/null; cd /home/kerry/programming/portfolio && npm install'
 
 # Dev server with hot reload
-wsl bash -ic "cd /home/kerry/programming/portfolio && npx vite --host"
+wsl -e bash -ic 'source ~/.nvm/nvm.sh; nvm use 22 >/dev/null; cd /home/kerry/programming/portfolio && npm run dev -- --host --port 4000'
 # → http://localhost:4000
 
 # Production build
-wsl bash -ic "cd /home/kerry/programming/portfolio && npx vite build"
+wsl -e bash -ic 'source ~/.nvm/nvm.sh; nvm use 22 >/dev/null; cd /home/kerry/programming/portfolio && npm run build'
 ```
 
-> **Important:** Always run through WSL. Running `npx vite` directly in PowerShell will fail because `node_modules` contains Linux-native binaries (rollup, esbuild) that Windows Node.js can't load.
+> **Important:** Always run through WSL using Linux Node (nvm). The project's `node_modules` contains Linux-native binaries (rollup, esbuild) that Windows Node.js can't load. If `node` is not found in WSL, run `source ~/.nvm/nvm.sh && nvm use 22` first.
 
 ## Sanity Check — All Pages
 

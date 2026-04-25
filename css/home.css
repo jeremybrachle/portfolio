@@ -332,3 +332,12 @@
 .card--portfolio .card-accent { background: linear-gradient(90deg, #0891b2, #22d3ee); }
 .card--portfolio h3 { color: #67e8f9; }
 .card--portfolio .tech-badge { background: rgba(34, 211, 238, 0.2); color: #67e8f9; }
+
+.card--vibecheck {
+  background: rgba(120, 60, 200, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 4px 30px rgba(168, 85, 247, 0.14);
+}
+.card--vibecheck .card-accent { background: linear-gradient(90deg, #7c3aed, #c084fc); }
+.card--vibecheck h3 { color: #ddd6fe; }
+.card--vibecheck .tech-badge { background: rgba(192, 132, 252, 0.22); color: #e9d5ff; }
