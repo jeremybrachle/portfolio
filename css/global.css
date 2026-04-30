@@ -172,13 +172,19 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Demo Placeholder ── */
+/* Temporarily hidden across the site — markup is preserved for when the
+   embedded demos are wired up. Remove this rule (or scope it) to bring back. */
 .demo-placeholder {
+  display: none !important;
+}
+
+.demo-placeholder.demo-placeholder--enabled {
+  display: flex;
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16/9;
   border-radius: 16px;
   border: 2px dashed rgba(255,255,255,0.2);
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -277,6 +283,88 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.06em;
 }
 
+/* Minimize button (top-right of handle) */
+#mp-minimize {
+  appearance: none;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: rgba(168, 85, 247, 0.08);
+  color: #c084fc;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+#mp-minimize:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.5);
+  color: #e9d5ff;
+}
+
+/* ── Minimized state ──
+   Collapses to a small clickable square pinned to the bottom-right corner.
+   Click anywhere on the puck (except the minimize button) to restore. */
+#mini-player.minimized {
+  width: 56px;
+  height: 56px;
+  left: auto !important;
+  top: auto !important;
+  right: 16px !important;
+  bottom: 16px !important;
+  border-radius: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#mini-player.minimized #mp-handle {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-bottom: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#mini-player.minimized .mp-label,
+#mini-player.minimized .mp-drag-hint,
+#mini-player.minimized .mp-body {
+  display: none;
+}
+#mini-player.minimized #mp-minimize {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  margin: 0;
+  z-index: 2;
+}
+/* Show the EQ canvas as the visible "puck" content while minimized */
+#mini-player.minimized::after {
+  content: '🎧';
+  font-size: 1.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+  pointer-events: none;
+}
+#mini-player.minimized.playing {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 14px rgba(168, 85, 247, 0.35);
+}
+
 /* Body */
 .mp-body {
   padding: 10px 12px 12px;
@@ -312,6 +400,33 @@ img { max-width: 100%; display: block; }
 #mp-play:hover {
   background: rgba(168, 85, 247, 0.2);
   border-color: rgba(168, 85, 247, 0.5);
+}
+
+#mp-prev,
+#mp-next {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: rgba(168, 85, 247, 0.06);
+  color: #c084fc;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+#mp-prev { order: 2; }
+#mp-next { order: 4; }
+
+#mp-prev:hover,
+#mp-next:hover {
+  background: rgba(168, 85, 247, 0.18);
+  border-color: rgba(168, 85, 247, 0.45);
 }
 
 .mp-info {

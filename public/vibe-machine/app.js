@@ -331,6 +331,9 @@
 
     const viz = visualizers[currentVizIndex];
     const drawCanvas = { width: window.innerWidth, height: window.innerHeight };
+    // Expose transition state so visualizers can fade with the sunrise/sunset overlay
+    window.__vibeOverlayAlpha = transitionAlpha;
+    window.__vibeSunriseComplete = sunriseComplete;
     if (viz && analyser && dataArray) {
       viz.draw(ctx, drawCanvas, analyser, dataArray, bufferLength);
     }
@@ -1448,7 +1451,7 @@
       playTrack();
       // Auto-enter vibe mode after 3 seconds
       setTimeout(() => {
-        if (!vibeMode) btnVibe.click();
+        if (!isVibeMode) btnVibe.click();
       }, 3000);
     });
   }
@@ -1466,7 +1469,7 @@
 
   // Show floating button on mouse move near bottom in vibe mode
   document.addEventListener('mousemove', (e) => {
-    if (!vibeMode) { vibePlayBtn.classList.remove('vibe-play-visible'); return; }
+    if (!isVibeMode) { vibePlayBtn.classList.remove('vibe-play-visible'); return; }
     if (e.clientY > window.innerHeight - 80) {
       vibePlayBtn.classList.add('vibe-play-visible');
     } else {
@@ -1513,6 +1516,8 @@
     play: function () { playTrack(); },
     pause: function () { pauseTrack(); },
     toggle: function () { togglePlay(); },
+    next: function () { nextTrack(); },
+    prev: function () { prevTrack(); },
     seek: function (pct) {
       if (audio && audio.duration) audio.currentTime = (pct / 100) * audio.duration;
     }

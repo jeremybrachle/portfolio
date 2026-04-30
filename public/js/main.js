@@ -16,6 +16,7 @@ var sectionPaths = {
   'section-costars':   '/costars',
   'section-agent':     '/multi-agent',
   'section-apk':       '/apk-archeologist',
+  'section-vibecheck': '/vibe-check',
   'section-portfolio': '/portfolio'
 };
 var pathToSection = {};

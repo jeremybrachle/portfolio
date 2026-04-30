@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/costars.css" />
   <link rel="stylesheet" href="/css/multi-agent.css" />
   <link rel="stylesheet" href="/css/apk-archeologist.css" />
+  <link rel="stylesheet" href="/css/vibe-check.css" />
   <link rel="stylesheet" href="/css/portfolio.css" />
 </head>
 <body class="home-body">
@@ -140,7 +141,7 @@
             </div>
           </a>
 
-          <a href="/pages/vibe-check.html" class="project-card card--vibecheck">
+          <a data-nav="section-vibecheck" class="project-card card--vibecheck">
             <div class="card-accent"></div>
             <h3>🟣 Vibe Check</h3>
             <div class="card-tagline">API-rendered meta UI shell</div>
@@ -171,6 +172,12 @@
         <p class="vibe-subtitle" style="font-size: 0.95rem; margin-top: 0.25em;">
           <a href="/" data-nav="section-home" style="color: var(--accent, #00e0ff); text-decoration: underline;">Try it out on the home page</a>
         </p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top: 18px;">
+          <a href="https://github.com/jeremybrachle/vibe-machine" target="_blank" rel="noopener noreferrer" class="github-link" style="border-color: rgba(248,113,113,0.35); color: #fca5a5;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
       </section>
       <div class="vibe-showcase">
         <div class="showcase-main">
@@ -632,6 +639,75 @@
     </div>
   </section>
 
+  <!-- ═══ VIBE CHECK ═══ -->
+  <section class="page-section" id="section-vibecheck" data-title="Vibe Check — Jeremy Brachle" data-body-class="vibe-check-body" data-bg-class="vibe-check-bg">
+    <div class="vibe-check-content page-content">
+      <section class="section-hero vibe-check-hero">
+        <p class="vibe-check-eyebrow">tech intelligence // live frontend demo</p>
+        <h1 class="vibe-check-title">Vibe Check</h1>
+        <p class="vibe-check-subtitle">A bare-bones static demo of what the broader Vibe Check project surfaces: trending tech stories and where the major LLMs stand right now.</p>
+        <p class="vibe-check-subtitle vibe-check-subtitle--detail">This page calls the public Hacker News Firebase API directly from the browser — no backend, no proxy. The full project (in active development) adds a scheduled FastAPI pipeline that ingests, scores, and ranks signals over time, plus a richer frontend that consumes those structured digests. This snapshot is the lightweight slice that runs without infrastructure.</p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top: 18px;">
+          <a href="https://github.com/jeremybrachle/vibe-check-front-end" target="_blank" rel="noopener noreferrer" class="github-link" style="border-color: rgba(74,222,128,0.35); color: #86efac;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            Frontend
+          </a>
+          <a href="https://github.com/jeremybrachle/vibe-check" target="_blank" rel="noopener noreferrer" class="github-link" style="border-color: rgba(34,211,238,0.35); color: #67e8f9;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            API
+          </a>
+        </div>
+      </section>
+
+      <section class="vibe-check-widgets">
+        <div class="dashboard-header">
+          <div class="dashboard-title-block">
+            <span class="dashboard-label">Static Demo Surface</span>
+            <span class="dashboard-src">live HN feed + curated LLM rankings</span>
+          </div>
+        </div>
+
+        <div class="widget-grid widget-grid--two-col">
+
+          <article class="widget-slot widget-accent--green">
+            <div class="slot-label">Live · Hacker News</div>
+            <h3>Top Stories Right Now</h3>
+            <div id="vc-stories-content" class="widget-loading">Loading…</div>
+          </article>
+
+          <article class="widget-slot widget-accent--cyan">
+            <div class="slot-label">Curated · Cloud</div>
+            <h3>Top Cloud LLMs</h3>
+            <div id="vc-llm-cloud-content" class="widget-loading">Loading…</div>
+          </article>
+
+          <article class="widget-slot widget-accent--purple">
+            <div class="slot-label">About</div>
+            <h3>What This Demo Is</h3>
+            <div class="vc-about">
+              <p>The full <strong>Vibe Check</strong> stack is two pieces:</p>
+              <ul>
+                <li><strong>Backend</strong> — a FastAPI service with scheduled scrapers (HN, Reddit), an LLM scoring pipeline, and a SQLite-backed snapshot store. Exposes <code>/api/v1/digest/latest</code> and friends.</li>
+                <li><strong>Frontend</strong> — a standalone Vite app that renders the digests as a dashboard.</li>
+              </ul>
+              <p>What you're seeing here is a <em>simplified, infra-free</em> version of the frontend: it skips the backend entirely and pulls one live source the browser can reach (the Hacker News public API), plus a hand-curated LLM leaderboard.</p>
+              <p class="vc-about-note">Full app: backend ingests → LLMs analyze → API serves → frontend renders. This page does step 1 and step 4 only.</p>
+            </div>
+          </article>
+
+          <article class="widget-slot widget-accent--orange">
+            <div class="slot-label">Curated · Local / Open</div>
+            <h3>Top Local LLMs</h3>
+            <div id="vc-llm-local-content" class="widget-loading">Loading…</div>
+            <p class="llm-updated-note">Rankings updated <span id="vc-llm-updated">—</span> · maintained by hand</p>
+          </article>
+
+        </div>
+      </section>
+      <p class="viz-copyright">&copy; 2026 Jeremy Brachle</p>
+    </div>
+  </section>
+
   <!-- ═══ EASTER EGG OVERLAY (for portfolio section) ═══ -->
   <div id="ee-overlay" class="ee-overlay" style="display:none;">
     <div class="ee-loading" id="ee-loading">
@@ -674,7 +750,7 @@
   <!-- ═══ MINI PLAYER ═══ -->
   <div id="mini-player" class="mp-hidden">
     <div id="mp-handle">
-      <span class="mp-label">🎧 Now Playing</span>
+      <button id="mp-minimize" type="button" title="Minimize" aria-label="Minimize player">&#x2013;</button><span class="mp-label">🎧 Now Playing</span>
       <span class="mp-drag-hint">drag me</span>
     </div>
     <div class="mp-body">
@@ -686,7 +762,7 @@
           <div id="mp-track">Vibe Machine</div>
           <div id="mp-time">0:00 / 0:00</div>
         </div>
-        <button id="mp-play" title="Play / Pause">&#9654;</button>
+        <button id="mp-prev" title="Previous">&#9198;</button><button id="mp-play" title="Play / Pause">&#9654;</button><button id="mp-next" title="Next">&#9197;</button>
       </div>
       <div id="mp-progress-bar"><div id="mp-progress-fill"></div></div>
     </div>
@@ -714,7 +790,7 @@
       <span class="nav-dot"></span>
       <span>APK Archeologist</span>
     </a>
-    <a href="/pages/vibe-check.html" data-page="vibecheck">
+    <a data-nav="section-vibecheck" data-page="vibecheck">
       <span class="nav-dot"></span>
       <span>Vibe Check</span>
     </a>
@@ -728,6 +804,7 @@
 
   <script src="/js/player.js"></script>
   <script src="/js/main.js"></script>
+  <script type="module" src="/js/vibe-check.js"></script>
 
   <!-- ═══ COPYRIGHT FADE-IN ═══ -->
   <script>

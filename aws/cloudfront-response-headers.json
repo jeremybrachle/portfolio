@@ -1,0 +1,27 @@
+{
+  "_comment": "Apply with: aws cloudfront create-response-headers-policy --response-headers-policy-config file://aws/cloudfront-response-headers.json",
+  "Comment": "Portfolio security headers",
+  "Name": "portfolio-security-headers",
+  "SecurityHeadersConfig": {
+    "StrictTransportSecurity": {
+      "Override": true,
+      "AccessControlMaxAgeSec": 63072000,
+      "IncludeSubdomains": true,
+      "Preload": true
+    },
+    "ContentTypeOptions": { "Override": true },
+    "FrameOptions": { "Override": true, "FrameOption": "SAMEORIGIN" },
+    "ReferrerPolicy": { "Override": true, "ReferrerPolicy": "strict-origin-when-cross-origin" },
+    "XSSProtection": { "Override": true, "Protection": true, "ModeBlock": true }
+  },
+  "CustomHeadersConfig": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Header": "Permissions-Policy",
+        "Value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "Override": true
+      }
+    ]
+  }
+}

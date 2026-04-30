@@ -1,131 +1,89 @@
-# Portfolio Deploy — Next Steps
+# Portfolio Deploy — AWS Status
 
-## Pre-deploy checklist
+> Detailed AWS plan lives in [HANDOFF_2025-04-17.md](HANDOFF_2025-04-17.md).
+> This file tracks what is **done in code** vs what still needs to happen in the AWS console / GitHub.
 
-### Must fix before going live
-- [ ] **Clair de Lune MP3** — Download a public-domain recording and drop at `public/audio/clair-de-lune.mp3`. Recommended: [Musopen](https://musopen.org), [IMSLP](https://imslp.org), or [Archive.org](https://archive.org). Without this the audio player on the home page is a dead control.
-- [ ] **Test the build** — Run `npx vite build` then `npx vite preview` from WSL. Confirm all 5 pages load, nav works, and assets resolve.
-- [ ] **Favicon** — Add one. Quickest option is an SVG emoji favicon in each `<head>`:
-  ```html
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
-  ```
+## ✅ Code-side: ready to deploy
 
-### Should do
-- [ ] **Open Graph meta tags** — Add to every page `<head>` so link previews look good when shared:
-  ```html
-  <meta property="og:title" content="Kerry's Portfolio" />
-  <meta property="og:description" content="Builder of games, tools, and weird experiments." />
-  <meta property="og:type" content="website" />
-  <!-- <meta property="og:image" content="https://yourdomain.com/og-image.png" /> -->
-  ```
-- [ ] **Responsive pass** — Nav dock collapses to dots on mobile but the page content needs testing at 375px / 768px widths.
+- [x] **Production build works** — `npm run build` produces a clean `dist/` (verified). Static `js/` lives in `public/js/`.
+- [x] **CSP meta tag** in `index.html` — locks `default-src 'self'`, restricts `connect-src` to HN + GitHub APIs, blocks `object-src`.
+- [x] **Inline favicon** (🎧 SVG emoji) on `index.html` and all `pages/*.html`.
+- [x] **Open Graph + Twitter card** meta tags on `index.html`.
+- [x] **HN data sanitization** — `safeUrl`, `safeInt`, `clampStr`, `isValidHnId` in `public/js/vibe-check.js`. Anchors get `rel="noopener noreferrer nofollow ugc"`.
+- [x] **postMessage hardening** — both `public/js/player.js` and `public/vibe-machine/portfolio-embed.js` validate `origin` and `source`, reject malformed payloads.
+- [x] **Vite SPA mode** configured.
+- [x] **GitHub Actions workflow** at `.github/workflows/deploy.yml` (placeholders need replacing — see below).
+- [x] **CloudFront response headers policy** template at `aws/cloudfront-response-headers.json`.
 
----
+## 🟡 Optional polish (not blocking)
 
-## Hosting options
-
-### Option A: GitHub Pages (simplest, free)
-
-1. Push the repo to `github.com/jeremybrachle/portfolio` (or it's already there).
-2. No `base` config needed if deploying to a custom domain or `jeremybrachle.github.io` root. If deploying to `jeremybrachle.github.io/portfolio/`, add to `vite.config.js`:
-   ```js
-   base: '/portfolio/',
-   ```
-3. Add a GitHub Actions workflow. Create `.github/workflows/deploy.yml`:
-   ```yaml
-   name: Deploy to GitHub Pages
-   on:
-     push:
-       branches: [main]
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-   concurrency:
-     group: pages
-     cancel-in-progress: true
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: actions/setup-node@v4
-           with:
-             node-version: 20
-         - run: npm ci
-         - run: npm run build
-         - uses: actions/upload-pages-artifact@v3
-           with:
-             path: dist
-     deploy:
-       needs: build
-       runs-on: ubuntu-latest
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       steps:
-         - id: deployment
-           uses: actions/deploy-pages@v4
-   ```
-4. In the repo's Settings → Pages, set source to **GitHub Actions**.
-5. Push to `main` and it auto-deploys.
-
-### Option B: Vercel (easiest auto-deploy)
-
-1. Go to [vercel.com](https://vercel.com), import the `portfolio` repo.
-2. Framework preset: **Vite**. It auto-detects the build command.
-3. No config changes needed — Vercel handles it.
-4. Get a `*.vercel.app` URL immediately, optional custom domain later.
-
-### Option C: Netlify
-
-1. Go to [netlify.com](https://netlify.com), import the repo.
-2. Build command: `npm run build`. Publish directory: `dist`.
-3. Works out of the box. Free tier is fine.
+- [ ] **Clair de Lune MP3** — drop a public-domain recording at `public/audio/clair-de-lune.mp3`. Without it the home audio control is dead, but the rest of the site works.
+- [ ] **Open Graph image** — currently points at `/screenshots/vibe-machine/vibe-demo-screenshot.png` (1.5MB). Consider creating a 1200×630 social card.
+- [ ] **Responsive pass** at 375 / 768 px.
+- [ ] Move 8 inline `<script>` blocks in `index.html` into separate files so we can drop `'unsafe-inline'` from `script-src`.
 
 ---
 
-## Custom domain (optional, any host)
+## 🔴 What you still need to do in AWS / GitHub
 
-1. Buy a domain (Namecheap, Cloudflare, Google Domains).
-2. Point DNS:
-   - **GitHub Pages:** CNAME to `jeremybrachle.github.io`, add a `CNAME` file in `public/` with the domain.
-   - **Vercel/Netlify:** Follow their custom domain UI, update DNS A/CNAME records as directed.
-3. Enable HTTPS (free and automatic on all three hosts).
+### 1. AWS resources (one-time, console)
+1. **S3 bucket** `jeremybrachle-portfolio` — block all public access, enable versioning.
+2. **CloudFront distribution** with the bucket as origin via **OAC** (not legacy OAI).
+   - Default root object: `index.html`
+   - **Custom error responses (SPA fallback):**
+     - `403 → /index.html`, response code `200`
+     - `404 → /index.html`, response code `200`
+   - Enable Brotli/gzip compression
+   - Default cache behavior: `CachingOptimized`
+3. **Response headers policy** — apply `aws/cloudfront-response-headers.json` (HSTS, X-CTO, Referrer-Policy, Permissions-Policy, X-Frame-Options).
+4. **IAM OIDC provider** for `token.actions.githubusercontent.com` (audience `sts.amazonaws.com`).
+5. **IAM role** `github-actions-portfolio-deploy` — see `HANDOFF_2025-04-17.md` for trust + inline policy JSON. Restrict the `sub` condition to `repo:jeremybrachle/portfolio:ref:refs/heads/main`.
+
+### 2. Wire up the workflow
+Edit `.github/workflows/deploy.yml` and replace:
+- `S3_BUCKET` → your real bucket name (only if different)
+- `CLOUDFRONT_DISTRIBUTION_ID` → distribution ID from CloudFront
+- `DEPLOY_ROLE` → role ARN with your account ID
+
+### 3. Push and verify
+```bash
+git push origin main
+```
+Then visit the `*.cloudfront.net` URL. Check:
+- [ ] All five projects load
+- [ ] Mini-player audio survives navigation between sections
+- [ ] Refreshing on `/section-vibecheck` (or any deep route) doesn't 404 — SPA fallback should serve `index.html`
+- [ ] HN stories load on the Vibe Check section
+- [ ] `/vibe-machine/index.html` (the standalone iframe demo) loads
+- [ ] DevTools Console shows no CSP violations
+
+### 4. Optional: custom domain
+- Request ACM cert in `us-east-1`
+- Add CNAME / Route 53 alias to the distribution
+- Add the alternate domain in CloudFront
 
 ---
 
-## After deploy — demo integration (not blocking)
-
-These make the portfolio more impressive but aren't needed for launch:
-
-| Project | Strategy | Effort |
-|---------|----------|--------|
-| **Vibe Machine** | Iframe a deployed instance into `.visualizer-stage` on the home page, or copy the Canvas + Web Audio JS directly | Medium |
-| **Co-Stars** | `npm run build` in `co-stars-frontend`, deploy as a separate Vercel/Netlify app, iframe into `.demo-placeholder` — works offline via snapshot mode | Medium |
-| **Multi-Agent Lab** | Build a static replay that simulates SSE events from a saved pipeline JSON, embed in `.demo-placeholder` — no backend needed | Medium |
-| **APK Archeologist** | Render a sample `report.md` as styled HTML, or embed an [asciinema](https://asciinema.org) terminal recording | Easy |
-
----
-
-## Polish backlog
-
-- [ ] Page transitions — View Transitions API for cross-page animations
-- [ ] About / contact section — Could be added to the home page below project cards
-- [ ] Analytics — Plausible or Umami for privacy-friendly tracking (optional)
-
----
-
-## Commands reference
+## Local commands
 
 ```bash
-# All commands run from WSL
+# All commands run from WSL — Windows can't exec the WSL-installed binaries
 cd /home/kerry/programming/portfolio
 
 npm install          # first time only
-npx vite --host      # dev → http://localhost:4000
-npx vite build       # production build → dist/
-npx vite preview     # preview the production build
+npm run dev          # dev → http://localhost:4000
+npm run build        # production build → dist/
+npx vite preview     # preview production bundle
+```
 
-# Do NOT run from Windows PowerShell — esbuild breaks over UNC paths
+---
+
+## Architecture reminder
+
+```
+GitHub push (main) → Actions → npm run build → S3 sync → CloudFront invalidation
+                                  │
+                                  └─ HTML: no-cache (deploys propagate instantly)
+                                  └─ Hashed assets: 1-year immutable
+                                  └─ vibe-machine/* (unhashed): 5-min cache
 ```

@@ -7,6 +7,22 @@ window.VisualizerWaveform = {
   name: 'waveform',
 
   draw(ctx, canvas, analyser, dataArray, bufferLength) {
+    // Fade in/out with the sunrise/sunset transition overlay.
+    // overlayAlpha: 1 = fully black (sunrise/sunset peak), 0 = fully clear.
+    // We only want to draw once the overlay has mostly cleared, and we want
+    // to fade back out before the closing sunset reaches full black.
+    var overlayAlpha = (typeof window !== 'undefined' && typeof window.__vibeOverlayAlpha === 'number')
+      ? window.__vibeOverlayAlpha
+      : 0;
+    // Map overlayAlpha 0.65 -> 0 (hidden) and 0.15 -> 1 (visible). Smooth band.
+    var fade = (0.65 - overlayAlpha) / 0.50;
+    if (fade <= 0) {
+      // Still in transition; clear and bail so previous frame doesn't linger.
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    if (fade > 1) fade = 1;
+
     analyser.getByteTimeDomainData(dataArray);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -14,12 +30,15 @@ window.VisualizerWaveform = {
     const centerY = canvas.height / 2;
 
     // Dim horizontal center line
+    ctx.save();
+    ctx.globalAlpha = fade;
     ctx.strokeStyle = 'rgba(0, 200, 120, 0.08)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, centerY);
     ctx.lineTo(canvas.width, centerY);
     ctx.stroke();
+    ctx.restore();
 
     // Glow effect — draw the line multiple times with increasing blur
     const layers = [
@@ -32,7 +51,7 @@ window.VisualizerWaveform = {
       ctx.save();
       ctx.shadowBlur = layer.blur;
       ctx.shadowColor = '#00c878';
-      ctx.globalAlpha = layer.alpha;
+      ctx.globalAlpha = layer.alpha * fade;
       ctx.strokeStyle = '#00c878';
       ctx.lineWidth = layer.width;
       ctx.lineJoin = 'round';
@@ -60,7 +79,7 @@ window.VisualizerWaveform = {
 
     // Secondary waveform (phase-shifted, different color) for depth
     ctx.save();
-    ctx.globalAlpha = 0.15;
+    ctx.globalAlpha = 0.15 * fade;
     ctx.strokeStyle = '#b060ff';
     ctx.lineWidth = 1;
     ctx.shadowBlur = 12;
@@ -76,20 +95,6 @@ window.VisualizerWaveform = {
       x += sliceWidth;
     }
     ctx.stroke();
-    ctx.restore();
-
-    // Subtle grid lines
-    ctx.save();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-    ctx.lineWidth = 1;
-    const gridLines = 8;
-    for (let i = 1; i < gridLines; i++) {
-      const gy = (canvas.height / gridLines) * i;
-      ctx.beginPath();
-      ctx.moveTo(0, gy);
-      ctx.lineTo(canvas.width, gy);
-      ctx.stroke();
-    }
     ctx.restore();
   }
 };
