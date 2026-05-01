@@ -27,6 +27,14 @@
   if (!api) return;
 
   // ── 3. Broadcast state to parent (~20 fps) ────────────────────
+  // Pin the parent origin once so we never broadcast to a navigated/
+  // hostile parent later in the lifecycle.
+  var parentOrigin = window.location.origin;
+
+  // When the parent reports the player is minimized + paused, throttle
+  // the EQ broadcast to 1 Hz to save CPU. Parent re-enables instantly.
+  var freqIdle = false;
+
   setInterval(function () {
     var s = api.getState();
     window.parent.postMessage({
@@ -36,23 +44,41 @@
       category:    s.category,
       currentTime: s.currentTime,
       duration:    s.duration
-    }, '*');
+    }, parentOrigin);
   }, 50);
 
   // ── 4. Broadcast frequency data for mini-EQ (~30 fps) ─────────
+  var lastFreq = 0;
   setInterval(function () {
+    if (freqIdle && performance.now() - lastFreq < 1000) return;
     var d = api.getFreqData();
-    if (d) window.parent.postMessage({ type: 'vm-freq', data: d }, '*');
+    if (d) {
+      window.parent.postMessage({ type: 'vm-freq', data: d }, parentOrigin);
+      lastFreq = performance.now();
+    }
   }, 33);
 
   // ── 5. Receive commands from parent ────────────────────────────
   window.addEventListener('message', function (e) {
-    if (!e.data || e.data.type !== 'vm-cmd') return;
-    switch (e.data.cmd) {
+    // Only accept commands from our owning parent window + same origin.
+    if (e.source !== window.parent) return;
+    if (e.origin !== parentOrigin) return;
+    if (!e.data || typeof e.data !== 'object' || e.data.type !== 'vm-cmd') return;
+    var cmd = typeof e.data.cmd === 'string' ? e.data.cmd : '';
+    switch (cmd) {
       case 'toggle': api.toggle(); break;
       case 'play':   api.play();   break;
       case 'pause':  api.pause();  break;
-      case 'seek':   api.seek(e.data.value); break;
+      case 'next':   if (api.next) api.next(); break;
+      case 'prev':   if (api.prev) api.prev(); break;
+      case 'seek': {
+        var v = Number(e.data.value);
+        if (Number.isFinite(v) && v >= 0 && v <= 100) api.seek(v);
+        break;
+      }
+      case 'idle':
+        freqIdle = !!e.data.value;
+        break;
       case 'startVibe':
         api.play();
         // Enter vibe mode instantly
@@ -63,7 +89,7 @@
   });
 
   // ── 6. Tell parent iframe is ready ─────────────────────────────
-  window.parent.postMessage({ type: 'vm-ready' }, '*');
+  window.parent.postMessage({ type: 'vm-ready' }, parentOrigin);
 
   // ── 7. Auto-hide UI after 2s of inactivity (embed only) ───────
   var uiEls = ['ui-overlay', 'queue-panel', 'vibe-toggle', 'transition-controls', 'info-btn-wrap'];

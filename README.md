@@ -21,6 +21,13 @@ A personal portfolio site showcasing four software projects — each page has it
 
 ## Quick Start
 
+**option zero:**
+```bash
+cd /home/kerry/programming/portfolio
+source ~/.nvm/nvm.sh && nvm use 22
+npm run dev -- --host --port 4000
+```
+
 **Option A — From a WSL terminal** (recommended):
 ```bash
 # One-time: activate Linux Node via nvm (nvm is installed at ~/.nvm)
@@ -58,6 +65,14 @@ wsl -e bash -ic 'source ~/.nvm/nvm.sh; nvm use 22 >/dev/null; cd /home/kerry/pro
 ```
 
 > **Important:** Always run through WSL using Linux Node (nvm). The project's `node_modules` contains Linux-native binaries (rollup, esbuild) that Windows Node.js can't load. If `node` is not found in WSL, run `source ~/.nvm/nvm.sh && nvm use 22` first.
+>
+> **Never run `npm install` from Windows / PowerShell against the WSL path** (`\\wsl.localhost\...`). Windows strips the Unix executable bit from `node_modules/.bin/*`, and you'll get `sh: 1: vite: Permission denied` when trying to run the dev server. If this happens, fix it from a WSL terminal:
+> ```bash
+> cd /home/kerry/programming/portfolio
+> rm -rf node_modules package-lock.json
+> source ~/.nvm/nvm.sh && nvm use 22
+> npm install
+> ```
 
 ## Sanity Check — All Pages
 

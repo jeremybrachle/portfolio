@@ -22,7 +22,7 @@ window.VIBE_CONFIG = {
 
   // ── Visualizers ──
   visualizers: ['blank', 'bars', 'waveform', 'circular', 'starrynight'],
-  defaultVisualizer: 8,
+  defaultVisualizer: 3,
 
   // ── Theme Colors ──
   theme: {

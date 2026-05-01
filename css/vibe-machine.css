@@ -7,6 +7,25 @@
   overflow-x: hidden;
 }
 
+/* Warm-themed inline links inside the vibe-machine section */
+.vibe-content .vibe-link,
+.vibe-content a.vibe-link,
+.vibe-content a.vibe-link:link,
+.vibe-content a.vibe-link:visited,
+.vibe-content a.vibe-link:hover,
+.vibe-content a.vibe-link:focus-visible,
+.vibe-content a.vibe-link:active {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(243, 213, 213, 0.55);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.18s ease;
+}
+.vibe-content a.vibe-link:hover,
+.vibe-content a.vibe-link:focus-visible {
+  text-decoration-color: currentColor;
+}
+
 /* Animated background */
 .vibe-bg {
   position: fixed;

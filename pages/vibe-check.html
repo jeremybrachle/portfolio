@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%A7%3C/text%3E%3C/svg%3E" />
   <title>Vibe Check — Jeremy's Portfolio</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/vibe-check.css" />
@@ -12,72 +13,53 @@
 
   <div class="vibe-check-content page-content">
     <section class="section-hero vibe-check-hero">
-      <p class="vibe-check-eyebrow">api-first backend // scheduled intelligence pipeline</p>
+      <p class="vibe-check-eyebrow">tech intelligence // live frontend demo</p>
       <h1 class="vibe-check-title">Vibe Check</h1>
-      <p class="vibe-check-subtitle">A scheduled backend that converts high-volume tech signals into structured intelligence snapshots — scored, ranked, and ready for frontends.</p>
-      <p class="vibe-check-subtitle vibe-check-subtitle--detail">This portfolio page is the frontend implementation: it consumes the standalone Vibe Check API backend, renders digest snapshots, and demonstrates how the same service can power dashboards and product surfaces without coupling UI and ingestion logic.</p>
-
-      <div class="vibe-check-status" id="vc-status-bar">
-        <div class="pulse-dot" id="vc-pulse" aria-hidden="true"></div>
-        <div>
-          <h2 id="vc-status-title">Connecting…</h2>
-          <p id="vc-status-detail">Checking backend at <code id="vc-api-origin"></code></p>
-        </div>
-        <span class="status-badge checking" id="vc-status-badge">Checking</span>
-      </div>
+      <p class="vibe-check-subtitle">A bare-bones static demo of what the broader Vibe Check project surfaces: trending tech stories and where the major LLMs stand right now.</p>
+      <p class="vibe-check-subtitle vibe-check-subtitle--detail">This page calls the public Hacker News Firebase API directly from the browser — no backend, no proxy. The full project (in active development) adds a scheduled FastAPI pipeline that ingests, scores, and ranks signals over time, plus a richer frontend that consumes those structured digests. This snapshot is the lightweight slice that runs without infrastructure.</p>
     </section>
 
     <section class="vibe-check-widgets">
       <div class="dashboard-header">
         <div class="dashboard-title-block">
-          <span class="dashboard-label">Live Intelligence Feed</span>
-          <span class="dashboard-src">source: hackernews</span>
+          <span class="dashboard-label">Static Demo Surface</span>
+          <span class="dashboard-src">live HN feed + curated LLM rankings</span>
         </div>
-        <div id="vc-meta-stats" class="meta-stats"></div>
       </div>
 
-      <div class="widget-grid">
-
-        <article class="widget-slot widget-slot--wide widget-accent--purple">
-          <div class="slot-label">AI Analysis</div>
-          <h3>Vibe Summary</h3>
-          <div id="vc-summary-content" class="widget-loading">Loading…</div>
-        </article>
+      <div class="widget-grid widget-grid--two-col">
 
         <article class="widget-slot widget-accent--green">
-          <div class="slot-label">Top Stories</div>
-          <h3>Trending Links</h3>
-          <div id="vc-links-content" class="widget-loading">Loading…</div>
+          <div class="slot-label">Live · Hacker News</div>
+          <h3>Top Stories Right Now</h3>
+          <div id="vc-stories-content" class="widget-loading">Loading…</div>
         </article>
 
         <article class="widget-slot widget-accent--cyan">
-          <div class="slot-label">Signal</div>
-          <h3>Excited About</h3>
-          <div id="vc-excited-content" class="widget-loading">Loading…</div>
-        </article>
-
-        <article class="widget-slot widget-accent--orange">
-          <div class="slot-label">Signal</div>
-          <h3>Skeptical About</h3>
-          <div id="vc-skeptical-content" class="widget-loading">Loading…</div>
-        </article>
-
-        <article class="widget-slot widget-accent--pink">
-          <div class="slot-label">Tooling</div>
-          <h3>Trending Tools</h3>
-          <div id="vc-tools-content" class="widget-loading">Loading…</div>
-        </article>
-
-        <article class="widget-slot widget-accent--blue">
-          <div class="slot-label">Today's Themes</div>
-          <h3>Big Topics</h3>
-          <div id="vc-themes-content" class="widget-loading">Loading…</div>
+          <div class="slot-label">Curated · Cloud</div>
+          <h3>Top Cloud LLMs</h3>
+          <div id="vc-llm-cloud-content" class="widget-loading">Loading…</div>
         </article>
 
         <article class="widget-slot widget-accent--purple">
-          <div class="slot-label">Deep Dives</div>
-          <h3>Rabbit Holes</h3>
-          <div id="vc-rabbit-content" class="widget-loading">Loading…</div>
+          <div class="slot-label">About</div>
+          <h3>What This Demo Is</h3>
+          <div class="vc-about">
+            <p>The full <strong>Vibe Check</strong> stack is two pieces:</p>
+            <ul>
+              <li><strong>Backend</strong> — a FastAPI service with scheduled scrapers (HN, Reddit), an LLM scoring pipeline, and a SQLite-backed snapshot store. Exposes <code>/api/v1/digest/latest</code> and friends.</li>
+              <li><strong>Frontend</strong> — a standalone Vite app that renders the digests as a dashboard.</li>
+            </ul>
+            <p>What you're seeing here is a <em>simplified, infra-free</em> version of the frontend: it skips the backend entirely and pulls one live source the browser can reach (the Hacker News public API), plus a hand-curated LLM leaderboard.</p>
+            <p class="vc-about-note">Full app: backend ingests → LLMs analyze → API serves → frontend renders. This page does step 1 and step 4 only.</p>
+          </div>
+        </article>
+
+        <article class="widget-slot widget-accent--orange">
+          <div class="slot-label">Curated · Local / Open</div>
+          <h3>Top Local LLMs</h3>
+          <div id="vc-llm-local-content" class="widget-loading">Loading…</div>
+          <p class="llm-updated-note">Rankings updated <span id="vc-llm-updated">—</span> · maintained by hand</p>
         </article>
 
       </div>
@@ -93,12 +75,12 @@
 
   <div id="mini-player">
     <div id="mp-handle">
-      <span class="mp-label">🎧 Now Playing</span>
+      <button id="mp-minimize" type="button" title="Minimize" aria-label="Minimize player">&#x2013;</button><span class="mp-label">🎧 Now Playing</span>
       <span class="mp-drag-hint">drag me</span>
     </div>
     <div class="mp-body">
       <div class="mp-controls">
-        <button id="mp-play" title="Play / Pause">▶</button>
+        <button id="mp-prev" title="Previous">&#9198;</button><button id="mp-play" title="Play / Pause">&#9654;</button><button id="mp-next" title="Next">&#9197;</button>
         <canvas id="mp-eq" width="25" height="18"></canvas>
         <div class="mp-info">
           <div id="mp-track">Vibe Machine</div>

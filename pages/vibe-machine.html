@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%A7%3C/text%3E%3C/svg%3E" />
   <title>Vibe Machine — Jeremy's Portfolio</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/vibe-machine.css" />
@@ -138,12 +139,12 @@
   <!-- ═══ MINI PLAYER ═══ -->
   <div id="mini-player">
     <div id="mp-handle">
-      <span class="mp-label">🎧 Now Playing</span>
+      <button id="mp-minimize" type="button" title="Minimize" aria-label="Minimize player">&#x2013;</button><span class="mp-label">🎧 Now Playing</span>
       <span class="mp-drag-hint">drag me</span>
     </div>
     <div class="mp-body">
       <div class="mp-controls">
-        <button id="mp-play" title="Play / Pause">▶</button>
+        <button id="mp-prev" title="Previous">&#9198;</button><button id="mp-play" title="Play / Pause">&#9654;</button><button id="mp-next" title="Next">&#9197;</button>
         <canvas id="mp-eq" width="25" height="18"></canvas>
         <div class="mp-info">
           <div id="mp-track">Vibe Machine</div>
