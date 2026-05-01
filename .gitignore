@@ -2,3 +2,9 @@ node_modules/
 dist/
 *.local
 .DS_Store
+
+# Markdown — ignore everything except README.md (at any depth)
+*.md
+!README.md
+!CHANGELOG.md
+!**/README.md
