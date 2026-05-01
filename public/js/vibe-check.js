@@ -12,6 +12,14 @@
  *      automatically; this page just shows a snapshot.
  */
 
+import {
+  escapeHtml,
+  safeUrl,
+  safeInt,
+  isValidHnId,
+  clampStr,
+} from "./lib/sanitize.js";
+
 const HN_API   = "https://hacker-news.firebaseio.com/v0";
 const HN_LIMIT = 10;
 
@@ -40,46 +48,9 @@ const elLlmLocal   = document.getElementById("vc-llm-local-content");
 const elLlmUpdated = document.getElementById("vc-llm-updated");
 
 // ── Helpers ───────────────────────────────────────────────
-function escapeHtml(s) {
-  return String(s ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-// Allow only http(s) URLs. Anything else (javascript:, data:, vbscript:, blank,
-// or non-string) becomes "#" so we can never produce a script-executing href
-// from untrusted Hacker News data.
-function safeUrl(u) {
-  if (typeof u !== "string") return "#";
-  const trimmed = u.trim();
-  if (trimmed.length === 0 || trimmed.length > 2048) return "#";
-  let parsed;
-  try { parsed = new URL(trimmed); } catch (_e) { return "#"; }
-  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return "#";
-  return parsed.toString();
-}
-
-// Bound an untrusted numeric value to a safe non-negative integer.
-function safeInt(n, max = 1_000_000) {
-  const v = Number(n);
-  if (!Number.isFinite(v) || v < 0) return 0;
-  return Math.min(Math.floor(v), max);
-}
-
-// HN item IDs must be plain positive integers.
-function isValidHnId(id) {
-  return Number.isInteger(id) && id > 0 && id < 1e12;
-}
-
-// Cap any user-controlled string before rendering so a hostile field
-// can't blow up the DOM or trigger pathological layout work.
-function clampStr(s, max = 300) {
-  const str = String(s ?? "");
-  return str.length > max ? str.slice(0, max) + "…" : str;
-}
+// Pure helpers (escapeHtml, safeUrl, safeInt, isValidHnId, clampStr)
+// live in ./lib/sanitize.js and are imported above. They're shared
+// with the unit-test suite.
 
 function setError(el, msg) {
   el.className = "widget-error";

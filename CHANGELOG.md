@@ -13,8 +13,16 @@ All notable changes to this project will be documented in this file.
 - Mini-player **prev/next** track controls and **minimize** button (collapses to a 56×56 🎧 puck pinned bottom-right)
 - Favicon (SVG 🎧 emoji), Open Graph + Twitter card metadata, page description
 - AWS deployment pipeline:
-  - `.github/workflows/deploy.yml` — S3 + CloudFront deploy via OIDC, three-tier cache strategy (HTML no-cache, hashed assets immutable 1yr, vibe-machine 5min)
+  - `.github/workflows/deploy.yml` — S3 + CloudFront deploy via OIDC, three-tier cache strategy (HTML no-cache, hashed assets immutable 1yr, vibe-machine 5min); gated on tests + post-build verification
+  - `.github/workflows/ci.yml` — runs tests, build, and post-build verifier on PRs and non-main pushes; uploads `dist/` as artifact
   - `aws/cloudfront-response-headers.json` — HSTS, X-Content-Type-Options, X-Frame-Options SAMEORIGIN, Referrer-Policy, Permissions-Policy
+- Test infrastructure (Vitest + happy-dom):
+  - `tests/sanitize.test.js` — 26 unit tests for `escapeHtml`, `safeUrl`, `safeInt`, `isValidHnId`, `clampStr`, `fmtDuration` (XSS payloads, scheme rejection, length caps, NaN/Infinity)
+  - `tests/html-structure.test.js` — 26 integration tests for required sections, GitHub repo links, mini-player markup, head metadata (CSP, favicon, OG/Twitter, referrer)
+  - `tests/postmessage.test.js` — 8 tests for source/origin validation and seek-percent clamping
+  - `tests/verify-build.mjs` — post-build CLI verifier (32 checks: required dist files, head metadata, all 7 sections, mini-player, all 6 GitHub links, hashed bundles, no placeholder leaks)
+  - `npm run verify` — one-shot `test → build → verify-build` pipeline
+- `public/js/lib/sanitize.js` — pure ESM helpers extracted from `vibe-check.js` for DRY between runtime and tests
 - `PORTFOLIO_DEPLOY.md` — code-done vs AWS-todo deployment checklist
 
 ### Changed
